@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".Homepage.Homework.HomeworkActivity">
+
+    <com.example.learningmachineparentsapp.View.TitleLayout
+        android:id="@+id/homework_tit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/homework_iv_torecord"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="7.5dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+
+    <RelativeLayout
+        android:id="@+id/homework_del"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_below="@+id/homework_tit">
+        <CheckBox
+            android:id="@+id/homework_cb_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="全选"/>
+        <TextView
+            android:id="@+id/homework_tv_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#FE6459"
+            android:text="删除"/>
+    </RelativeLayout>
+
+    <com.example.learningmachineparentsapp.View.SlideRecyclerView
+        android:id="@+id/homework_rv_hwlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/homework_del"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/homework_fb_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        android:src="@mipmap/add"
+        android:scaleType="fitXY"
+        android:backgroundTint="#3DDC84"
+        app:borderWidth="0dp"
+        app:elevation="5dp"
+        app:pressedTranslationZ="12dp"
+        app:fabSize="normal"
+        app:rippleColor="#4CAF50"/>
+</RelativeLayout>

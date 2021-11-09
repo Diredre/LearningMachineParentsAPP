@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="InputBoxStyle">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginLeft">18dp</item>
+        <item name="android:layout_marginRight">18dp</item>
+        <item name="android:background">@drawable/border_et_background</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!--主页ladder样式-->
+    <style name="ladder">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">110dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <!--这个说明提示框是否有边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--这个说明提示框是否是浮动的-->
+        <item name="android:windowIsFloating">true</item>
+        <!--这个说明提示框是滞是透明的-->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--这个说明提示框是否有标题-->
+        <item name="android:windowNoTitle">true</item>
+        <!--这个说明提示框的背景颜色是什么-->
+        <item name="android:windowBackground">@drawable/bg_dialog_input</item>
+        <!--这个说明是否充许对话框的背景变暗。为true则充许变暗-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="AppTheme" parent="XUITheme.Phone">
+        <!-- 自定义自己的主题样式 -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+</resources>

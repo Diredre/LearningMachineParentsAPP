@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dip"
+        android:background="@drawable/rotate_layout_background"
+        android:orientation="vertical"
+        android:padding="10dip" >
+        <com.example.learningmachineparentsapp.Widget.CirclePgBar
+            android:id="@+id/login_pb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminateDrawable="@drawable/gradient_pb_background"/>
+    </LinearLayout>
+
+</LinearLayout>
