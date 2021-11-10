@@ -6,8 +6,9 @@ public class VideoBean {
     private int likenum = 0;
     private int comment_num = 0;
     private int type = 0;   // 运动类=1， 文化类=2， 历史类=3
+    private boolean isLike = false;
 
-    public PlayerBean(String videoUrl, String imageUrl, String auther, String con) {
+    public VideoBean(String videoUrl, String imageUrl, String auther, String con) {
         this.videoUrl = videoUrl;
         this.imageUrl = imageUrl;
         this.auther = auther;
@@ -59,6 +60,22 @@ public class VideoBean {
     }
 
     public void setComment_num(int comment_num) {
-            this.comment_num = comment_num;
-        }
+        this.comment_num = comment_num;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
+    }
 }

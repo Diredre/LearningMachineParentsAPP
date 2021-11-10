@@ -1,7 +1,5 @@
 package com.example.learningmachineparentsapp.Circle.Upload;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -20,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.example.learningmachineparentsapp.R;
 
@@ -37,7 +37,7 @@ import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTr
 /**
  * 上传视频界面
  */
-public class UploadActivity extends AppCompatActivity  implements View.OnClickListener{
+public class UploadActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String TAG = UploadActivity.class.getName();
     public  final static int VEDIO_KU = 101;

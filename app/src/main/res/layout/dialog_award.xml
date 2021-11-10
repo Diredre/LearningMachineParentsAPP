@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="450dp"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center">
+
+    <!--奖品兑换进度条-->
+    <LinearLayout
+        android:id="@+id/videoplay_full"
+        android:layout_width="400dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:paddingTop="20dp"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:id="@+id/videoplay_progess_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/percentage"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="2dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:text="20%" />
+        <ProgressBar
+            android:id="@+id/videoplay_progess"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="350dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_horizontal"
+            android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+            android:indeterminateOnly="false"
+            android:max="100"
+            android:progress="20"
+            android:maxHeight="50dp"
+            android:minHeight="16dp"
+            android:progressDrawable="@drawable/videoplay_draw_progressbar" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/dialog_award_cansel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@mipmap/cansel"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+</RelativeLayout>
