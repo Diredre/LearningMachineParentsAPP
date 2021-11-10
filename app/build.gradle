@@ -71,4 +71,8 @@ dependencies {
 
     // tab
     //implementation 'com.github.dacaoyuan:YPKTabDemo:1.2.3'
+
+    // 饺子播放器
+    implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
+
 }

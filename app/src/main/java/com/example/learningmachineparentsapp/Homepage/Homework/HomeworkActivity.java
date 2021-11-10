@@ -1,5 +1,8 @@
 package com.example.learningmachineparentsapp.Homepage.Homework;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -39,7 +42,7 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
     private ImageView homework_iv_torecord;
     private CheckBox homework_cb_del;
     private TextView homework_tv_del;
-    private FloatingActionButton homework_fb_add;
+    private FloatingActionButton homework_fb_send;
     private SlideRecyclerView homework_rv_hwlist;
     private HomeworkAdapter homeworkAdapter;
     private List<HomeworkBean> hwlist = new ArrayList<>();
@@ -71,8 +74,8 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         homework_tv_del = findViewById(R.id.homework_tv_del);
         homework_tv_del.setOnClickListener(this);
 
-        homework_fb_add = findViewById(R.id.homework_fb_add);
-        homework_fb_add.setOnClickListener(this);
+        homework_fb_send = findViewById(R.id.homework_fb_send);
+        homework_fb_send.setOnClickListener(this);
 
         // 设置作业序列
         homework_rv_hwlist = findViewById(R.id.homework_rv_hwlist);
@@ -108,8 +111,9 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.homework_fb_add:
-                inputDialogShow();
+            case R.id.homework_fb_send:
+                //inputDialogShow();
+                Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.homework_iv_torecord:
                 startActivity(new Intent(HomeworkActivity.this, RecordActivity.class));
@@ -151,6 +155,7 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
+
         inputHWDialog.setOnCanlceListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,4 +165,20 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         inputHWDialog.setTile("请输入作业");
         inputHWDialog.show();
     }
+
+/*    private String getCilpbord(){
+        //获取系统剪贴板服务
+        ClipboardManager clipboardManager = (ClipboardManager)mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+        if (null != clipboardManager) {
+            // 获取剪贴板的剪贴数据集
+            ClipData clipData = clipboardManager.getPrimaryClip();
+            if (null != clipData && clipData.getItemCount() > 0) {
+                // 从数据集中获取（粘贴）第一条文本数据
+                ClipData.Item item = clipData.getItemAt(0);
+                if (null != item) {
+                    String content = item.getText().toString();
+                }
+            }
+        }
+    }*/
 }

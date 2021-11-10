@@ -31,9 +31,9 @@ public class InputHWDialog extends Dialog {
     public void initView() {
         View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_input_homework, null);
         tit = view.findViewById(R.id.dialog_inputhw_tit);
-        editText = (EditText) view.findViewById(R.id.dialog_inputhw_et);
-        btnSure = (TextView) view.findViewById(R.id.dialog_inputhw_sure);
-        btnCancle = (TextView) view.findViewById(R.id.dialog_inputhw_cansel);
+        editText = view.findViewById(R.id.dialog_inputhw_et);
+        btnSure = view.findViewById(R.id.dialog_inputhw_sure);
+        btnCancle = view.findViewById(R.id.dialog_inputhw_cansel);
         super.setContentView(view);
     }
 

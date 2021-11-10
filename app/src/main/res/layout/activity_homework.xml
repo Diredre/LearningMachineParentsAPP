@@ -8,57 +8,104 @@
     android:fitsSystemWindows="true"
     tools:context=".Homepage.Homework.HomeworkActivity">
 
-    <com.example.learningmachineparentsapp.View.TitleLayout
-        android:id="@+id/homework_tit"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/homework_iv_torecord"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="7.5dp"
-        android:layout_marginRight="15dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"/>
+            <com.example.learningmachineparentsapp.View.TitleLayout
+                android:id="@+id/homework_tit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <RelativeLayout
-        android:id="@+id/homework_del"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_below="@+id/homework_tit">
-        <CheckBox
-            android:id="@+id/homework_cb_del"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="全选"/>
-        <TextView
-            android:id="@+id/homework_tv_del"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:textColor="#FE6459"
-            android:text="删除"/>
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/homework_iv_torecord"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="7.5dp"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"/>
 
-    <com.example.learningmachineparentsapp.View.SlideRecyclerView
-        android:id="@+id/homework_rv_hwlist"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/homework_del"/>
+            <EditText
+                android:id="@+id/homework_et_clip"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/homework_tit"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:maxLines="6"
+                android:gravity="left"
+                android:padding="10dp"
+                android:background="@drawable/border_et_hw"
+                android:hint="请输入作业"/>
+
+            <Button
+                android:id="@+id/homework_btn_add"
+                android:layout_width="75dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/white"
+                android:background="@drawable/upload_btn_background"
+                android:text="添加"
+                android:layout_below="@id/homework_et_clip"/>
+
+            <RelativeLayout
+                android:id="@+id/homework_del"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/homework_btn_add"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+                <CheckBox
+                    android:id="@+id/homework_cb_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="全选" />
+                <TextView
+                    android:id="@+id/homework_tv_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="删除"
+                    android:textColor="#FE6459" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/homework_del"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="#D7D7D7"/>
+
+            <com.example.learningmachineparentsapp.View.SlideRecyclerView
+                android:id="@+id/homework_rv_hwlist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/homework_del"/>
+        </RelativeLayout>
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/homework_fb_add"
+        android:id="@+id/homework_fb_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
-        android:src="@mipmap/add"
+        android:src="@mipmap/send"
         android:scaleType="fitXY"
         android:backgroundTint="#3DDC84"
         app:borderWidth="0dp"

@@ -159,7 +159,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
 
 
     /**
-     * 输入作业内容dialog
+     * 修改作业内容dialog
      */
     public void inputDialogShow(int position){
         InputHWDialog inputHWDialog = new InputHWDialog(context);
@@ -172,7 +172,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
                     Toast.makeText(context, "修改成功", Toast.LENGTH_SHORT).show();
                     inputHWDialog.dismiss();
                 }else{
-                    Toast.makeText(context, "请输入作业", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "请修改作业", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -182,7 +182,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
                 inputHWDialog.dismiss();
             }
         });
-        inputHWDialog.setTile("请输入作业");
+        inputHWDialog.setTile("修改作业");
         inputHWDialog.show();
     }
 }

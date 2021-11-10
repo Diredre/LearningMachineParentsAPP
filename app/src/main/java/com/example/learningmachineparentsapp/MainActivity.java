@@ -1,16 +1,22 @@
 package com.example.learningmachineparentsapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.learningmachineparentsapp.LoginRegist.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,9 +24,12 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.learningmachineparentsapp.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private ImageView main_iv_off, main_iv_setting;
     private ActivityMainBinding binding;
+    private BottomNavigationView navView;
+    private DrawerLayout main_drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+
+        initView();
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -42,6 +53,44 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+    }
+
+
+    public DrawerLayout getDrawer(){
+        return main_drawer;
+    }
+
+
+    private void initView() {
+
+        navView = findViewById(R.id.nav_view);
+        main_drawer = findViewById(R.id.main_drawer);
+
+        main_iv_setting = findViewById(R.id.main_iv_setting);
+        main_iv_setting.setOnClickListener(this);
+        Glide.with(MainActivity.this)
+                .load("https://z3.ax1x.com/2021/11/01/ICMZlQ.png")
+                .into(main_iv_setting);
+
+        main_iv_off = findViewById(R.id.main_iv_off);
+        main_iv_off.setOnClickListener(this);
+        Glide.with(MainActivity.this)
+                .load("https://z3.ax1x.com/2021/11/01/ICMSOA.png")
+                .into(main_iv_off);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.main_iv_setting:
+                Toast.makeText(MainActivity.this, "设置界面还没写", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.main_iv_off:
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                MainActivity.this.finish();
+                break;
+        }
     }
 
 
@@ -65,5 +114,6 @@ public class MainActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
+
 
 }
