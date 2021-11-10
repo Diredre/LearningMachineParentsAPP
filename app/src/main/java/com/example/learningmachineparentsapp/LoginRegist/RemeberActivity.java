@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.Window;
 
 import com.example.learningmachineparentsapp.R;
-import com.example.learningmachineparentsapp.MainActivity.makeStatusBarTransparent;
+import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTransparent;
 /**
  * 忘记（找回）密码界面
  */

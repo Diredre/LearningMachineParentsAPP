@@ -12,11 +12,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.parents.Homepage.Homework.HomeworkActivity;
-import com.example.parents.MainActivity;
+import com.example.learningmachineparentsapp.Homepage.Homework.HomeworkActivity;
+import com.example.learningmachineparentsapp.MainActivity;
 import com.example.learningmachineparentsapp.R;
-import com.example.learningmachineparentsapp.MainActivity.makeStatusBarTransparent;
-import com.example.parents.Widget.Code;
+import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTransparent;
+import com.example.learningmachineparentsapp.Widget.Code;
 
 /**
  * 注册界面

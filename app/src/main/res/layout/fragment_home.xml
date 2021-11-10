@@ -1,22 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Homepage.HomeFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Homepage.HomeFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_home"
+    <!--主页内容-->
+    <RelativeLayout
+        android:id="@+id/hp_ll_top"
         android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <com.example.learningmachineparentsapp.View.RoundImageView
+            android:id="@+id/hp_riv_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/added"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="云淡风轻"
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/hp_riv_icon"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:id="@+id/hp_iv_tomessage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"/>
+    </RelativeLayout>
+
+    <com.xuexiang.xui.widget.banner.recycler.BannerLayout
+        android:id="@+id/hp_bl_banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/hp_ll_top"
+        app:bl_autoPlaying="true"
+        app:bl_centerScale="1.3"
+        app:bl_itemSpace="10dp"
+        app:bl_moveSpeed="1.8" />
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/hp_btn_toupload"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:text="上传视频" />
+        <Button
+            android:id="@+id/hp_btn_towatch"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@+id/hp_btn_toupload"
+            android:layout_alignTop="@+id/hp_btn_toupload"
+            android:layout_centerHorizontal="true"
+            android:text="学习监测"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/ll1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/hp_btn_tohomework"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:text="布置作业"/>
+        <Button
+            android:id="@+id/hp_btn_tomessage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:text="消息通知"/>
+    </LinearLayout>
+
+</RelativeLayout>
