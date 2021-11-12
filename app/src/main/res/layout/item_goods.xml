@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="7dp"
+        android:background="@drawable/border_goods_bg"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/itemgoods_iv_icon"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#C3C3C3" />
+
+        <TextView
+            android:id="@+id/itemgoods_tv_tit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="荒野求生少年生存"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_margin="5dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:layout_height="30dp">
+            <TextView
+                android:id="@+id/itemgoods_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥"
+                android:textColor="@color/red_normal"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/itemgoods_tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="77.77"
+                android:layout_toRightOf="@id/itemgoods_tv1"
+                android:textColor="@color/red_normal"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/itemgoods_tv_peo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7777"
+                android:layout_alignBottom="@id/itemgoods_tv_money"
+                android:layout_toRightOf="@id/itemgoods_tv_money"
+                android:textColor="#C3C3C3"
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人已付款"
+                android:layout_alignBottom="@id/itemgoods_tv_peo"
+                android:layout_toRightOf="@id/itemgoods_tv_peo"
+                android:textColor="#C3C3C3"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

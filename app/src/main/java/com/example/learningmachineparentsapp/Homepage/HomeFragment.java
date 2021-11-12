@@ -1,5 +1,6 @@
 package com.example.learningmachineparentsapp.Homepage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -18,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.example.learningmachineparentsapp.Homepage.Control.ControlActivity;
 import com.example.learningmachineparentsapp.Homepage.Homework.HomeworkActivity;
+import com.example.learningmachineparentsapp.Homepage.Homework.HwcheckActivity;
 import com.example.learningmachineparentsapp.Homepage.Message.MessageActivity;
 import com.example.learningmachineparentsapp.Homepage.Videochat.VideochatActivity;
 import com.example.learningmachineparentsapp.Homepage.Watch.WatchActivity;
@@ -26,13 +28,13 @@ import com.example.learningmachineparentsapp.R;
 
 import com.example.learningmachineparentsapp.View.RoundImageView;
 import com.example.learningmachineparentsapp.Widget.RecyclerViewBannerAdapter;
-import com.example.learningmachineparentsapp.databinding.FragmentHomeBinding;
 import com.xuexiang.xui.widget.banner.recycler.BannerLayout;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, BannerLayout.OnBannerItemClickListener{
 
+    private Context context;
+    private View view;
     private HomeViewModel homeViewModel;
-    private FragmentHomeBinding binding;
     private Button hp_btn_tovideochat, hp_btn_towatch, hp_btn_tohomework, hp_btn_tocontrol;
     private BannerLayout hp_bl_banner;
     private RecyclerViewBannerAdapter banner_horizontal;
@@ -51,20 +53,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Bann
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        return root;
+        view = inflater.inflate(R.layout.fragment_home, container,false);
+        return view;
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-
 
     @Override
     public void onResume() {
@@ -113,7 +105,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Bann
                 startActivity(new Intent(getActivity(), WatchActivity.class));
                 break;
             case R.id.hp_btn_tohomework:
-                startActivity(new Intent(getActivity(), HomeworkActivity.class));
+                startActivity(new Intent(getActivity(), HwcheckActivity.class));
                 break;
             case R.id.hp_btn_tovideochat:
                 startActivity(new Intent(getActivity(), VideochatActivity.class));

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Homepage.Homework.HwcheckActivity">
+
+    <ImageView
+        android:id="@+id/hwcheck_tit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:src="@mipmap/toptit"/>
+
+    <ImageView
+        android:id="@+id/hwcheck_iv_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="20dp"
+        android:src="@mipmap/back_white"/>
+
+    <RelativeLayout
+        android:id="@+id/hwcheck_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hwcheck_tit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-35dp">
+        <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/usericon_background"/>
+        <com.example.learningmachineparentsapp.View.RoundImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="3dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/added"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/hwcheck_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/hwcheck_icon"
+        android:layout_above="@id/hwcheck_iv_add"
+        android:layout_margin="20dp"/>
+
+    <ImageView
+        android:id="@+id/hwcheck_iv_add"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:src="@mipmap/add_hw"/>
+</RelativeLayout>

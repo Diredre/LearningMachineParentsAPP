@@ -1,32 +1,38 @@
-package com.example.learningmachineparentsapp.Circle;
+package com.example.learningmachineparentsapp.Discover.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.learningmachineparentsapp.Circle.Video.VideoActivity;
 import com.example.learningmachineparentsapp.R;
 
-public class DashboardFragment extends Fragment {
+public class FamilyFragment extends Fragment {
 
     private Context context;
     private View view;
-    private DashboardViewModel dashboardViewModel;
+
+
+    public FamilyFragment(Context context){
+        this.context = context;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_dashboard, container,false);
+        view = inflater.inflate(R.layout.fragment_family, container,false);
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
+    }
+
+    private void initView(){}
 }

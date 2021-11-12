@@ -22,13 +22,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.learningmachineparentsapp.databinding.ActivityMainBinding;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView main_iv_off, main_iv_setting;
-    private ActivityMainBinding binding;
-    private BottomNavigationView navView;
+    private BottomNavigationView nav_view;
     private DrawerLayout main_drawer;
 
     @Override
@@ -39,9 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         makeStatusBarTransparent(this);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);    //设置手机应用内部状态栏字体图标为黑色
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
 
         initView();
 
@@ -52,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        NavigationUI.setupWithNavController(nav_view, navController);
     }
 
 
@@ -62,8 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void initView() {
-
-        navView = findViewById(R.id.nav_view);
+        nav_view = findViewById(R.id.nav_view);
         main_drawer = findViewById(R.id.main_drawer);
 
         main_iv_setting = findViewById(R.id.main_iv_setting);

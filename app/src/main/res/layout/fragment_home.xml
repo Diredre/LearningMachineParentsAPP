@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--顶部-->
     <RelativeLayout
         android:id="@+id/hp_ll_top"
         android:layout_width="match_parent"
@@ -39,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/hp_ll_top">
+        <!--滑动组件-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -53,50 +55,53 @@
                 app:bl_moveSpeed="1.8" />
 
             <LinearLayout
-                android:id="@+id/ll1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_margin="20dp"
                 android:layout_below="@id/hp_bl_banner"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/hp_btn_tovideochat"
-                    android:layout_width="170dp"
-                    android:layout_height="140dp"
-                    android:layout_margin="10dp"
-                    android:background="@mipmap/videochat"/>
-                <Button
-                    android:id="@+id/hp_btn_tohomework"
-                    android:layout_width="170dp"
-                    android:layout_height="140dp"
-                    android:layout_margin="10dp"
-                    android:layout_toRightOf="@+id/hp_btn_toupload"
-                    android:layout_alignTop="@+id/hp_btn_toupload"
-                    android:layout_centerHorizontal="true"
-                    android:background="@mipmap/homework"/>
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/hp_btn_tovideochat"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@mipmap/videochat"/>
+                    <Button
+                        android:id="@+id/hp_btn_tohomework"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:layout_toRightOf="@+id/hp_btn_toupload"
+                        android:layout_alignTop="@+id/hp_btn_toupload"
+                        android:layout_centerHorizontal="true"
+                        android:background="@mipmap/homework"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/hp_btn_tocontrol"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@mipmap/control"/>
+                    <Button
+                        android:id="@+id/hp_btn_towatch"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@mipmap/watch"/>
+                </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_below="@+id/ll1"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/hp_btn_tocontrol"
-                    android:layout_width="170dp"
-                    android:layout_height="140dp"
-                    android:layout_margin="10dp"
-                    android:background="@mipmap/control"/>
-                <Button
-                    android:id="@+id/hp_btn_towatch"
-                    android:layout_width="170dp"
-                    android:layout_height="140dp"
-                    android:layout_margin="10dp"
-                    android:background="@mipmap/watch"/>
-            </LinearLayout>
-
         </RelativeLayout>
     </ScrollView>
 
