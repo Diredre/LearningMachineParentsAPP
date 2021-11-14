@@ -29,6 +29,8 @@ public class ShopFragment extends Fragment {
     private List<ShopBean> shopBeanList = new ArrayList<>();
 
 
+    public ShopFragment(){}
+
     public ShopFragment(Context context){
         this.context = context;
     }
@@ -46,34 +48,16 @@ public class ShopFragment extends Fragment {
         initView();
     }
 
-    private void initView(){/*
-        shopBeanList.add(new ShopBean("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg",
-                "幼儿教育：《我不想发脾气，我想好好说》", 12.00, 108));
-        shopBeanList.add(new ShopBean("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg",
-                "幼儿教育：《我不想发脾气，我想好好说》", 12.00, 108));
-        shopBeanList.add(new ShopBean("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg",
-                "幼儿教育：《我不想发脾气，我想好好说》", 12.00, 108));
-        shopBeanList.add(new ShopBean("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg",
-                "幼儿教育：《我不想发脾气，我想好好说》", 12.00, 108));
-        shopBeanList.add(new ShopBean("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg",
-                "幼儿教育：《我不想发脾气，我想好好说》", 12.00, 108));
-        shopBeanList.add(new ShopBean("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg",
-                "幼儿教育：《我不想发脾气，我想好好说》", 12.00, 108));
-        shopBeanList.add(new ShopBean("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg",
-                "幼儿教育：《我不想发脾气，我想好好说》", 12.00, 108));
-        shopBeanList.add(new ShopBean("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg",
-                "幼儿教育：《我不想发脾气，我想好好说》", 12.00, 108));
-        shopBeanList.add(new ShopBean("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg",
-                "幼儿教育：《我不想发脾气，我想好好说》", 12.00, 108));
-        shopBeanList.add(new ShopBean("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg",
-                "幼儿教育：《我不想发脾气，我想好好说》", 12.00, 108));
-        shopBeanList.add(new ShopBean("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg",
-                "幼儿教育：《我不想发脾气，我想好好说》", 12.00, 108));
+    private void initView(){
+        for(int i = 0; i < 15; i++) {
+            shopBeanList.add(new ShopBean("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg",
+                    "幼儿教育：《我不想发脾气，我想好好说》", 12.00, 108));
+        }
 
         fragmentshop_rv = view.findViewById(R.id.fragmentshop_rv);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         fragmentshop_rv.setLayoutManager(layoutManager);
-        shopAdapter = new ShopAdapter(shopBeanList, view.getContext());
-        fragmentshop_rv.setAdapter(shopAdapter);*/
+        shopAdapter = new ShopAdapter(shopBeanList, context);
+        fragmentshop_rv.setAdapter(shopAdapter);
     }
 }

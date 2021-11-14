@@ -21,7 +21,6 @@ public class DashboardFragment extends Fragment {
 
     private Context context;
     private View view;
-    private DashboardViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

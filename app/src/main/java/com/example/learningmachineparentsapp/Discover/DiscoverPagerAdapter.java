@@ -11,34 +11,25 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.List;
 
-public class DiscoverPagerAdapter<T extends View> extends PagerAdapter {
+public class DiscoverPagerAdapter extends FragmentPagerAdapter  {
 
     // 外部传入的ViewPager对应的Item对象
-    private List<T> mList;
+    private List<Fragment> mList;
 
-    public DiscoverPagerAdapter(List<T> mList) {
+    public DiscoverPagerAdapter(FragmentManager fm, List<Fragment> mList) {
+        super(fm);
         this.mList = mList;
     }
 
     @Override
+    public Fragment getItem(int arg0) {
+        // TODO Auto-generated method stub
+        return mList.get(arg0);
+    }
+
+    @Override
     public int getCount() {
-        return this.mList.size();
-    }
-
-    @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return object == view;
-    }
-
-    @NonNull
-    @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        container.addView(mList.get(position));
-        return mList.get(position);
-    }
-
-    @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView(mList.get(position));
+        // TODO Auto-generated method stub
+        return mList.size();
     }
 }

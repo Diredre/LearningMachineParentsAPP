@@ -17,6 +17,8 @@ public class FamilyFragment extends Fragment {
     private View view;
 
 
+    public FamilyFragment(){}
+
     public FamilyFragment(Context context){
         this.context = context;
     }

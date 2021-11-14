@@ -45,8 +45,9 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_video_player,
-                parent, false);
+        /*View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_goods,
+                parent, false);*/
+        View view = View.inflate(context, R.layout.item_goods, null);
         final ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;

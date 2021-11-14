@@ -34,7 +34,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Bann
 
     private Context context;
     private View view;
-    private HomeViewModel homeViewModel;
     private Button hp_btn_tovideochat, hp_btn_towatch, hp_btn_tohomework, hp_btn_tocontrol;
     private BannerLayout hp_bl_banner;
     private RecyclerViewBannerAdapter banner_horizontal;
