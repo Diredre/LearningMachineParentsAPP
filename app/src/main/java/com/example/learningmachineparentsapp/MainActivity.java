@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
-        makeStatusBarTransparent(this);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);    //设置手机应用内部状态栏字体图标为黑色
         setContentView(R.layout.activity_main);
 
         initView();
@@ -108,6 +106,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
-
-
 }

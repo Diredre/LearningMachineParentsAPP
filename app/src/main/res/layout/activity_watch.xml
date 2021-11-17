@@ -8,49 +8,32 @@
     android:fitsSystemWindows="true"
     tools:context=".Homepage.Watch.WatchActivity">
 
-    <com.example.learningmachineparentsapp.View.TitleLayout
-        android:id="@+id/watch_tit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <ImageView
-        android:id="@+id/watch_iv_tomodule"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="7.5dp"
-        android:layout_marginRight="15dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <SurfaceView
+        android:id="@+id/watch_sv_camera"
+        android:layout_width="384dp"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/watch_tit"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/watch_btn_preview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="打开摄像头" />
-            <Button
-                android:id="@+id/watch_btn_colse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="关闭摄像头" />
-        </RelativeLayout>
+        android:layout_gravity="center_horizontal"/>
 
-        <SurfaceView
-            android:id="@+id/watch_sv_camera"
-            android:layout_width="384dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"/>
-    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp">
+        <ImageView
+            android:id="@+id/watch_iv_colse"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/watch_iv_colse"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:text="取消"/>
+    </RelativeLayout>
+
 </RelativeLayout>

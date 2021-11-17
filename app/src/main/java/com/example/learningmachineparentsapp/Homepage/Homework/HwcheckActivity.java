@@ -21,8 +21,6 @@ public class HwcheckActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_hwcheck);
-        makeStatusBarTransparent(this);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);    //设置手机应用内部状态栏字体图标为黑色
 
         initView();
     }

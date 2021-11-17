@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.learningmachineparentsapp.R;
-import com.example.learningmachineparentsapp.Widget.DisplayUtils;
+import com.example.learningmachineparentsapp.Utils.DisplayUtils;
 
 public class AwardDialog extends Dialog {
 

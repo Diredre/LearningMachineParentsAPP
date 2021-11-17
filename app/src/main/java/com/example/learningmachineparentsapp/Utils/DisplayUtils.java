@@ -1,4 +1,4 @@
-package com.example.learningmachineparentsapp.Widget;
+package com.example.learningmachineparentsapp.Utils;
 import android.content.Context;
 
 public class DisplayUtils {

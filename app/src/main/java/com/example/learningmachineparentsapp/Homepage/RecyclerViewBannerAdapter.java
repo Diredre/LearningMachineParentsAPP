@@ -1,4 +1,4 @@
-package com.example.learningmachineparentsapp.Widget;
+package com.example.learningmachineparentsapp.Homepage;
 
 
 import android.graphics.Color;
@@ -9,6 +9,15 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.example.learningmachineparentsapp.R;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.xuexiang.xui.adapter.recyclerview.BaseRecyclerAdapter;
 import com.xuexiang.xui.adapter.recyclerview.RecyclerViewHolder;
 import com.xuexiang.xui.widget.banner.recycler.BannerLayout;
@@ -54,9 +63,6 @@ public class RecyclerViewBannerAdapter extends BaseRecyclerAdapter<String> {
 
     /**
      * 适配的布局
-     *
-     * @param viewType
-     * @return
      */
     @Override
     public int getItemLayoutId(int viewType) {
@@ -65,34 +71,31 @@ public class RecyclerViewBannerAdapter extends BaseRecyclerAdapter<String> {
 
     /**
      * 绑定数据
-     *
-     * @param holder
-     * @param position
-     * @param imgUrl
      */
     @Override
     public void bindData(@NonNull RecyclerViewHolder holder, final int position, String imgUrl) {
-        ImageView imageView = holder.findViewById(R.id.item_mb_iv);
-
-        if (!TextUtils.isEmpty(imgUrl)) {
+        //ImageView imageView = holder.findViewById(R.id.item_mb_iv);
+        LineChart item_mb_lc = holder.findViewById(R.id.item_mb_lc);
+        item_mb_lc.setOnClickListener(v->{
+            if (mOnBannerItemClickListener != null) {
+                mOnBannerItemClickListener.onItemClick(position);
+            }
+        });
+        /*if (!TextUtils.isEmpty(imgUrl)) {
             ImageLoader.get().loadImage(imageView, imgUrl, mColorDrawable,
                     mEnableCache ? DiskCacheStrategyEnum.RESOURCE : DiskCacheStrategyEnum.NONE);
         } else {
             imageView.setImageDrawable(mColorDrawable);
         }
-
         imageView.setOnClickListener(v -> {
             if (mOnBannerItemClickListener != null) {
                 mOnBannerItemClickListener.onItemClick(position);
             }
-        });
+        });*/
     }
 
     /**
      * 设置是否允许缓存
-     *
-     * @param enableCache
-     * @return
      */
     public RecyclerViewBannerAdapter enableCache(boolean enableCache) {
         mEnableCache = enableCache;
@@ -101,8 +104,6 @@ public class RecyclerViewBannerAdapter extends BaseRecyclerAdapter<String> {
 
     /**
      * 获取是否允许缓存
-     *
-     * @return
      */
     public boolean getEnableCache() {
         return mEnableCache;

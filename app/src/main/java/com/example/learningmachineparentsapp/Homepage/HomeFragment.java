@@ -7,34 +7,31 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.learningmachineparentsapp.Homepage.Control.ControlActivity;
-import com.example.learningmachineparentsapp.Homepage.Homework.HomeworkActivity;
 import com.example.learningmachineparentsapp.Homepage.Homework.HwcheckActivity;
 import com.example.learningmachineparentsapp.Homepage.Message.MessageActivity;
+import com.example.learningmachineparentsapp.Homepage.Module.ModuleActivity;
 import com.example.learningmachineparentsapp.Homepage.Videochat.VideochatActivity;
 import com.example.learningmachineparentsapp.Homepage.Watch.WatchActivity;
 import com.example.learningmachineparentsapp.MainActivity;
 import com.example.learningmachineparentsapp.R;
 
 import com.example.learningmachineparentsapp.View.RoundImageView;
-import com.example.learningmachineparentsapp.Widget.RecyclerViewBannerAdapter;
 import com.xuexiang.xui.widget.banner.recycler.BannerLayout;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, BannerLayout.OnBannerItemClickListener{
 
     private Context context;
     private View view;
-    private Button hp_btn_tovideochat, hp_btn_towatch, hp_btn_tohomework, hp_btn_tocontrol;
+    private ImageView hp_iv_tovideochat, hp_iv_towatch, hp_iv_tohomework, hp_iv_tocontrol;
     private BannerLayout hp_bl_banner;
     private RecyclerViewBannerAdapter banner_horizontal;
     private ImageView hp_iv_tomessage;
@@ -65,20 +62,33 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Bann
 
     private void initView() {
 
-        hp_btn_tovideochat = getView().findViewById(R.id.hp_btn_tovideochat);
-        hp_btn_tovideochat.setOnClickListener(this);
+        hp_iv_tovideochat = getView().findViewById(R.id.hp_iv_tovideochat);
+        Glide.with(getActivity())
+                .load("https://z3.ax1x.com/2021/11/15/IRPa79.png")
+                .into(hp_iv_tovideochat);
+        hp_iv_tovideochat.setOnClickListener(this);
 
-        hp_btn_towatch = getView().findViewById(R.id.hp_btn_towatch);
-        hp_btn_towatch.setOnClickListener(this);
+        hp_iv_towatch = getView().findViewById(R.id.hp_iv_towatch);
+        Glide.with(getActivity())
+                .load("https://z3.ax1x.com/2021/11/15/IRifrF.png")
+                .into(hp_iv_towatch);
+        hp_iv_towatch.setOnClickListener(this);
 
-        hp_btn_tohomework = getView().findViewById(R.id.hp_btn_tohomework);
-        hp_btn_tohomework.setOnClickListener(this);
+        hp_iv_tohomework = getView().findViewById(R.id.hp_iv_tohomework);
+        Glide.with(getActivity())
+                .load("https://z3.ax1x.com/2021/11/15/IRis5n.png")
+                .into(hp_iv_tohomework);
+        hp_iv_tohomework.setOnClickListener(this);
 
-        hp_btn_tocontrol = getView().findViewById(R.id.hp_btn_tocontrol);
-        hp_btn_tocontrol.setOnClickListener(this);
+        hp_iv_tocontrol = getView().findViewById(R.id.hp_iv_tocontrol);
+        Glide.with(getActivity())
+                .load("https://z3.ax1x.com/2021/11/15/IRijqe.png")
+                .into(hp_iv_tocontrol);
+        hp_iv_tocontrol.setOnClickListener(this);
 
         hp_bl_banner = getView().findViewById(R.id.hp_bl_banner);
         hp_bl_banner.setAdapter(banner_horizontal = new RecyclerViewBannerAdapter(urls));
+        hp_bl_banner.setOnClickListener(this);
         banner_horizontal.setOnBannerItemClickListener(this);
 
         hp_iv_tomessage = getView().findViewById(R.id.hp_iv_tomessage);
@@ -97,16 +107,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Bann
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.hp_btn_tocontrol:
+            case R.id.hp_iv_tocontrol:
                 startActivity(new Intent(getActivity(), ControlActivity.class));
                 break;
-            case R.id.hp_btn_towatch:
+            case R.id.hp_iv_towatch:
                 startActivity(new Intent(getActivity(), WatchActivity.class));
                 break;
-            case R.id.hp_btn_tohomework:
+            case R.id.hp_iv_tohomework:
                 startActivity(new Intent(getActivity(), HwcheckActivity.class));
                 break;
-            case R.id.hp_btn_tovideochat:
+            case R.id.hp_iv_tovideochat:
                 startActivity(new Intent(getActivity(), VideochatActivity.class));
                 break;
             case R.id.hp_iv_tomessage:
@@ -115,12 +125,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Bann
             case R.id.hp_riv_icon:
                 main_drawer.openDrawer(Gravity.LEFT);
                 break;
+            case R.id.hp_bl_banner:
+                startActivity(new Intent(getActivity(), ModuleActivity.class));
+                break;
         }
     }
 
 
     @Override
     public void onItemClick(int position) {
+        startActivity(new Intent(getActivity(), ModuleActivity.class));
         Toast.makeText(getActivity(), "点击了第" + (position + 1) + "个", Toast.LENGTH_SHORT).show();
     }
 }

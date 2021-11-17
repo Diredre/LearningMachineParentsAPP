@@ -1,4 +1,4 @@
-package com.example.learningmachineparentsapp.Widget.UploadUtils;
+package com.example.learningmachineparentsapp.Utils.UploadUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
