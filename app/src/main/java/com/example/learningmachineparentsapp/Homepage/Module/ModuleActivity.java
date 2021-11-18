@@ -67,15 +67,14 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
         module_tit = findViewById(R.id.module_tit);
         module_tit.setTitle("使用情况");
 
-        tvDate = (TextView) findViewById(R.id.tv_date);
-        ivDate = (ImageView) findViewById(R.id.iv_date);
+        tvDate = (TextView) findViewById(R.id.module_tv_date);
+        ivDate = (ImageView) findViewById(R.id.module_iv_date);
         ivDate.setColorFilter(Color.WHITE);
         tvDate.setOnClickListener(this);
         ivDate.setOnClickListener(this);
         moudule_lc_time = findViewById(R.id.moudule_lc_time);
         ChartUtils.initChart(moudule_lc_time);
         ChartUtils.notifyDataSetChanged(moudule_lc_time, getData(), ChartUtils.dayValue);
-
 
         module_bc_chart = findViewById(R.id.module_bc_chart);
         chart();
@@ -205,8 +204,8 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_date:
-            case R.id.iv_date:
+            case R.id.module_tv_date:
+            case R.id.module_iv_date:
                 String data = tvDate.getText().toString();
                 if (!ShowUtils.isPopupWindowShowing()) {
                     AnimationUtils.startModeSelectAnimation(ivDate, true);

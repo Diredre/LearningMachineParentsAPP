@@ -22,11 +22,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningMachineParentsAPP">
         <activity android:name=".LoginRegist.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".LoginRegist.RegisterActivity" />
         <activity android:name=".LoginRegist.RemeberActivity" />
@@ -39,7 +34,14 @@
         <activity android:name=".Homepage.Videochat.VideochatActivity" />
         <activity android:name=".Homepage.Control.ControlActivity" />
         <activity android:name=".Homepage.Message.MessageActivity" />
-        <activity android:name=".Homepage.Module.ModuleActivity" />
+        <activity android:name=".Homepage.Module.ModuleActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Homepage.Watch.WatchActivity" />
         <activity android:name=".Circle.Video.VideoActivity" />
         <activity android:name=".Circle.Upload.UploadActivity" />
