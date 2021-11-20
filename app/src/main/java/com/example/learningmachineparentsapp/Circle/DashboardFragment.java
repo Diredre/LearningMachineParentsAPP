@@ -53,10 +53,10 @@ public class DashboardFragment extends Fragment implements ViewPager.OnPageChang
     private void initView(){
         circle_tv_friend_bg = view.findViewById(R.id.circle_tv_friend_bg);
         circle_tv_video_bg = view.findViewById(R.id.circle_tv_video_bg);
-
         circle_tv_friend = view.findViewById(R.id.circle_tv_friend);
         circle_tv_video = view.findViewById(R.id.circle_tv_video);
         resetState();
+
         circle_tv_friend.setOnClickListener(this);
         circle_tv_video.setOnClickListener(this);
 
@@ -68,6 +68,7 @@ public class DashboardFragment extends Fragment implements ViewPager.OnPageChang
 
         circle_vp = view.findViewById(R.id.circle_vp);
         mAdater = new ViewPagerAdapter(getChildFragmentManager(), mFragmentLists);
+        circle_vp.addOnPageChangeListener(this);
         circle_vp.setAdapter(mAdater);
     }
 
@@ -93,9 +94,7 @@ public class DashboardFragment extends Fragment implements ViewPager.OnPageChang
     }
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
 
     @Override
     public void onPageSelected(int position) {
@@ -104,24 +103,22 @@ public class DashboardFragment extends Fragment implements ViewPager.OnPageChang
             case 0:
                 circle_tv_friend_bg.setVisibility(View.VISIBLE);
                 circle_tv_video_bg.setVisibility(View.INVISIBLE);
-                circle_tv_friend.setTextSize(22);
+                circle_tv_friend.setTextSize(24);
                 circle_tv_friend.getPaint().setFakeBoldText(true);
-                circle_tv_video.setTextSize(16);
+                circle_tv_video.setTextSize(20);
                 circle_tv_video.getPaint().setFakeBoldText(false);
                 break;
             case 1:
                 circle_tv_friend_bg.setVisibility(View.INVISIBLE);
                 circle_tv_video_bg.setVisibility(View.VISIBLE);
-                circle_tv_friend.setTextSize(16);
+                circle_tv_friend.setTextSize(20);
                 circle_tv_friend.getPaint().setFakeBoldText(false);
-                circle_tv_video.setTextSize(22);
+                circle_tv_video.setTextSize(24);
                 circle_tv_video.getPaint().setFakeBoldText(true);
                 break;
         }
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
+    public void onPageScrollStateChanged(int state) { }
 }

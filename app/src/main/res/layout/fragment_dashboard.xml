@@ -11,12 +11,13 @@
         android:id="@+id/circle_tit"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp">
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF">
         <View
             android:id="@+id/circle_tv_friend_bg"
-            android:layout_width="45dp"
+            android:layout_width="50dp"
             android:layout_height="5dp"
             android:visibility="invisible"
             android:layout_alignBottom="@id/circle_tv_friend"
@@ -36,7 +37,7 @@
 
         <View
             android:id="@+id/circle_tv_video_bg"
-            android:layout_width="64dp"
+            android:layout_width="50dp"
             android:layout_height="5dp"
             android:visibility="invisible"
             android:layout_alignBottom="@id/circle_tv_video"
