@@ -1,4 +1,4 @@
-package com.example.learningmachineparentsapp.Homepage;
+package com.example.learningmachineparentsapp.Homepage.Module;
 
 import android.content.Context;
 import android.graphics.Color;

@@ -2,7 +2,10 @@ package com.example.learningmachineparentsapp.Homepage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
@@ -25,27 +29,48 @@ import com.example.learningmachineparentsapp.MainActivity;
 import com.example.learningmachineparentsapp.R;
 
 import com.example.learningmachineparentsapp.View.RoundImageView;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.xuexiang.xui.widget.banner.recycler.BannerLayout;
 
-public class HomeFragment extends Fragment implements View.OnClickListener, BannerLayout.OnBannerItemClickListener{
+import java.lang.ref.WeakReference;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private Context context;
     private View view;
     private ImageView hp_iv_tovideochat, hp_iv_towatch, hp_iv_tohomework, hp_iv_tocontrol;
-    private BannerLayout hp_bl_banner;
-    private RecyclerViewBannerAdapter banner_horizontal;
+    private LineChart hp_lc;
     private ImageView hp_iv_tomessage;
     private DrawerLayout main_drawer;
     private RoundImageView hp_riv_icon;
 
-    public static String[] urls = new String[]{//640*360 360/640=0.5625
-            "http://photocdn.sohu.com/tvmobilemvms/20150907/144160323071011277.jpg",//伪装者:胡歌演绎"痞子特工"
-            "http://photocdn.sohu.com/tvmobilemvms/20150907/144158380433341332.jpg",//无心法师:生死离别!月牙遭虐杀
-            "http://photocdn.sohu.com/tvmobilemvms/20150907/144160286644953923.jpg",//花千骨:尊上沦为花千骨
-            "http://photocdn.sohu.com/tvmobilemvms/20150902/144115156939164801.jpg",//综艺饭:胖轩偷看夏天洗澡掀波澜
-            "http://photocdn.sohu.com/tvmobilemvms/20150907/144159406950245847.jpg",//碟中谍4:阿汤哥高塔命悬一线,超越不可能
-    };
+    LineData mLineData; // 线集合，所有折现以数组的形式存到此集合中
+    XAxis mXAxis; //X轴
+    YAxis mLeftYAxis; //左侧Y轴
+    YAxis mRightYAxis; //右侧Y轴
+    Legend mLegend; //图例
+    LimitLine mLimitline; //限制线
 
+    private Random mRandom = new Random(); // 随机产生点
+    private DecimalFormat mDecimalFormat = new DecimalFormat("#.00");   // 格式化浮点数位两位小数
+
+    //  Y值数据链表
+    List<Float> mList = new ArrayList<>();
+    // Chart需要的点数据链表
+    List<Entry> mEntries = new ArrayList<>();
+    // LineDataSet:点集合,即一条线
+    LineDataSet mLineDataSet = new LineDataSet(mEntries, "每日使用时间总览");
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,10 +80,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Bann
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         initView();
+        initChart();
     }
+
 
     private void initView() {
 
@@ -86,11 +114,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Bann
                 .into(hp_iv_tocontrol);
         hp_iv_tocontrol.setOnClickListener(this);
 
-        hp_bl_banner = getView().findViewById(R.id.hp_bl_banner);
-        hp_bl_banner.setAdapter(banner_horizontal = new RecyclerViewBannerAdapter(urls));
-        hp_bl_banner.setOnClickListener(this);
-        banner_horizontal.setOnBannerItemClickListener(this);
-
         hp_iv_tomessage = getView().findViewById(R.id.hp_iv_tomessage);
         Glide.with(getActivity())
                 .load("https://z3.ax1x.com/2021/11/10/IUE6Ve.png")
@@ -101,6 +124,225 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Bann
 
         hp_riv_icon = getView().findViewById(R.id.hp_riv_icon);
         hp_riv_icon.setOnClickListener(this);
+    }
+
+
+    private void initChart(){
+        hp_lc = getView().findViewById(R.id.hp_lc);
+        hp_lc.setOnClickListener(this);
+
+        mXAxis = hp_lc.getXAxis(); // 得到x轴
+        mLeftYAxis = hp_lc.getAxisLeft(); // 得到侧Y轴
+        mRightYAxis = hp_lc.getAxisRight(); // 得到右侧Y轴
+        mLegend = hp_lc.getLegend(); // 得到图例
+        mLineData = new LineData();
+        hp_lc.setData(mLineData);
+
+        mList.add((float) 13.9);
+        mList.add((float) 26.4);
+        mList.add((float) 14.6);
+        mList.add((float) 15.2);
+        mList.add((float) 20.1);
+        mList.add((float) 5.8);
+        mList.add((float) 12.3);
+
+        // 设置图标基本属性
+        setChartBasicAttr(hp_lc);
+
+        // 设置XY轴
+        setXYAxis(hp_lc, mXAxis, mLeftYAxis, mRightYAxis);
+
+        // 添加线条
+        initLine();
+
+        // 设置图例
+        createLegend(mLegend);
+    }
+
+    /**
+     * 功能：产生随机数（小数点两位）
+     */
+    public Float getRandom(Float seed) {
+        return Float.valueOf(mDecimalFormat.format(mRandom.nextFloat() * seed));
+    }
+
+    /**
+     * 功能：设置图标的基本属性
+     */
+    void setChartBasicAttr(LineChart lineChart) {
+        lineChart.setDrawGridBackground(false); //是否展示网格线
+        lineChart.setDrawBorders(false); //是否显示边界
+        lineChart.setDragEnabled(false); //是否可以拖动
+        lineChart.setScaleEnabled(false); // 是否可以缩放
+        lineChart.setTouchEnabled(true); //是否有触摸事件
+        //设置XY轴动画效果
+        //lineChart.animateY(2500);
+        lineChart.animateX(1500);
+    }
+
+    /**
+     * 功能：设置XY轴
+     */
+    void setXYAxis(LineChart lineChart, XAxis xAxis, YAxis leftYAxis, YAxis rightYAxis) {
+        /***XY轴的设置***/
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); //X轴设置显示位置在底部
+        xAxis.setAxisMinimum(0f); // 设置X轴的最小值
+        xAxis.setAxisMaximum(20); // 设置X轴的最大值
+        xAxis.setLabelCount(20, false); // 设置X轴的刻度数量，第二个参数表示是否平均分配
+        xAxis.setGranularity(1f); // 设置X轴坐标之间的最小间隔
+        lineChart.setVisibleXRangeMaximum(5);// 当前统计图表中最多在x轴坐标线上显示的总量
+        //保证Y轴从0开始，不然会上移一点
+        leftYAxis.setAxisMinimum(0f);
+        rightYAxis.setAxisMinimum(0f);
+        leftYAxis.setAxisMaximum(100f);
+        rightYAxis.setAxisMaximum(100f);
+        leftYAxis.setGranularity(1f);
+        rightYAxis.setGranularity(1f);
+        leftYAxis.setLabelCount(20);
+        lineChart.setVisibleYRangeMaximum(30, YAxis.AxisDependency.LEFT);// 当前统计图表中最多在Y轴坐标线上显示的总量
+        lineChart.setVisibleYRangeMaximum(30, YAxis.AxisDependency.RIGHT);// 当前统计图表中最多在Y轴坐标线上显示的总量
+        leftYAxis.setEnabled(false);
+
+//        leftYAxis.setCenterAxisLabels(true);// 将轴标记居中
+//        leftYAxis.setDrawZeroLine(true); // 原点处绘制 一条线
+//        leftYAxis.setZeroLineColor(Color.RED);
+//        leftYAxis.setZeroLineWidth(1f);
+    }
+
+    /**
+     * 功能：对图表中的曲线初始化，并且默认显示第一条
+     */
+    void initLine() {
+
+        createLine(mList, mEntries, mLineDataSet, Color.BLUE, mLineData, hp_lc);
+
+        // mLineData.getDataSetCount() 总线条数
+        // mLineData.getEntryCount() 总点数
+        // mLineData.getDataSetByIndex(index).getEntryCount() 索引index处折线的总点数
+        // 每条曲线添加到mLineData后，从索引0处开始排列
+        for (int i = 0; i < mLineData.getDataSetCount(); i++) {
+            hp_lc.getLineData().getDataSets().get(i).setVisible(false); //
+        }
+        showLine(0);
+    }
+
+    /**
+     * 功能：根据索引显示或隐藏指定线条
+     */
+    public void showLine(int index) {
+        hp_lc.getLineData()
+                .getDataSets()
+                .get(index)
+                .setVisible(true);
+        hp_lc.invalidate();
+    }
+
+    /**
+     * 功能：动态创建一条曲线
+     */
+    private void createLine(List<Float> dataList, List<Entry> entries, LineDataSet lineDataSet, int color, LineData lineData, LineChart lineChart) {
+        for (int i = 0; i < dataList.size(); i++) {
+            /**
+             * 在此可查看 Entry构造方法，可发现 可传入数值 Entry(float x, float y)
+             * 也可传入Drawable， Entry(float x, float y, Drawable icon) 可在XY轴交点 设置Drawable图像展示
+             */
+            Entry entry = new Entry(i, dataList.get(i));// Entry(x,y)
+            entries.add(entry);
+        }
+
+        // 初始化线条
+        initLineDataSet(lineDataSet, color, LineDataSet.Mode.CUBIC_BEZIER);
+
+        if (lineData == null) {
+            lineData = new LineData();
+            lineData.addDataSet(lineDataSet);
+            lineChart.setData(lineData);
+        } else {
+            lineChart.getLineData().addDataSet(lineDataSet);
+        }
+
+        lineChart.invalidate();
+    }
+
+
+    /**
+     * 曲线初始化设置,一个LineDataSet 代表一条曲线
+     *
+     * @param lineDataSet 线条
+     * @param color       线条颜色
+     * @param mode
+     */
+    private void initLineDataSet(LineDataSet lineDataSet, int color, LineDataSet.Mode mode) {
+        lineDataSet.setColor(color); // 设置曲线颜色
+        lineDataSet.setCircleColor(color);  // 设置数据点圆形的颜色
+        lineDataSet.setDrawCircleHole(true);// 设置曲线值的圆点是否是空心
+        lineDataSet.setLineWidth(1f); // 设置折线宽度
+        lineDataSet.setCircleRadius(3f); // 设置折现点圆点半径
+        lineDataSet.setValueTextSize(10f);
+
+        lineDataSet.setDrawFilled(true); //设置折线图填充
+        lineDataSet.setFormLineWidth(1f);
+        lineDataSet.setFormSize(15.f);
+        if (mode == null) {
+            //设置曲线展示为圆滑曲线（如果不设置则默认折线）
+            lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        } else {
+            lineDataSet.setMode(mode);
+        }
+
+    }
+
+
+    /**
+     * 功能：创建图例
+     */
+    private void createLegend(Legend legend) {
+        /***折线图例 标签 设置***/
+        //设置显示类型，LINE CIRCLE SQUARE EMPTY 等等 多种方式，查看LegendForm 即可
+        legend.setForm(Legend.LegendForm.CIRCLE);
+        legend.setTextSize(12f);
+        //显示位置 左下方
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        //是否绘制在图表里面
+        legend.setDrawInside(false);
+        legend.setEnabled(true);
+    }
+
+
+    /**
+     * 设置 可以显示X Y 轴自定义值的 MarkerView
+     */
+    public void setMarkerView(LineChart lineChart) {
+        LineChartMarkViewDemo mv = new LineChartMarkViewDemo(getActivity());
+        mv.setChartView(lineChart);
+        lineChart.setMarker(mv);
+        lineChart.invalidate();
+    }
+
+
+    /**
+     * 动态添加数据
+     * 在一个LineChart中存放的折线，其实是以索引从0开始编号的
+     *
+     * @param yValues y值
+     */
+    public void addEntry(LineData lineData, LineChart lineChart, float yValues, int index) {
+
+        // 通过索引得到一条折线，之后得到折线上当前点的数量
+        int xCount = lineData.getDataSetByIndex(index).getEntryCount();
+
+        Entry entry = new Entry(xCount, yValues); // 创建一个点
+        lineData.addEntry(entry, index); // 将entry添加到指定索引处的折线中
+
+        //通知数据已经改变
+        lineData.notifyDataChanged();
+        lineChart.notifyDataSetChanged();
+
+        //把yValues移到指定索引的位置
+        lineChart.moveViewToAnimated(xCount - 4, yValues, YAxis.AxisDependency.LEFT, 1000);// TODO: 2019/5/4 内存泄漏，异步 待修复
+        lineChart.invalidate();
     }
 
 
@@ -125,16 +367,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Bann
             case R.id.hp_riv_icon:
                 main_drawer.openDrawer(Gravity.LEFT);
                 break;
-            case R.id.hp_bl_banner:
+            case R.id.hp_lc:
                 startActivity(new Intent(getActivity(), ModuleActivity.class));
                 break;
         }
-    }
-
-
-    @Override
-    public void onItemClick(int position) {
-        startActivity(new Intent(getActivity(), ModuleActivity.class));
-        Toast.makeText(getActivity(), "点击了第" + (position + 1) + "个", Toast.LENGTH_SHORT).show();
     }
 }

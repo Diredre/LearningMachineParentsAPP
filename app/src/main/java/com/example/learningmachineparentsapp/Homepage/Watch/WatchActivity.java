@@ -49,7 +49,7 @@ public class WatchActivity extends AppCompatActivity {
         surfaceHolder = watch_sv_camera.getHolder();
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-        watch_iv_close = findViewById(R.id.watch_iv_colse);
+        watch_iv_close = findViewById(R.id.watch_iv_close);
         Glide.with(this)
                 .load("https://z3.ax1x.com/2021/11/17/I4icKx.png")
                 .into(watch_iv_close);

@@ -6,7 +6,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
-import com.example.learningmachineparentsapp.Homepage.PopupWindowAdapter;
+import com.example.learningmachineparentsapp.Homepage.Module.PopupWindowAdapter;
 import com.example.learningmachineparentsapp.R;
 
 import java.util.List;

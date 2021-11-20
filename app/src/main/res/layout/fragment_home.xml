@@ -11,7 +11,10 @@
     <RelativeLayout
         android:id="@+id/hp_ll_top"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="70dp"
+        android:layout_marginBottom="10dp"
+        android:background="#ffffff"
+        android:elevation="5dp">
         <com.example.learningmachineparentsapp.View.RoundImageView
             android:id="@+id/hp_riv_icon"
             android:layout_width="50dp"
@@ -44,21 +47,30 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <com.xuexiang.xui.widget.banner.recycler.BannerLayout
-                android:id="@+id/hp_bl_banner"
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/hp_ban"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="10dp"
-                app:bl_autoPlaying="true"
-                app:bl_centerScale="1.3"
-                app:bl_itemSpace="10dp"
-                app:bl_moveSpeed="2" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="20dp">
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/hp_lc"
+                    android:background="#FFFFFF"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"/>
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:layout_below="@id/hp_bl_banner"
+                android:layout_below="@id/hp_ban"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"

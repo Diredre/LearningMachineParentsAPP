@@ -27,21 +27,20 @@
         <activity android:name=".LoginRegist.RemeberActivity" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" />
-        <activity android:name=".Homepage.Homework.HwcheckActivity"/>
-        <activity android:name=".Homepage.Homework.HomeworkActivity" />
-        <activity android:name=".Homepage.Homework.RecordActivity" />
-        <activity android:name=".Homepage.Videochat.VideochatActivity" />
-        <activity android:name=".Homepage.Control.ControlActivity" />
-        <activity android:name=".Homepage.Message.MessageActivity" />
-        <activity android:name=".Homepage.Module.ModuleActivity">
-
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Homepage.Homework.HwcheckActivity"/>
+        <activity android:name=".Homepage.Homework.HomeworkActivity" />
+        <activity android:name=".Homepage.Homework.RecordActivity" />
+        <activity android:name=".Homepage.Videochat.VideochatActivity" />
+        <activity android:name=".Homepage.Control.ControlActivity" />
+        <activity android:name=".Homepage.Message.MessageActivity" />
+        <activity android:name=".Homepage.Module.ModuleActivity"/>
         <activity android:name=".Homepage.Watch.WatchActivity" />
         <activity android:name=".Circle.Video.VideoActivity" />
         <activity android:name=".Circle.Upload.UploadActivity" />
