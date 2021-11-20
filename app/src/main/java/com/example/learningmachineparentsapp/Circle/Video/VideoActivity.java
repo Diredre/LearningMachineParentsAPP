@@ -6,13 +6,17 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.example.learningmachineparentsapp.Circle.Upload.UploadActivity;
 import com.example.learningmachineparentsapp.R;
 import com.example.learningmachineparentsapp.Widget.MyJzvdStd;
 
@@ -26,6 +30,7 @@ public class VideoActivity extends AppCompatActivity {
 
     //上下滑动视频
     private RecyclerView videoplay_rv_video;
+    private ImageView videoplay_rv_upload;
     private VideoAdapter playerAdapter;
     private List<VideoBean> urlList = new ArrayList<>();
     private VideoBean[] urls = {
@@ -64,6 +69,13 @@ public class VideoActivity extends AppCompatActivity {
      * 控件绑定和初始化
      */
     private void initView(){
+        videoplay_rv_upload = findViewById(R.id.videoplay_rv_upload);
+        Glide.with(this)
+                .load("https://z3.ax1x.com/2021/11/20/ILlw7t.png")
+                .into(videoplay_rv_upload);
+        videoplay_rv_upload.setOnClickListener(v->{
+            startActivity(new Intent(this, UploadActivity.class));
+        });
     }
 
     /**

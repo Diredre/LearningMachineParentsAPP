@@ -51,11 +51,8 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
         discover_tv_shop_bg = view.findViewById(R.id.discover_tv_shop_bg);
         discover_tv_family_bg = view.findViewById(R.id.discover_tv_family_bg);
         discover_tv_shop = view.findViewById(R.id.discover_tv_shop);
-        discover_tv_shop.getPaint().setFakeBoldText(true);
-        discover_tv_shop.setTextSize(20);
         discover_tv_family = view.findViewById(R.id.discover_tv_family);
-        discover_tv_family.getPaint().setFakeBoldText(false);
-        discover_tv_family.setTextSize(16);
+        resetState();
 
         discover_tv_shop.setOnClickListener(this);
         discover_tv_family.setOnClickListener(this);
@@ -75,32 +72,33 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
                 .into(discover_iv_recomicon);
     }
 
+    private void resetState(){
+        discover_tv_shop_bg.setVisibility(View.VISIBLE);
+        discover_tv_family_bg.setVisibility(View.INVISIBLE);
+        discover_tv_shop.getPaint().setFakeBoldText(true);
+        discover_tv_shop.setTextSize(20);
+        discover_tv_family.getPaint().setFakeBoldText(false);
+        discover_tv_family.setTextSize(16);
+    }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.discover_tv_shop:
-                discover_tv_shop_bg.setVisibility(View.VISIBLE);
-                discover_tv_family_bg.setVisibility(View.INVISIBLE);
-                discover_tv_shop.setTextSize(22);
-                discover_tv_shop.getPaint().setFakeBoldText(true);
-                discover_tv_family.setTextSize(16);
-                discover_tv_family.getPaint().setFakeBoldText(false);
                 discover_vp.setCurrentItem(0);
                 break;
             case R.id.discover_tv_family:
-                discover_tv_shop_bg.setVisibility(View.INVISIBLE);
-                discover_tv_family_bg.setVisibility(View.VISIBLE);
-                discover_tv_shop.setTextSize(16);
-                discover_tv_shop.getPaint().setFakeBoldText(false);
-                discover_tv_family.setTextSize(20);
-                discover_tv_family.getPaint().setFakeBoldText(true);
                 discover_vp.setCurrentItem(1);
                 break;
         }
     }
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
+
+    @Override
+    public void onPageSelected(int position) {
+        resetState();
         switch (position) {
             case 0:
                 discover_tv_shop_bg.setVisibility(View.VISIBLE);
@@ -120,9 +118,6 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
                 break;
         }
     }
-
-    @Override
-    public void onPageSelected(int position) { }
 
     @Override
     public void onPageScrollStateChanged(int state) { }

@@ -1,23 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Circle.DashboardFragment">
 
-    <TextView
-        android:id="@+id/text_dashboard"
+    <RelativeLayout
+        android:id="@+id/circle_tit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
+        <View
+            android:id="@+id/circle_tv_friend_bg"
+            android:layout_width="45dp"
+            android:layout_height="5dp"
+            android:visibility="invisible"
+            android:layout_alignBottom="@id/circle_tv_friend"
+            android:layout_alignLeft="@id/circle_tv_friend"
+            android:layout_marginLeft="-2dp"
+            android:background="#49DA9C"/>
+        <TextView
+            android:id="@+id/circle_tv_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="动态"
+            android:layout_alignParentBottom="true"
+            android:textColor="#404040"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/circle_tv_video_bg"
+            android:layout_width="64dp"
+            android:layout_height="5dp"
+            android:visibility="invisible"
+            android:layout_alignBottom="@id/circle_tv_video"
+            android:layout_alignLeft="@id/circle_tv_video"
+            android:layout_marginLeft="-2dp"
+            android:background="#49DA9C"/>
+        <TextView
+            android:id="@+id/circle_tv_video"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/circle_tv_friend"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="视频"
+            android:textColor="#404040"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
+        <ImageView
+            android:id="@+id/circle_iv_upload"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/circle_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/circle_tit"/>
+
+</RelativeLayout>

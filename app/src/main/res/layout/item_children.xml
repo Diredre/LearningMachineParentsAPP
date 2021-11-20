@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="90dp"
+    android:layout_height="90dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp">
+
+    <View
+        android:id="@+id/item_child_view"
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:background="#49DA9C"/>
+
+    <ImageView
+        android:id="@+id/item_child_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/border_goods_bg"
+        android:adjustViewBounds="true"/>
+    
+    <TextView
+        android:id="@+id/item_child_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/item_child_icon"
+        android:text="添加学习机"
+        android:textColor="#404040"/>
+    
+</RelativeLayout>

@@ -56,7 +56,7 @@ public class VideochatActivity extends AppCompatActivity {
             }
         });
 
-        if (!isPreview) {
+        /*if (!isPreview) {
             // 如果没打开->打开摄像头
             camera = Camera.open();
             isPreview = true;
@@ -72,7 +72,7 @@ public class VideochatActivity extends AppCompatActivity {
             camera.autoFocus(null);         // 自动对焦
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 
