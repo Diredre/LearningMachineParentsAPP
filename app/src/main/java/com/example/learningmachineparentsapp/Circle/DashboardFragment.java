@@ -76,9 +76,9 @@ public class DashboardFragment extends Fragment implements ViewPager.OnPageChang
         circle_tv_friend_bg.setVisibility(View.VISIBLE);
         circle_tv_video_bg.setVisibility(View.INVISIBLE);
         circle_tv_friend.getPaint().setFakeBoldText(true);
-        circle_tv_friend.setTextSize(24);
+        circle_tv_friend.setTextSize(22);
         circle_tv_video.getPaint().setFakeBoldText(false);
-        circle_tv_video.setTextSize(20);
+        circle_tv_video.setTextSize(17);
     }
 
     @Override
@@ -103,17 +103,17 @@ public class DashboardFragment extends Fragment implements ViewPager.OnPageChang
             case 0:
                 circle_tv_friend_bg.setVisibility(View.VISIBLE);
                 circle_tv_video_bg.setVisibility(View.INVISIBLE);
-                circle_tv_friend.setTextSize(24);
+                circle_tv_friend.setTextSize(20);
                 circle_tv_friend.getPaint().setFakeBoldText(true);
-                circle_tv_video.setTextSize(20);
+                circle_tv_video.setTextSize(17);
                 circle_tv_video.getPaint().setFakeBoldText(false);
                 break;
             case 1:
                 circle_tv_friend_bg.setVisibility(View.INVISIBLE);
                 circle_tv_video_bg.setVisibility(View.VISIBLE);
-                circle_tv_friend.setTextSize(20);
+                circle_tv_friend.setTextSize(17);
                 circle_tv_friend.getPaint().setFakeBoldText(false);
-                circle_tv_video.setTextSize(24);
+                circle_tv_video.setTextSize(20);
                 circle_tv_video.getPaint().setFakeBoldText(true);
                 break;
         }

@@ -111,7 +111,7 @@
                             android:layout_gravity="center_vertical"
                             android:textSize="16sp"
                             android:textColor="#404040"
-                            android:text="我的发布"/>
+                            android:text="审核进度"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -131,7 +131,7 @@
                             android:layout_gravity="center_vertical"
                             android:textSize="16sp"
                             android:textColor="#404040"
-                            android:text="钱包"/>
+                            android:text="我的钱包"/>
                     </LinearLayout>
 
                     <LinearLayout

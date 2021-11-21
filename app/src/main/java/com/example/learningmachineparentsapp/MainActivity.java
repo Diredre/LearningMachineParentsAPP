@@ -13,6 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.learningmachineparentsapp.Homepage.LeftActs.AccountActivity;
+import com.example.learningmachineparentsapp.Homepage.LeftActs.HelpActivity;
+import com.example.learningmachineparentsapp.Homepage.LeftActs.PersonActivity;
+import com.example.learningmachineparentsapp.Homepage.LeftActs.PrivateActivity;
+import com.example.learningmachineparentsapp.Homepage.LeftActs.PublishActivity;
+import com.example.learningmachineparentsapp.Homepage.LeftActs.PurseActivity;
 import com.example.learningmachineparentsapp.LoginRegist.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -26,7 +32,8 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView main_iv_off, main_iv_setting, main_iv_publish, main_iv_purse,
-            main_iv_help, main_iv_account, main_iv_cache, main_iv_private, main_iv_qrcode;
+            main_iv_help, main_iv_account, main_iv_cache, main_iv_private, main_iv_qrcode,
+            main_riv_usericon;
     private LinearLayout main_ll_publish, main_ll_purse, main_ll_help, main_ll_account,
             main_ll_cache, main_ll_private;
     private BottomNavigationView nav_view;
@@ -121,6 +128,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Glide.with(this)
                 .load("https://z3.ax1x.com/2021/11/20/IqjJtU.png")
                 .into(main_iv_private);
+
+        main_riv_usericon = findViewById(R.id.main_riv_usericon);
+        main_riv_usericon.setOnClickListener(this);
     }
 
 
@@ -135,25 +145,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MainActivity.this.finish();
                 break;
             case R.id.main_ll_publish:
-                Toast.makeText(MainActivity.this, "我的发布界面还没写", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, PublishActivity.class));
                 break;
             case R.id.main_ll_purse:
-                Toast.makeText(MainActivity.this, "钱包界面还没写", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, PurseActivity.class));
                 break;
             case R.id.main_ll_help:
-                Toast.makeText(MainActivity.this, "帮助与反馈界面还没写", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, HelpActivity.class));
                 break;
             case R.id.main_ll_account:
-                Toast.makeText(MainActivity.this, "账号与安全界面还没写", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, AccountActivity.class));
                 break;
             case R.id.main_ll_cache:
-                Toast.makeText(MainActivity.this, "清除缓存界面还没写", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "清除缓存成功", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.main_ll_private:
-                Toast.makeText(MainActivity.this, "隐私设置界面还没写", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, PrivateActivity.class));
                 break;
             case R.id.main_iv_qrcode:
                 Toast.makeText(MainActivity.this, "二维码界面还没写", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.main_riv_usericon:
+                startActivity(new Intent(MainActivity.this, PersonActivity.class));
                 break;
         }
     }

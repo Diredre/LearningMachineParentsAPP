@@ -22,14 +22,24 @@
             android:src="@mipmap/added"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"/>
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="云淡风轻"
-            android:textSize="22sp"
+            android:orientation="vertical"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/hp_riv_icon"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="云淡风轻"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="李小华 浙江省杭州市学军中学 四年级"
+                android:textSize="12sp"/>
+        </LinearLayout>
         <ImageView
             android:id="@+id/hp_iv_tomessage"
             android:layout_width="40dp"

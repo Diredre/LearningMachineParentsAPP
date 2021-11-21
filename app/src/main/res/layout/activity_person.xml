@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Homepage.LeftActs.PersonActivity">
+
+    <ImageView
+        android:id="@+id/person_iv_back"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
+
+    <ImageView
+        android:id="@+id/person_iv_bg"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:src="@mipmap/back_white"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/person_cd"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:elevation="3dp"
+        app:cardCornerRadius="15dp"
+        android:layout_alignBottom="@id/person_iv_back"
+        android:layout_margin="20dp">
+        <ImageView
+            android:id="@+id/publish_iv_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/added"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/publish_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="云淡风轻"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textColor="#404040"
+        android:layout_toRightOf="@id/person_cd"
+        android:layout_alignTop="@id/person_cd"/>
+
+    <TextView
+        android:id="@+id/publish_tv_school"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="浙江省杭州市学军小学"
+        android:maxLines="1"
+        android:layout_below="@id/publish_tv_name"
+        android:layout_toRightOf="@id/person_cd"
+        android:textSize="14sp"
+        android:textColor="#404040"/>
+
+    <TextView
+        android:id="@+id/publish_tv_grade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="四年级"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/publish_tv_name"
+        android:layout_toRightOf="@id/publish_tv_school"
+        android:textSize="14sp"
+        android:textColor="#404040"/>
+
+    <LinearLayout
+        android:id="@+id/person_ll1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/person_iv_back">
+        <TextView
+            android:id="@+id/person_tv_friend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="动态"/>
+        <TextView
+            android:id="@+id/person_tv_video"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="视频"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/person_ll2"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/person_ll1">
+        <View
+            android:id="@+id/person_tv_friend_bg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:background="#49DA9C"/>
+        <View
+            android:id="@+id/person_tv_video_bg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:background="#49DA9C"/>
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/person_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/person_ll2"/>
+</RelativeLayout>

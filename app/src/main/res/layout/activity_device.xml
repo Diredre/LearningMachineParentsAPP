@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Homepage.LeftActs.DeviceActivity">
+
+    <com.example.learningmachineparentsapp.View.TitleLayout
+        android:id="@+id/device_tit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="最近登录设备：你可以删除列表中的设备，删除后在该设备登录需要进行身份验证。"
+        android:textColor="#BFBFBF"
+        android:textSize="13sp"
+        android:layout_margin="5dp"/>
+
+    <RelativeLayout
+        android:id="@+id/account_rl_psw"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:id="@+id/device_tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="vivo-x60"
+                android:textColor="#404040"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/device_tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="2021-11-20"
+                android:layout_below="@id/device_tv_name"
+                android:textColor="#BFBFBF"
+                android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/device_tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="10::35:08"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/device_tv_name"
+                android:layout_toRightOf="@id/device_tv_date"
+                android:textColor="#BFBFBF"
+                android:textSize="12sp"/>
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/next"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#D7D7D7"/>
+
+</LinearLayout>
