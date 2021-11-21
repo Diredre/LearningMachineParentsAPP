@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.learningmachineparentsapp.R;
@@ -52,8 +53,10 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.account_rl_phone:
+                Toast.makeText(this,"开发中",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.account_rl_psw:
+                startActivity(new Intent(this, PasswordActivity.class));
                 break;
             case R.id.account_rl_device:
                 startActivity(new Intent(this, DeviceActivity.class));

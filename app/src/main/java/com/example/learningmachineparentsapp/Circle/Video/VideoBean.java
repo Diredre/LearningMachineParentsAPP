@@ -2,15 +2,14 @@ package com.example.learningmachineparentsapp.Circle.Video;
 
 public class VideoBean {
 
-    private String videoUrl, imageUrl, auther, con;
+    private String videoUrl, auther, con;
     private int likenum = 0;
     private int comment_num = 0;
     private int type = 0;   // 运动类=1， 文化类=2， 历史类=3
     private boolean isLike = false;
 
-    public VideoBean(String videoUrl, String imageUrl, String auther, String con) {
+    public VideoBean(String videoUrl, String auther, String con) {
         this.videoUrl = videoUrl;
-        this.imageUrl = imageUrl;
         this.auther = auther;
         this.con = con;
     }
@@ -21,14 +20,6 @@ public class VideoBean {
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public String getAuther() {

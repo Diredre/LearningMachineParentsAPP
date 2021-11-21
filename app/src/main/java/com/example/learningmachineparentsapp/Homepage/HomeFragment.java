@@ -176,8 +176,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         lineChart.setScaleEnabled(false); // 是否可以缩放
         lineChart.setTouchEnabled(true); //是否有触摸事件
         //设置XY轴动画效果
-        //lineChart.animateY(2500);
-        lineChart.animateX(1500);
+        lineChart.animateY(1500);
+        //lineChart.animateX(1500);
     }
 
     /**
