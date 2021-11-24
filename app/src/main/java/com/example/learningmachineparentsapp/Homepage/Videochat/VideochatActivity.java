@@ -39,11 +39,11 @@ public class VideochatActivity extends AppCompatActivity {
 
     private void initView() {
 
-        vchat_sv_camera = findViewById(R.id.watch_sv_camera);
+        vchat_sv_camera = findViewById(R.id.vchat_sv_camera);
         surfaceHolder = vchat_sv_camera.getHolder();
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-        vchat_iv_close = findViewById(R.id.watch_iv_close);
+        vchat_iv_close = findViewById(R.id.vchat_iv_close);
         Glide.with(this)
                 .load("https://z3.ax1x.com/2021/11/17/I4icKx.png")
                 .into(vchat_iv_close);

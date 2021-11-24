@@ -75,4 +75,6 @@ dependencies {
     // 饺子播放器
     implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
 
+    // 视频压缩
+    implementation 'com.github.yellowcath:VideoProcessor:2.4.2'
 }

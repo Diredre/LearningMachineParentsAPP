@@ -85,11 +85,7 @@ public class VideoFragment extends Fragment {
         snapHelper.attachToRecyclerView(circle_video_rv);
         // adapter应用
         playerAdapter = new VideoAdapter(getContext(), urlList);
-
-
-        //todo: 这一行有问题，标明显一点记得改
         circle_video_rv.setAdapter(playerAdapter);
-
 
         circle_video_rv.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
             @Override

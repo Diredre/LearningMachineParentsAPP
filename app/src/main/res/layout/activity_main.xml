@@ -117,7 +117,7 @@
                             android:layout_gravity="center_vertical"
                             android:textSize="16sp"
                             android:textColor="#404040"
-                            android:text="审核进度"/>
+                            android:text="个人资料"/>
                     </LinearLayout>
 
                     <LinearLayout

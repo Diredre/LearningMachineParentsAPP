@@ -43,6 +43,7 @@ public class WatchActivity extends AppCompatActivity {
         initView();
     }
 
+
     private void initView() {
 
         watch_sv_camera = findViewById(R.id.watch_sv_camera);

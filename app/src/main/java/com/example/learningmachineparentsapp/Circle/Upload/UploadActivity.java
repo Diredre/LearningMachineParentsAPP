@@ -1,14 +1,18 @@
 package com.example.learningmachineparentsapp.Circle.Upload;
 
 import android.app.Activity;
+import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +25,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.learningmachineparentsapp.Circle.Video.LocalVideo;
 import com.example.learningmachineparentsapp.R;
+import com.hw.videoprocessor.VideoProcessor;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -92,30 +98,6 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(UploadActivity.this, "请选择视频后，再点击上传！", Toast.LENGTH_LONG).show();
                 else {
                     submit();
-                    /*File file = new File(VIDEOPATH);
-                    String postUrl = "http://101.35.7.157/api/upload";
-                    uploadProgressDialog.show();
-                    HttpUtil.postFile(postUrl, new ProgressListener() {
-                        @Override
-                        public void onProgress(long currentBytes, long contentLength, boolean done) {
-                            Log.i(TAG, "currentBytes==" + currentBytes +
-                                    "==contentLength==" + contentLength +
-                                    "==done==" + done);
-                            int progress = (int) (currentBytes * 100 / contentLength);
-                            uploadProgressDialog.setPb_dialog_bar(progress);
-                            //post_text.setText(progress + "%");
-                        }
-                    }, new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {}
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            if (response != null) {
-                                String result = response.body().string();
-                                Log.i(TAG, "result===" + result);
-                            }
-                        }
-                    }, file);*/
                 }
                 break;
             case R.id.upload_iv_add:
@@ -130,14 +112,13 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
      */
     private void choiceVideo() {
         /*Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(i, UploadActivity.VEDIO_KU);
-        VIDEOPATH =*/
+        startActivityForResult(i, UploadActivity.VEDIO_KU);*/
 
         Intent intent = new Intent();
         intent.setType("video/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        this.startActivityForResult(intent, UploadActivity.VEDIO_KU);
+        startActivityForResult(intent, UploadActivity.VEDIO_KU);
     }
 
     /**
@@ -148,7 +129,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
      */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /*if (requestCode == UploadActivity.VEDIO_KU && resultCode == RESULT_OK && null != data) {
+        if (requestCode == 66 && resultCode == RESULT_OK && null != data) {
             Uri selectedVideo = data.getData();
             String[] filePathColumn = {MediaStore.Video.Media.DATA};
 
@@ -158,92 +139,12 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             VIDEOPATH = cursor.getString(columnIndex);
-            Log.e("myx 视频路径：", VIDEOPATH);
             cursor.close();
-            //换个图片表示已选中该视频
-            upload_iv_add.setImageDrawable(getResources().getDrawable(R.mipmap.added));
+            upload_tv_path.setText(VIDEOPATH);
         }
         if (resultCode != Activity.RESULT_OK) {
             return;
-        }*/
-        switch (requestCode) {
-            // TODO 视频
-            case UploadActivity.VEDIO_KU:
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    try {
-                        Uri uri = data.getData();
-                        uri = geturi(this, data);
-                        File file = null;
-                        if (uri.toString().indexOf("file") == 0) {
-                            file = new File(new URI(uri.toString()));
-                            VIDEOPATH = file.getPath();
-                        } else {
-                            VIDEOPATH = getPath(uri);
-                            file = new File(VIDEOPATH);
-                        }
-                        if (!file.exists()) break;
-                        if (file.length() > 100 * 1024 * 1024) {// "文件大于100M";
-                            break;
-                        }
-                        //换个图片表示已选中该视频
-                        upload_iv_add.setImageDrawable(getResources().getDrawable(R.mipmap.added));
-
-                        //视频播放
-                        // mVideoView.setVideoURI(uri);
-                        // mVideoView.start();
-                        //开始上传视频，
-                        // submitVedio();
-                    } catch (Exception e) {
-                        String a = e + "";
-                    } catch (OutOfMemoryError e) {
-                        String a = e + "";
-                    }
-                }
-                break;
         }
-    }
-
-
-    public static Uri geturi(Context context, android.content.Intent intent) {
-        Uri uri = intent.getData();
-        String type = intent.getType();
-        if (uri.getScheme().equals("file") && (type.contains("image/"))) {
-            String path = uri.getEncodedPath();
-            if (path != null) {
-                path = Uri.decode(path);
-                ContentResolver cr = context.getContentResolver();
-                StringBuffer buff = new StringBuffer();
-                buff.append("(").append(MediaStore.Images.ImageColumns.DATA).append("=")
-                        .append("'" + path + "'").append(")");
-                Cursor cur = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        new String[] { MediaStore.Images.ImageColumns._ID },
-                        buff.toString(), null, null);
-                int index = 0;
-                for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
-                    index = cur.getColumnIndex(MediaStore.Images.ImageColumns._ID);
-                    // set _id value
-                    index = cur.getInt(index);
-                }
-                if (index != 0){
-                    Uri uri_temp = Uri.parse("content://media/external/images/media/" + index);
-                    if (uri_temp != null) {
-                        uri = uri_temp;
-                        Log.i("urishi", uri.toString());
-                    }
-                }
-            }
-        }
-        return uri;
-    }
-
-
-    private String getPath(Uri uri) {
-        String[] projection = {MediaStore.Video.Media.DATA};
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
-        int column_index = cursor
-                .getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
     }
 
     /**
@@ -261,79 +162,59 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         return bitmap;
     }
 
-
-    public static ByteArrayInputStream getByteArrayInputStream(File file){
-        return new ByteArrayInputStream(getByetsFromFile(file));
+    /**
+     * 获取视频文件的大小
+     * @param file 文件
+     * @return 返回文件大小
+     * @throws Exception
+     */
+    private long getFileSize(File file) throws Exception {
+        long size = 0;
+        if (file.exists()) {
+            FileInputStream fis = new FileInputStream(file);
+            size = fis.available();
+        } else {
+            Toast.makeText(UploadActivity.this, "文件不存在！",Toast.LENGTH_SHORT).show();
+        }
+        return size;
     }
 
     /**
-     * 视频文件转换为流方法
-     *  ByteArrayInputStream ins = new ByteArrayInputStream(picBytes);
-     * @param file
+     * 获取视频时长,这里获取的是毫秒
+     * @param context
+     * @param uri
      * @return
      */
-    public static byte[] getByetsFromFile(File file){
-        FileInputStream is = null;
-        // 获取文件大小
-        long length = file.length();
-        // 创建一个数据来保存文件数据
-        byte[] fileData = new byte[(int)length];
-
+    private int getVideoTime(Context context, Uri uri){
         try {
-            is = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            mediaPlayer.setDataSource(context,uri);
+            mediaPlayer.prepare();
+            int duration = mediaPlayer.getDuration();
+            return duration;
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        int bytesRead=0;
-        // 读取数据到byte数组中
-        while(bytesRead != fileData.length) {
-            try {
-                bytesRead += is.read(fileData, bytesRead, fileData.length - bytesRead);
-                if(is != null)
-                    is.close();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        return fileData;
+        return 0;
     }
 
     /**
-     * 断点续传
+     * 视频压缩
      */
-    public void submit(){
-        try {
-            File file = new File(VIDEOPATH);
-            FileInputStream is = null;
-            long length = file.length();    // 获取文件大小
-            byte[] fileData = null;         // 创建一个数据来保存文件数据
+    private void videoProcess(){
+        /*VideoProcessor.processor(this)
+                .input(inputVideoPath) // .input(inputVideoUri)
+                .output(outputVideoPath)
+                .outWidth(width)
+                .outHeight(height)
+                .process();*/
+    }
 
-            try {
-                is = new FileInputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            // 读取数据到byte数组中
-            List<ByteArrayInputStream> temp = new ArrayList<>();
-            int len = 0;
-            fileData = new byte[1000 * 1000 * 2];
-
-            //断点续传
-            while ((len = is.read(fileData)) != -1) {
-                temp = new ArrayList<>();
-                ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(fileData);
-                temp.add(byteArrayInputStream);
-                //这里是提交数组流到后台
-                //RegisterControlService.submitVedioSon(
-                //SubVedioViewActivity.this, temp, fInfos, subIdx);
-                temp.clear();
-                byteArrayInputStream.close();
-            }
-            if (is != null)
-                is.close();
-        } catch (Exception ex) {
-        }
+    /**
+     * 上传视频
+     * @return
+     */
+    private boolean submit(){
+        return false;
     }
 }
