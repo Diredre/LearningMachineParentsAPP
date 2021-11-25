@@ -12,23 +12,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <ImageView
-        android:id="@+id/control_iv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:adjustViewBounds="true"
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/control_pc"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/control_tit"/>
 
     <LinearLayout
+        android:id="@+id/control_ll1"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/control_iv">
+        android:layout_below="@id/control_pc">
+        <ImageView
+            android:id="@+id/control_iv_clock"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:textSize="18sp"
+            android:textColor="#404040"
+            android:text="设置设备可用时间"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/control_ll2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/control_ll1">
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -87,4 +109,69 @@
             android:text="日"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/control_ll3"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/control_ll2">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="#404040"
+            android:text="开始使用时间"/>
+        <TextView
+            android:id="@+id/control_tv_start"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="#404040"
+            android:text="00:00"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/control_ll4"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/control_ll3">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="#404040"
+            android:text="结束使用时间"/>
+        <TextView
+            android:id="@+id/control_tv_end"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="#404040"
+            android:text="00:00"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/control_btn_adapt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:textColor="@color/white"
+        android:background="@drawable/upload_btn_background"
+        android:text="应用"/>
 </RelativeLayout>

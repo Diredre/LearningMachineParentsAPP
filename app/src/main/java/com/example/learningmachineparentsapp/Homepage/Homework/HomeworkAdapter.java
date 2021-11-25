@@ -149,14 +149,27 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
     }
 
     /**
-     * 删除数据
+     * 增删改查数据
      */
     public void removeItemData(int postition){
         hwList.remove(postition);
         notifyItemRemoved(postition);
         //notifyDataSetChanged();     //防止错位
+        //刷新下标，不然下标就重复
+        notifyItemRangeChanged(postition, hwList.size());
     }
 
+    public void addItemData(HomeworkBean data) {
+        hwList.add(hwList.size(), data);
+        notifyItemInserted(hwList.size());
+        //刷新下标，不然下标就不连续
+        notifyItemRangeChanged(hwList.size(), hwList.size());
+    }
+
+    public void changeItemData(int position, HomeworkBean data) {
+        hwList.set(position, data);
+        notifyItemChanged(position);
+    }
 
     /**
      * 修改作业内容dialog

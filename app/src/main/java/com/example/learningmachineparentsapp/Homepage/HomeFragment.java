@@ -30,6 +30,7 @@ import com.example.learningmachineparentsapp.R;
 
 import com.example.learningmachineparentsapp.View.RoundImageView;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
@@ -130,6 +131,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private void initChart(){
         hp_lc = getView().findViewById(R.id.hp_lc);
         hp_lc.setOnClickListener(this);
+
+        // 去除右下角
+        Description description = new Description();
+        description.setText("");
+        hp_lc.setDescription(description);
 
         mXAxis = hp_lc.getXAxis(); // 得到x轴
         mLeftYAxis = hp_lc.getAxisLeft(); // 得到侧Y轴

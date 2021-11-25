@@ -50,6 +50,15 @@
         android:layout_margin="20dp"/>
 
     <ImageView
+        android:id="@+id/hwcheck_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/hwcheck_icon"
+        android:layout_above="@id/hwcheck_iv_add"
+        android:adjustViewBounds="true"
+        android:layout_margin="20dp"/>
+
+    <ImageView
         android:id="@+id/hwcheck_iv_add"
         android:layout_width="60dp"
         android:layout_height="60dp"

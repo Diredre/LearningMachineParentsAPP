@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,6 +43,8 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
     private ImageView homework_iv_torecord;
     private CheckBox homework_cb_del;
     private TextView homework_tv_del;
+    private EditText homework_et_clip;
+    private Button homework_btn_add;
     private FloatingActionButton homework_fb_send;
     private SlideRecyclerView homework_rv_hwlist;
     private HomeworkAdapter homeworkAdapter;
@@ -72,8 +75,13 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         homework_tv_del = findViewById(R.id.homework_tv_del);
         homework_tv_del.setOnClickListener(this);
 
+        homework_btn_add = findViewById(R.id.homework_btn_add);
+        homework_btn_add.setOnClickListener(this);
+
         homework_fb_send = findViewById(R.id.homework_fb_send);
         homework_fb_send.setOnClickListener(this);
+
+        homework_et_clip = findViewById(R.id.homework_et_clip);
 
         // 设置作业序列
         homework_rv_hwlist = findViewById(R.id.homework_rv_hwlist);
@@ -119,6 +127,15 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
             case R.id.homework_tv_del:
                 Toast.makeText(this, "TODO删除", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.homework_btn_add:
+                if(!homework_et_clip.getText().toString().trim().equals("")) {
+                    smartInput();
+                    Toast.makeText(HomeworkActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+                    homework_et_clip.setText("");
+                }else{
+                    Toast.makeText(HomeworkActivity.this, "请输入作业", Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
     }
 
@@ -131,6 +148,18 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         return true;
     }
 
+    private void smartInput(){
+        String input = homework_et_clip.getText().toString();
+        String[] inputs = input.split("\n");
+        for(String s : inputs){
+            homeworkAdapter.addItemData(new HomeworkBean(s, new Time(0)));
+        }
+/*        hwlist.add(new HomeworkBean(input, new Time(10)));
+        // 通知适配器
+        homeworkAdapter.notifyItemChanged(hwlist.size() - 1);
+        // 更新定位
+        homework_rv_hwlist.scrollToPosition(homeworkAdapter.getItemCount() - 1);*/
+    }
     /**
      * 输入作业内容dialog
      */

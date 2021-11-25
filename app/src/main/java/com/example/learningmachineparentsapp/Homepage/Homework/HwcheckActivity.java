@@ -8,12 +8,13 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.learningmachineparentsapp.R;
 import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTransparent;
 
 public class HwcheckActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ImageView hwcheck_iv_add, hwcheck_iv_back;
+    private ImageView hwcheck_iv_add, hwcheck_iv_back, hwcheck_iv;
 
 
     @Override
@@ -31,6 +32,11 @@ public class HwcheckActivity extends AppCompatActivity implements View.OnClickLi
 
         hwcheck_iv_back = findViewById(R.id.hwcheck_iv_back);
         hwcheck_iv_back.setOnClickListener(this);
+
+        hwcheck_iv = findViewById(R.id.hwcheck_iv);
+        Glide.with(this)
+                .load("https://z3.ax1x.com/2021/11/25/okE3lt.png")
+                .into(hwcheck_iv);
     }
 
     @Override
