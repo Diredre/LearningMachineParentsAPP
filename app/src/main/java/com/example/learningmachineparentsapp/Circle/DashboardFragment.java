@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +18,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.example.learningmachineparentsapp.Circle.Trend.FriendFragment;
 import com.example.learningmachineparentsapp.Circle.Video.VideoActivity;
 import com.example.learningmachineparentsapp.Circle.Video.VideoFragment;
@@ -26,15 +29,12 @@ import com.example.learningmachineparentsapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardFragment extends Fragment implements ViewPager.OnPageChangeListener, View.OnClickListener{
+public class DashboardFragment extends Fragment implements View.OnClickListener{
 
     private Context context;
-    private View view, circle_tv_friend_bg, circle_tv_video_bg;
-    private TextView circle_tv_friend, circle_tv_video;
-    private ImageView circle_iv_upload;
-    private ViewPager circle_vp;
-    private List<Fragment> mFragmentLists;
-    private ViewPagerAdapter mAdater;
+    private View view;
+    private RelativeLayout circle_friend, circle_video;
+    private ImageView circle_iv_friend, circle_iv_video;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -51,74 +51,31 @@ public class DashboardFragment extends Fragment implements ViewPager.OnPageChang
     }
 
     private void initView(){
-        circle_tv_friend_bg = view.findViewById(R.id.circle_tv_friend_bg);
-        circle_tv_video_bg = view.findViewById(R.id.circle_tv_video_bg);
-        circle_tv_friend = view.findViewById(R.id.circle_tv_friend);
-        circle_tv_video = view.findViewById(R.id.circle_tv_video);
-        resetState();
+        circle_friend = view.findViewById(R.id.circle_friend);
+        circle_video = view.findViewById(R.id.circle_video);
+        circle_iv_video = view.findViewById(R.id.circle_iv_video);
+        circle_iv_friend = view.findViewById(R.id.circle_iv_friend);
 
-        circle_tv_friend.setOnClickListener(this);
-        circle_tv_video.setOnClickListener(this);
+        Glide.with(getContext())
+                .load("")
+                .into(circle_iv_video);
+        Glide.with(getContext())
+                .load("")
+                .into(circle_iv_friend);
 
-        mFragmentLists = new ArrayList<>();
-        mFragmentLists.add(new FriendFragment(getActivity()));
-        mFragmentLists.add(new VideoFragment(getActivity()));
-
-        circle_iv_upload = view.findViewById(R.id.circle_iv_upload);
-
-        circle_vp = view.findViewById(R.id.circle_vp);
-        mAdater = new ViewPagerAdapter(getChildFragmentManager(), mFragmentLists);
-        circle_vp.addOnPageChangeListener(this);
-        circle_vp.setAdapter(mAdater);
-    }
-
-    private void resetState(){
-        circle_tv_friend_bg.setVisibility(View.VISIBLE);
-        circle_tv_video_bg.setVisibility(View.INVISIBLE);
-        circle_tv_friend.getPaint().setFakeBoldText(true);
-        circle_tv_friend.setTextSize(22);
-        circle_tv_video.getPaint().setFakeBoldText(false);
-        circle_tv_video.setTextSize(17);
+        circle_friend.setOnClickListener(this);
+        circle_video.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.circle_tv_friend:
-                circle_vp.setCurrentItem(0);
+            case R.id.circle_friend:
+                Toast.makeText(getContext(), "111", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.circle_tv_video:
-                circle_vp.setCurrentItem(1);
-                break;
-        }
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
-
-    @Override
-    public void onPageSelected(int position) {
-        resetState();
-        switch (position) {
-            case 0:
-                circle_tv_friend_bg.setVisibility(View.VISIBLE);
-                circle_tv_video_bg.setVisibility(View.INVISIBLE);
-                circle_tv_friend.setTextSize(20);
-                circle_tv_friend.getPaint().setFakeBoldText(true);
-                circle_tv_video.setTextSize(17);
-                circle_tv_video.getPaint().setFakeBoldText(false);
-                break;
-            case 1:
-                circle_tv_friend_bg.setVisibility(View.INVISIBLE);
-                circle_tv_video_bg.setVisibility(View.VISIBLE);
-                circle_tv_friend.setTextSize(17);
-                circle_tv_friend.getPaint().setFakeBoldText(false);
-                circle_tv_video.setTextSize(20);
-                circle_tv_video.getPaint().setFakeBoldText(true);
+            case R.id.circle_video:
+                startActivity(new Intent(getActivity(),VideoActivity.class));
                 break;
         }
     }
-
-    @Override
-    public void onPageScrollStateChanged(int state) { }
 }

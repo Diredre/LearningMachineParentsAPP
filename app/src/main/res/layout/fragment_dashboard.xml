@@ -1,72 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Circle.DashboardFragment">
 
-    <RelativeLayout
-        android:id="@+id/circle_tit"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_marginTop="10dp"
-        android:background="#FFFFFF">
-        <View
-            android:id="@+id/circle_tv_friend_bg"
-            android:layout_width="50dp"
-            android:layout_height="5dp"
-            android:visibility="invisible"
-            android:layout_alignBottom="@id/circle_tv_friend"
-            android:layout_alignLeft="@id/circle_tv_friend"
-            android:layout_marginLeft="-2dp"
-            android:background="#49DA9C"/>
-        <TextView
-            android:id="@+id/circle_tv_friend"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="动态"
-            android:layout_alignParentBottom="true"
-            android:textColor="#404040"
-            android:textSize="18sp"
-            tools:ignore="HardcodedText" />
 
-        <View
-            android:id="@+id/circle_tv_video_bg"
-            android:layout_width="50dp"
-            android:layout_height="5dp"
-            android:visibility="invisible"
-            android:layout_alignBottom="@id/circle_tv_video"
-            android:layout_alignLeft="@id/circle_tv_video"
-            android:layout_marginLeft="-2dp"
-            android:background="#49DA9C"/>
-        <TextView
-            android:id="@+id/circle_tv_video"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/circle_tv_friend"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:text="视频"
-            android:textColor="#404040"
-            android:textSize="18sp"
-            tools:ignore="HardcodedText" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:background="#D7D7D7"/>
+
+    <RelativeLayout
+        android:id="@+id/circle_friend"
+        android:layout_width="match_parent"
+        android:layout_height="25dp">
         <ImageView
-            android:id="@+id/circle_iv_upload"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/circle_iv_friend"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/topic"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="家长社交圈"
+            android:layout_toRightOf="@+id/circle_iv_friend"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/next"/>
     </RelativeLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/circle_vp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/circle_tit"/>
 
-</RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:background="#D7D7D7"/>
+
+    <RelativeLayout
+        android:id="@+id/circle_video"
+        android:layout_width="match_parent"
+        android:layout_height="25dp">
+        <ImageView
+            android:id="@+id/circle_iv_video"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/topic"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="短视频"
+            android:layout_toRightOf="@+id/circle_iv_video"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/next"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:background="#D7D7D7"/>
+</LinearLayout>
