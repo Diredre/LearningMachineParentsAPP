@@ -26,6 +26,8 @@ import com.example.learningmachineparentsapp.View.SlideRecyclerView;
 import com.example.learningmachineparentsapp.View.TitleLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.example.learningmachineparentsapp.Homepage.Homework.HomeworkBean;
+import com.xuexiang.xui.widget.button.switchbutton.SwitchButton;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,7 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
     private TextView homework_tv_del;
     private EditText homework_et_clip;
     private Button homework_btn_add;
+    private SwitchButton homework_sb;
     private FloatingActionButton homework_fb_send;
     private SlideRecyclerView homework_rv_hwlist;
     private HomeworkAdapter homeworkAdapter;
@@ -80,6 +83,8 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
 
         homework_fb_send = findViewById(R.id.homework_fb_send);
         homework_fb_send.setOnClickListener(this);
+
+        homework_sb = findViewById(R.id.homework_sb);
 
         homework_et_clip = findViewById(R.id.homework_et_clip);
 

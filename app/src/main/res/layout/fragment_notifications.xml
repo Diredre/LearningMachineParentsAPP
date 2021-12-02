@@ -430,11 +430,11 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!--语音识别-->
+        <!--购物车-->
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@mipmap/voice"/>
+            android:id="@+id/discover_iv_cart"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
     </LinearLayout>
 
 </RelativeLayout>

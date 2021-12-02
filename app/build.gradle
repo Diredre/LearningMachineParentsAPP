@@ -51,17 +51,11 @@ dependencies {
     }
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
-    // 上传视频
-    implementation("com.squareup.okhttp3:okhttp:4.9.1")
-
     // 数据图表
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
     // recycleview的动画库
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
-
-    // 微信登录
-    api 'com.tencent.mm.opensdk:wechat-sdk-android:+'
 
     // XUI
     implementation 'com.github.xuexiangjys:XUI:1.1.8'
@@ -69,12 +63,27 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.google.android.material:material:1.4.0'
 
-    // tab
-    //implementation 'com.github.dacaoyuan:YPKTabDemo:1.2.3'
+    // RecyclerView的好搭档
+    // implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
 
     // 饺子播放器
     implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
 
     // 视频压缩
     implementation 'com.github.yellowcath:VideoProcessor:2.4.2'
+    
+    // json数据
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    // 上传视频
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+
+    // 下拉刷新框架
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+
+    // 绑定那个
+    // implementation 'com.jakewharton:butterknife:5.1.1'
+
+    // 偷的 我也不知道是啥
+    implementation 'org.greenrobot:greendao:3.2.2'
 }

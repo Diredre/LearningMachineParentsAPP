@@ -8,32 +8,31 @@
     android:fitsSystemWindows="true"
     tools:context=".Homepage.Homework.HomeworkActivity">
 
+    <com.example.learningmachineparentsapp.View.TitleLayout
+        android:id="@+id/homework_tit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/homework_iv_torecord"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="7.5dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/homework_tit">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <com.example.learningmachineparentsapp.View.TitleLayout
-                android:id="@+id/homework_tit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ImageView
-                android:id="@+id/homework_iv_torecord"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="7.5dp"
-                android:layout_marginRight="15dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"/>
-
             <EditText
                 android:id="@+id/homework_et_clip"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_below="@+id/homework_tit"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
@@ -62,6 +61,7 @@
                     android:textSize="16sp"
                     android:text="智能输入"/>
                 <com.xuexiang.xui.widget.button.switchbutton.SwitchButton
+                    android:id="@+id/homework_sb"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
@@ -116,7 +116,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/homework_del"/>
+                android:layout_below="@+id/homework_del"
+                android:layout_marginBottom="50dp"/>
         </RelativeLayout>
     </ScrollView>
 

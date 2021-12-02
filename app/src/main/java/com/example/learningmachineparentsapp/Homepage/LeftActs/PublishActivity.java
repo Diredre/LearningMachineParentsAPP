@@ -26,6 +26,6 @@ public class PublishActivity extends AppCompatActivity {
 
     private void initView(){
         publish_tit = findViewById(R.id.publish_tit);
-        publish_tit.setTitle("审核进度");
+        publish_tit.setTitle("个人资料");
     }
 }

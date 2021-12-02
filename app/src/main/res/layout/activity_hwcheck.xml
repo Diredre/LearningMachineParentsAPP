@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".Homepage.Homework.HwcheckActivity">
 
     <ImageView
@@ -56,7 +57,7 @@
         android:layout_below="@id/hwcheck_icon"
         android:layout_above="@id/hwcheck_iv_add"
         android:adjustViewBounds="true"
-        android:layout_margin="20dp"/>
+        android:layout_margin="10dp"/>
 
     <ImageView
         android:id="@+id/hwcheck_iv_add"

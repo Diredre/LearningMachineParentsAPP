@@ -32,9 +32,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="荒野求生少年生存"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:maxLines="1"
-            android:textColor="@color/black"
+            android:textColor="#404040"
             android:layout_margin="5dp"/>
 
         <RelativeLayout
@@ -76,6 +76,36 @@
                 android:layout_alignBottom="@id/itemgoods_tv_peo"
                 android:layout_toRightOf="@id/itemgoods_tv_peo"
                 android:textColor="#C3C3C3"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
+            <ImageView
+                android:id="@+id/itemgoods_iv_add"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/goods_add"
+                android:background="@drawable/goods_btn_background"/>
+            <TextView
+                android:id="@+id/itemgoods_tv_num"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/itemgoods_iv_add"
+                android:layout_toLeftOf="@id/itemgoods_iv_sub"
+                android:gravity="center"
+                android:textColor="#404040"
+                android:text="0"/>
+            <ImageView
+                android:id="@+id/itemgoods_iv_sub"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/goods_btn_background"
+                android:src="@mipmap/goods_sub"
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
     </LinearLayout>
 

@@ -85,7 +85,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         holder.iv_cal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showTimePickerDialog(context,  2, holder.timetv, calendar);
+                showDatePickerDialog(context,  2, holder.timetv, calendar);
                 Glide.with(context)
                         .load("https://z3.ax1x.com/2021/11/05/IKF5BF.png")
                         .into(holder.iv_cal);
@@ -151,12 +151,12 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
     /**
      * 增删改查数据
      */
-    public void removeItemData(int postition){
-        hwList.remove(postition);
-        notifyItemRemoved(postition);
+    public void removeItemData(int position){
+        hwList.remove(position);
+        notifyItemRemoved(position);
         //notifyDataSetChanged();     //防止错位
         //刷新下标，不然下标就重复
-        notifyItemRangeChanged(postition, hwList.size());
+        notifyItemRangeChanged(position, hwList.size());
     }
 
     public void addItemData(HomeworkBean data) {

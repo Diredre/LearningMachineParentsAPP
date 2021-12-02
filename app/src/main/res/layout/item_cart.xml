@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:background="#ffffff">
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/item_cart_rb_check"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/checkbox_bg"
+        android:button="@null"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"/>
+
+    <ImageView
+        android:id="@+id/item_cart_iv_shopicon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:layout_toRightOf="@id/item_cart_rb_check"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/item_cart_tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:layout_toRightOf="@id/item_cart_iv_shopicon"
+        android:textSize="16sp"
+        android:textColor="#404040"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
+        android:text="幼儿教育：《我不想发脾气，我想好好说》"/>
+
+    <TextView
+        android:id="@+id/item_cart_tv_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12.0"
+        android:textColor="@color/red_normal"
+        android:layout_alignLeft="@id/item_cart_tv_name"
+        android:layout_alignBottom="@id/item_cart_iv_shopicon"
+        android:layout_margin="5dp"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/item_cart_tv_add"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:background="@drawable/cart_addsub_bg"
+        android:text="+"
+        android:textColor="#404040"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:id="@+id/item_cart_tv_sub"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:background="@drawable/cart_addsub_bg"
+        android:text="—"
+        android:textColor="#404040"
+        android:layout_toLeftOf="@id/item_cart_tv_num"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"/>
+
+    <TextView
+        android:id="@+id/item_cart_tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center"
+        android:background="@drawable/cart_addsub_bg"
+        android:text="1"
+        android:textColor="#404040"
+        android:layout_toLeftOf="@id/item_cart_tv_add"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"/>
+</RelativeLayout>
