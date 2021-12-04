@@ -21,8 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningMachineParentsAPP">
-        <activity android:name=".Circle.Friend.FriendActivity"></activity>
-        <activity android:name=".Discover.Cart.CartActivity"></activity>
+        <activity android:name=".Circle.Video.GSYVideoActivity"></activity>
+        <activity android:name=".Circle.Friend.FriendActivity" />
+        <activity android:name=".Discover.Cart.CartActivity" />
         <activity android:name=".Homepage.LeftActs.PasswordActivity" />
         <activity android:name=".Homepage.LeftActs.DeviceActivity" />
         <activity android:name=".Homepage.LeftActs.AccountActivity" />

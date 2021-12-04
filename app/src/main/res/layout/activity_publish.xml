@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Homepage.LeftActs.PublishActivity">
 
     <com.example.learningmachineparentsapp.View.TitleLayout
@@ -12,4 +13,98 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-</RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/publish_nane"
+        android:layout_width="match_parent"
+        android:layout_height="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="修改昵称"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/publish_tv_nownane"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toLeftOf="@id/publish_iv2"
+            android:text="云淡风轻"
+            android:textSize="16sp"
+            android:textColor="#BFBFBF"/>
+        <ImageView
+            android:id="@+id/publish_iv2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/next"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:background="#D7D7D7"/>
+
+    <RelativeLayout
+        android:id="@+id/publish_icon"
+        android:layout_width="match_parent"
+        android:layout_height="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="修改头像"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"/>
+        <com.example.learningmachineparentsapp.View.RoundImageView
+            android:id="@+id/publish_riv_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_toLeftOf="@id/publish_iv1"
+            android:src="@mipmap/added"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:id="@+id/publish_iv1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/next"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:background="#D7D7D7"/>
+
+    <RelativeLayout
+        android:id="@+id/publish_children"
+        android:layout_width="match_parent"
+        android:layout_height="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="修改孩子信息"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/next"/>
+    </RelativeLayout>
+
+</LinearLayout>

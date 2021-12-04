@@ -31,9 +31,8 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ImageView main_iv_off, main_iv_setting, main_iv_publish, main_iv_purse,
-            main_iv_help, main_iv_account, main_iv_cache, main_iv_private, main_iv_qrcode,
-            main_riv_usericon;
+    private ImageView main_iv_off, main_iv_publish, main_iv_purse, main_riv_usericon,
+            main_iv_help, main_iv_account, main_iv_cache, main_iv_private, main_iv_qrcode;
     private LinearLayout main_ll_publish, main_ll_purse, main_ll_help, main_ll_account,
             main_ll_cache, main_ll_private;
     private BottomNavigationView nav_view;
@@ -68,12 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         nav_view = findViewById(R.id.nav_view);
         main_drawer = findViewById(R.id.main_drawer);
-
-        main_iv_setting = findViewById(R.id.main_iv_setting);
-        main_iv_setting.setOnClickListener(this);
-        Glide.with(MainActivity.this)
-                .load("https://z3.ax1x.com/2021/11/01/ICMZlQ.png")
-                .into(main_iv_setting);
 
         main_iv_off = findViewById(R.id.main_iv_off);
         main_iv_off.setOnClickListener(this);
@@ -137,9 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.main_iv_setting:
-                Toast.makeText(MainActivity.this, "设置界面还没写", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.main_iv_off:
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 MainActivity.this.finish();

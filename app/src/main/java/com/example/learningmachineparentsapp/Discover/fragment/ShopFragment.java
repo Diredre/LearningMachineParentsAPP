@@ -51,7 +51,12 @@ public class ShopFragment extends Fragment {
         }
 
         fragmentshop_rv = view.findViewById(R.id.fragmentshop_rv);
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         fragmentshop_rv.setLayoutManager(layoutManager);
         shopAdapter = new ShopAdapter(beanList, context);
         fragmentshop_rv.setAdapter(shopAdapter);

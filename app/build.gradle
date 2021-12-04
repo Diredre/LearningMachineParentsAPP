@@ -68,6 +68,10 @@ dependencies {
 
     // 饺子播放器
     implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
+    
+    // 更好用的播放器
+    implementation 'com.shuyu:GSYVideoPlayer:7.0.1'
+    implementation 'com.shuyu:gsyVideoPlayer-java:7.0.1'
 
     // 视频压缩
     implementation 'com.github.yellowcath:VideoProcessor:2.4.2'

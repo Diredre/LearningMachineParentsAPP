@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:orientation="horizontal"
-    android:layout_margin="10dp">
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
 
     <ImageView
         android:id="@+id/item_hwcheck_iv"
@@ -41,9 +42,12 @@
                 android:layout_weight="1"
                 android:paddingTop="5dp"
                 android:gravity="top|center_horizontal"
-                android:text="12月1日"
+                android:text="2021年12月1日"
+                android:maxLines="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp"
                 android:textColor="#404040"
-                android:textSize="18sp"/>
+                android:textSize="15sp"/>
         </LinearLayout>
 
         <View
@@ -63,15 +67,16 @@
                 android:gravity="center"
                 android:text="已完成"
                 android:textColor="#404040"
-                android:textSize="18sp"/>
+                android:textSize="20sp"/>
             <TextView
                 android:id="@+id/item_hwcheck_tv_commit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:gravity="right"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:text="11月20日"
+                android:text="2021-12-02\n15:08:41 "
                 android:textColor="#404040"
                 android:textSize="10sp"/>
         </RelativeLayout>

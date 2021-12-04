@@ -22,8 +22,8 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
 
     private List<HomeworkBean> hwList;
     private Context context;
-    private SimpleDateFormat commit_format = new SimpleDateFormat("yyyy-MM-dd");
-    private SimpleDateFormat format = new SimpleDateFormat("MM-dd");
+    private SimpleDateFormat commit_format = new SimpleDateFormat("yyyy-MM-dd\nhh-mm-ss");
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -42,7 +42,6 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
         }
     }
 
-
     public HwcheckAdapter(Context context, List<HomeworkBean> hwList) {
         this.context = context;
         this.hwList = hwList;
@@ -54,6 +53,10 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hwcheck, parent, false);
         final HwcheckAdapter.ViewHolder viewHolder = new HwcheckAdapter.ViewHolder(view);
+        int parentHeight= parent.getHeight();
+        parent.getWidth();
+        ViewGroup.LayoutParams layoutParams = viewHolder.itemView.getLayoutParams();
+        layoutParams.height =  (parentHeight/ 3);
 
         return viewHolder;
     }
@@ -83,4 +86,5 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
     public int getItemCount() {
         return hwList.size();
     }
+
 }

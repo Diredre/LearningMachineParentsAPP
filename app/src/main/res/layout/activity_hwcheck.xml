@@ -46,6 +46,7 @@
         android:id="@+id/hwcheck_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_centerInParent="true"
         android:layout_below="@id/hwcheck_icon"
         android:layout_above="@id/hwcheck_iv_add"
         android:layout_margin="20dp"/>

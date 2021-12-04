@@ -90,4 +90,6 @@ public class HwcheckActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
+
+
 }
