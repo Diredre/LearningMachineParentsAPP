@@ -7,6 +7,7 @@ import android.view.Window;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.learningmachineparentsapp.R;
+import com.example.learningmachineparentsapp.View.TitleLayout;
 
 import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTransparent;
 
@@ -14,6 +15,9 @@ import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTr
  * 家长查看自己布置的作业记录
  */
 public class RecordActivity extends AppCompatActivity {
+
+    private TitleLayout record_tit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,7 @@ public class RecordActivity extends AppCompatActivity {
     }
 
     private void  initView(){
-
+        record_tit = findViewById(R.id.record_tit);
+        record_tit.setTitle("查看作业历史");
     }
 }

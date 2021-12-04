@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--    视频播放-->
+    <!--视频播放-->
     <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
         android:id="@+id/itemgsy_videoplayer"
         android:layout_width="match_parent"

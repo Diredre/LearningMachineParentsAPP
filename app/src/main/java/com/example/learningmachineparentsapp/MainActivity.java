@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +21,7 @@ import com.example.learningmachineparentsapp.Homepage.LeftActs.PrivateActivity;
 import com.example.learningmachineparentsapp.Homepage.LeftActs.PublishActivity;
 import com.example.learningmachineparentsapp.Homepage.LeftActs.PurseActivity;
 import com.example.learningmachineparentsapp.LoginRegist.LoginActivity;
+import com.example.learningmachineparentsapp.View.RoundImageView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,10 +33,12 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ImageView main_iv_off, main_iv_publish, main_iv_purse, main_riv_usericon,
-            main_iv_help, main_iv_account, main_iv_cache, main_iv_private, main_iv_qrcode;
+    private ImageView main_iv_publish, main_iv_purse, main_iv_help, main_iv_account,
+            main_iv_cache, main_iv_private, main_iv_qrcode;
     private LinearLayout main_ll_publish, main_ll_purse, main_ll_help, main_ll_account,
             main_ll_cache, main_ll_private;
+    private RoundImageView main_riv_usericon;
+    private TextView main_tv_off;
     private BottomNavigationView nav_view;
     private DrawerLayout main_drawer;
 
@@ -68,11 +72,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         nav_view = findViewById(R.id.nav_view);
         main_drawer = findViewById(R.id.main_drawer);
 
-        main_iv_off = findViewById(R.id.main_iv_off);
-        main_iv_off.setOnClickListener(this);
-        Glide.with(MainActivity.this)
-                .load("https://z3.ax1x.com/2021/11/01/ICMSOA.png")
-                .into(main_iv_off);
+        main_tv_off = findViewById(R.id.main_tv_off);
+        main_tv_off.setOnClickListener(this);
 
         main_iv_qrcode = findViewById(R.id.main_iv_qrcode);
         main_iv_qrcode.setOnClickListener(this);
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.main_iv_off:
+            case R.id.main_tv_off:
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 MainActivity.this.finish();
                 break;

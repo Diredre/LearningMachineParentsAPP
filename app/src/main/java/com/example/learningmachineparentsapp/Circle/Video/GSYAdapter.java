@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,11 +40,9 @@ import cn.jzvd.JzvdStd;
 
 public class GSYAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    public static final String TAG = "GSYAdapter";
     private Context context;
     private List<GSYVideoBean> list;
-
-    public static final String TAG = "ListNormalAdapter22";
-
     private GSYVideoOptionBuilder gsyVideoOptionBuilder;
 
     //评论区dialog
@@ -70,7 +69,7 @@ public class GSYAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     "强烈推荐《觉醒年代》电视剧，好看好哭", "0")};
 
 
-    public GSYAdapter(Context context,List<GSYVideoBean> list) {
+    public GSYAdapter(Context context, List<GSYVideoBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -165,6 +164,7 @@ public class GSYAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         vh.itemgsy_videoplayer.getBackButton().setVisibility(View.GONE);
 
         //设置全屏按键功能
+        //vh.itemgsy_videoplayer.getBackButton().setVisibility(View.GONE);
         vh.itemgsy_videoplayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,10 +176,9 @@ public class GSYAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.itemgsy_videoplayer.startPlayLogic();
         }
 
-        GSYVideoBean url = list.get(position % list.size());
         //视频内容+作者
-        vh.itemgsy_tv_con.setText(url.getCon());
-        vh.itemgsy_tv_auther.setText(url.getAuther());
+        vh.itemgsy_tv_con.setText(list.get(position).getCon());
+        vh.itemgsy_tv_auther.setText(list.get(position).getAuther());
     }
 
     @Override
@@ -187,17 +186,18 @@ public class GSYAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return list == null ? 0 : list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
         private StandardGSYVideoPlayer itemgsy_videoplayer;
         private TextView itemgsy_tv_auther, itemgsy_tv_con;
         private ImageView itemgsy_iv_like, itemgsy_iv_comment, itemgsy_iv_award;
         private TextView itemgsy_tv_like, itemgsy_tv_comment;
-        private RelativeLayout itemgsy_like, itemgsy_comment, itemgsy_award;
+        private LinearLayout itemgsy_like, itemgsy_comment, itemgsy_award;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             gsyVideoOptionBuilder = new GSYVideoOptionBuilder();
             itemgsy_videoplayer = itemView.findViewById(R.id.itemgsy_videoplayer);
+
             itemgsy_tv_auther = itemView.findViewById(R.id.itemgsy_tv_auther);
             itemgsy_tv_con = itemView.findViewById(R.id.itemgsy_tv_con);
 
@@ -216,21 +216,6 @@ public class GSYAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             itemgsy_iv_award.setColorFilter(Color.parseColor("#FFFFFF"));
         }
     }
-
-
-    /**
-     * 获取视频封面
-     */
-    public Bitmap getBitmapFormUrl(String url) {
-        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        retriever.setDataSource(url);
-        //getFrameAtTime()--->在setDataSource()之后调用此方法。 如果可能，该方法在任何时间位置找到代表性的帧，
-        // 并将其作为位图返回。这对于生成输入数据源的缩略图很有用。
-        Bitmap bitmap = retriever.getFrameAtTime();
-        retriever.release();
-        return bitmap;
-    }
-
 
     /**
      * 弹出评论区（底部dialog

@@ -69,7 +69,7 @@ dependencies {
     // 饺子播放器
     implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
     
-    // 更好用的播放器
+    // 比饺子更好用的播放器
     implementation 'com.shuyu:GSYVideoPlayer:7.0.1'
     implementation 'com.shuyu:gsyVideoPlayer-java:7.0.1'
 
@@ -90,4 +90,7 @@ dependencies {
 
     // 偷的 我也不知道是啥
     implementation 'org.greenrobot:greendao:3.2.2'
+    
+    // 帅死了的日历
+    implementation 'com.haibin:calendarview:3.7.1'
 }

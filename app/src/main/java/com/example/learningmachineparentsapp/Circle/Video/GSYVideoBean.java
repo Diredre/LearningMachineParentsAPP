@@ -10,7 +10,8 @@ public class GSYVideoBean implements Serializable {
      */
     public static final long serialVersionUID = 1L;
 
-    private String videoUrl, imgurl, auther, con;
+    private String videoUrl, auther, con;
+    private Drawable img;
     private int likenum = 0;
     private int comment_num = 0;
     private int type = 0;   // 运动类=1， 文化类=2， 历史类=3
@@ -30,12 +31,12 @@ public class GSYVideoBean implements Serializable {
         this.videoUrl = videoUrl;
     }
 
-    public String getImgurl() {
-        return imgurl;
+    public Drawable getImg() {
+        return img;
     }
 
-    public void setImgurl(String imgurl) {
-        this.imgurl = imgurl;
+    public void setImg(Drawable img) {
+        this.img = img;
     }
 
     public String getAuther() {

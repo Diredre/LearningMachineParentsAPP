@@ -86,8 +86,8 @@
                     android:layout_below="@id/main_riv_usericon"/>
                 <ImageView
                     android:id="@+id/main_iv_qrcode"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignTop="@id/main_tv_username"
                     android:layout_marginRight="30dp"/>
@@ -221,29 +221,19 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
+
+                <TextView
+                    android:id="@+id/main_tv_off"
+                    android:layout_width="120dp"
                     android:layout_height="35dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="20dp">
-                    <TextView
-                        android:id="@+id/main_tv"
-                        android:layout_width="135dp"
-                        android:layout_height="35dp"
-                        android:gravity="center"
-                        android:background="@drawable/border_et_hw"
-                        android:layout_centerHorizontal="true"
-                        android:textSize="14sp"
-                        android:textColor="#404040"
-                        android:text="退出登录"/>
-                    <ImageView
-                        android:id="@+id/main_iv_off"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignRight="@id/main_tv"
-                        android:layout_marginRight="5dp"/>
-                </RelativeLayout>
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/border_et_hw"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="14sp"
+                    android:textColor="#267151"
+                    android:text="退出登录"/>
             </RelativeLayout>
 
             <LinearLayout

@@ -7,10 +7,48 @@
     android:layout_height="match_parent"
     tools:context=".Homepage.Homework.RecordActivity">
 
-    <TextView
+    <com.example.learningmachineparentsapp.View.TitleLayout
+        android:id="@+id/record_tit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.haibin.calendarview.CalendarLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="这是查看历史布置作业的界面"
-        android:gravity="center"/>
+        android:orientation="vertical"
+        android:layout_below="@id/record_tit"
+        app:default_status="shrink"
+        app:calendar_show_mode="only_week_view"
+        app:calendar_content_view_id="@+id/recyclerView">
+
+        <com.haibin.calendarview.CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            app:month_view="com.haibin.calendarviewproject.simple.SimpleMonthView"
+            app:week_view="com.haibin.calendarviewproject.simple.SimpleWeekView"
+            app:week_bar_view="com.haibin.calendarviewproject.EnglishWeekBar"
+            app:calendar_height="50dp"
+            app:current_month_text_color="#333333"
+            app:current_month_lunar_text_color="#CFCFCF"
+            app:min_year="2004"
+            app:other_month_text_color="#e1e1e1"
+            app:scheme_text="假"
+            app:scheme_text_color="#333"
+            app:scheme_theme_color="#333"
+            app:selected_text_color="#fff"
+            app:selected_theme_color="#333"
+            app:week_start_with="mon"
+            app:week_background="#fff"
+            app:month_view_show_mode="mode_only_current"
+            app:week_text_color="#111" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff" />
+    </com.haibin.calendarview.CalendarLayout>
 
 </RelativeLayout>

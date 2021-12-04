@@ -39,7 +39,6 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
 
     private TitleLayout control_tit;
     private ImageView control_iv_clock;
-    private TextView control_tv_start, control_tv_end;
     private PieChart control_pc;
     private Button control_btn_adapt;
     private Calendar calendar= Calendar.getInstance(Locale.CHINA);
@@ -66,12 +65,6 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
 
         control_btn_adapt = findViewById(R.id.control_btn_adapt);
         control_btn_adapt.setOnClickListener(this);
-
-        control_tv_start = findViewById(R.id.control_tv_start);
-        control_tv_start.setOnClickListener(this);
-
-        control_tv_end = findViewById(R.id.control_tv_end);
-        control_tv_end.setOnClickListener(this);
     }
 
     private void initChart(){
@@ -186,33 +179,6 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                 Toast.makeText(this, "应用成功！", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
-            case R.id.control_tv_start:
-                showTimeDialog(this, 2, control_tv_start, calendar);
-                break;
-            case R.id.control_tv_end:
-                showTimeDialog(this, 2, control_tv_end, calendar);
-                break;
         }
-    }
-
-    /**
-     * 时间选择
-     */
-    private void showTimeDialog(Context context, int themeResId, final TextView tv, Calendar calendar) {
-        // Calendar c = Calendar.getInstance();
-        // 创建一个TimePickerDialog实例，并把它显示出来
-        new TimePickerDialog(context, themeResId,
-                // 绑定监听器
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        tv.setText(hourOfDay + ":" + minute);
-                    }
-                }
-                // 设置初始时间
-                , calendar.get(Calendar.HOUR_OF_DAY)
-                , calendar.get(Calendar.MINUTE)
-                // true表示采用24小时制
-                , true).show();
     }
 }

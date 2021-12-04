@@ -121,9 +121,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public boolean OnCircleProgress(int progress) {
                         if(progress == 100){
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            LoginActivity.this.finish();
                             Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
                             login_pb.setProgress(0);
+                            LoginActivity.this.finish();
                         }
                         return false;
                     }
