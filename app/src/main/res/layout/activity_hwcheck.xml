@@ -18,9 +18,9 @@
 
     <ImageView
         android:id="@+id/hwcheck_iv_back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="20dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="10dp"
         android:src="@mipmap/back_white"/>
 
     <RelativeLayout
@@ -49,15 +49,6 @@
         android:layout_below="@id/hwcheck_icon"
         android:layout_above="@id/hwcheck_iv_add"
         android:layout_margin="20dp"/>
-
-    <ImageView
-        android:id="@+id/hwcheck_iv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/hwcheck_icon"
-        android:layout_above="@id/hwcheck_iv_add"
-        android:adjustViewBounds="true"
-        android:layout_margin="10dp"/>
 
     <ImageView
         android:id="@+id/hwcheck_iv_add"

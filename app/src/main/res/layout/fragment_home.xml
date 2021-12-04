@@ -11,14 +11,14 @@
     <RelativeLayout
         android:id="@+id/hp_ll_top"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="10dp"
         android:background="#ffffff"
         android:elevation="5dp">
         <com.example.learningmachineparentsapp.View.RoundImageView
             android:id="@+id/hp_riv_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:src="@mipmap/added"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"/>
@@ -33,17 +33,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="云淡风轻"
-                android:textSize="18sp"/>
+                android:textSize="15sp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="李小华 浙江省杭州市学军中学 四年级"
-                android:textSize="12sp"/>
+                android:textSize="10sp"/>
         </LinearLayout>
         <ImageView
             android:id="@+id/hp_iv_tomessage"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"/>

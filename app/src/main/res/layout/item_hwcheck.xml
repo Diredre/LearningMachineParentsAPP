@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:layout_margin="10dp">
+
+    <ImageView
+        android:id="@+id/item_hwcheck_iv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@mipmap/hwcomplete"
+        android:layout_marginRight="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:background="@mipmap/hwback">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/item_hwcheck_tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="bottom|center_horizontal"
+                android:textColor="#404040"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp"
+                android:maxLines="2"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/item_hwcheck_tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingTop="5dp"
+                android:gravity="top|center_horizontal"
+                android:text="12月1日"
+                android:textColor="#404040"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_vertical"
+            android:background="#B9B9B9"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/item_hwcheck_tv_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="已完成"
+                android:textColor="#404040"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/item_hwcheck_tv_commit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:text="11月20日"
+                android:textColor="#404040"
+                android:textSize="10sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

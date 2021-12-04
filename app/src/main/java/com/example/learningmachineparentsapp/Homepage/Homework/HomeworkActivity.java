@@ -28,6 +28,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.example.learningmachineparentsapp.Homepage.Homework.HomeworkBean;
 import com.xuexiang.xui.widget.button.switchbutton.SwitchButton;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,6 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
 
     private TitleLayout homework_tit;
     private ImageView homework_iv_torecord;
-    private CheckBox homework_cb_del;
-    private TextView homework_tv_del;
     private EditText homework_et_clip;
     private Button homework_btn_add;
     private SwitchButton homework_sb;
@@ -72,11 +71,6 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
                 .load("https://z3.ax1x.com/2021/11/05/IKVZDK.png")
                 .into(homework_iv_torecord);
         homework_iv_torecord.setOnClickListener(this);
-
-        homework_cb_del = findViewById(R.id.homework_cb_del);
-
-        homework_tv_del = findViewById(R.id.homework_tv_del);
-        homework_tv_del.setOnClickListener(this);
 
         homework_btn_add = findViewById(R.id.homework_btn_add);
         homework_btn_add.setOnClickListener(this);
@@ -111,10 +105,10 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
 
     private List<HomeworkBean> initData(){
         List<HomeworkBean> dataList = new ArrayList<>();
-        dataList.add(new HomeworkBean("预习《滕王阁序》", new Time(30)));
-        dataList.add(new HomeworkBean("背诵《滕王阁序》", new Time(60)));
-        dataList.add(new HomeworkBean("做完数学课堂练习", new Time(45)));
-        dataList.add(new HomeworkBean("勾股定理", new Time(30)));
+        dataList.add(new HomeworkBean("预习《滕王阁序》", new Date(System.currentTimeMillis())));
+        dataList.add(new HomeworkBean("背诵《滕王阁序》", new Date(System.currentTimeMillis())));
+        dataList.add(new HomeworkBean("做完数学课堂练习", new Date(System.currentTimeMillis())));
+        dataList.add(new HomeworkBean("勾股定理", new Date(System.currentTimeMillis())));
 
         return dataList;
     }
@@ -128,9 +122,6 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.homework_iv_torecord:
                 startActivity(new Intent(HomeworkActivity.this, RecordActivity.class));
-                break;
-            case R.id.homework_tv_del:
-                Toast.makeText(this, "TODO删除", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.homework_btn_add:
                 if(!homework_et_clip.getText().toString().trim().equals("")) {
@@ -157,7 +148,7 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         String input = homework_et_clip.getText().toString();
         String[] inputs = input.split("\n");
         for(String s : inputs){
-            homeworkAdapter.addItemData(new HomeworkBean(s, new Time(0)));
+            homeworkAdapter.addItemData(new HomeworkBean(s, new Date(System.currentTimeMillis())));
         }
 /*        hwlist.add(new HomeworkBean(input, new Time(10)));
         // 通知适配器
@@ -175,7 +166,7 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 if(!input.getText().toString().trim().equals("")) {
-                    hwlist.add(new HomeworkBean(input.getText().toString().trim(), new Time(10)));
+                    hwlist.add(new HomeworkBean(input.getText().toString().trim(), new Date(System.currentTimeMillis())));
                     // 通知适配器
                     homeworkAdapter.notifyItemChanged(hwlist.size() - 1);
                     // 更新定位

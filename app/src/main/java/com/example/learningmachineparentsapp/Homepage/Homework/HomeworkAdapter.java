@@ -22,7 +22,10 @@ import com.example.learningmachineparentsapp.Homepage.Homework.HomeworkBean;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -85,7 +88,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         holder.iv_cal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog(context,  2, holder.timetv, calendar);
+                showDatePickerDialog(context,  2, holder.timetv, calendar, homework);
                 Glide.with(context)
                         .load("https://z3.ax1x.com/2021/11/05/IKF5BF.png")
                         .into(holder.iv_cal);
@@ -111,14 +114,15 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
     /**
      * 日期选择
      */
-    public static void showDatePickerDialog(Context context, int themeResId, final TextView tv, Calendar calendar) {
+    public static void showDatePickerDialog(Context context, int themeResId, final TextView tv, Calendar calendar, HomeworkBean hw) {
         // 直接创建一个DatePickerDialog对话框实例，并将它显示出来
         new DatePickerDialog(context, themeResId, new DatePickerDialog.OnDateSetListener() {
             // 绑定监听器(How the parent is notified that the date is set.)
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 // 此处得到选择的时间，可以进行你想要的操作
-                tv.setText("您选择了：" + year + "年" + (monthOfYear + 1) + "月" + dayOfMonth + "日");
+                tv.setText("提交截止时间：" + year + "年" + (monthOfYear + 1) + "月" + dayOfMonth + "日");
+                hw.setUse_time(new Date(year, monthOfYear+1, dayOfMonth));
             }
         }
                 // 设置初始日期
@@ -197,5 +201,19 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
         });
         inputHWDialog.setTile("修改作业");
         inputHWDialog.show();
+    }
+
+    /**
+     * 将String类型的时间转换成Date类型,传入的时间格式必须要满足下面的格式，否则会报错
+     */
+    public static Date str2Date(String dateStr) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        Date date = null;
+        try {
+            date = (Date) format.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 }

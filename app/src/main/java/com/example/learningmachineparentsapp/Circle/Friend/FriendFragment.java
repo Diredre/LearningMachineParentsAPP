@@ -1,4 +1,4 @@
-package com.example.learningmachineparentsapp.Circle.Trend;
+package com.example.learningmachineparentsapp.Circle.Friend;
 
 import android.content.Context;
 import android.os.Bundle;

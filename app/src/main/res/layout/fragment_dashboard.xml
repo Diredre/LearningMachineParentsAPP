@@ -8,12 +8,28 @@
     android:orientation="vertical"
     tools:context=".Circle.DashboardFragment">
 
-
-    <View
+    <!--顶部-->
+    <RelativeLayout
+        android:id="@+id/hp_ll_top"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="10dp"
-        android:background="#D7D7D7"/>
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="#ffffff"
+        android:elevation="5dp">
+        <com.example.learningmachineparentsapp.View.RoundImageView
+            android:id="@+id/hp_riv_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@mipmap/added"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="圈子"
+                android:layout_centerInParent="true"
+                android:textSize="18sp"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/circle_friend"
@@ -80,7 +96,9 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="10dp"
-        android:background="#D7D7D7"/>
+        android:layout_height="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#E8E8E8"/>
+
 </LinearLayout>
