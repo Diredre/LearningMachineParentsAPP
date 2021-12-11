@@ -34,11 +34,11 @@
     <RelativeLayout
         android:id="@+id/circle_friend"
         android:layout_width="match_parent"
-        android:layout_height="25dp">
+        android:layout_height="30dp">
         <ImageView
             android:id="@+id/circle_iv_friend"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:src="@mipmap/topic"/>
@@ -69,11 +69,11 @@
     <RelativeLayout
         android:id="@+id/circle_video"
         android:layout_width="match_parent"
-        android:layout_height="25dp">
+        android:layout_height="30dp">
         <ImageView
             android:id="@+id/circle_iv_video"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:src="@mipmap/topic"/>

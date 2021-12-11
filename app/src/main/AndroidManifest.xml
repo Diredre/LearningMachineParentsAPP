@@ -2,11 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.learningmachineparentsapp">
 
-    <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,8 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningMachineParentsAPP">
-        <activity android:name=".Circle.Video.GSYVideoActivity">
-        </activity>
+        <activity android:name=".Discover.MailActivity"></activity>
+        <activity android:name=".Circle.Video.GSYVideoActivity"></activity>
         <activity android:name=".Circle.Friend.FriendActivity" />
         <activity android:name=".Discover.Cart.CartActivity" />
         <activity android:name=".Homepage.LeftActs.PasswordActivity" />
@@ -42,7 +41,7 @@
         </activity>
         <activity android:name=".LoginRegist.RegisterActivity" />
         <activity android:name=".LoginRegist.RemeberActivity" />
-         <activity android:name=".Homepage.Homework.HwcheckActivity" />
+        <activity android:name=".Homepage.Homework.HwcheckActivity" />
         <activity android:name=".Homepage.Homework.HomeworkActivity" />
         <activity android:name=".Homepage.Homework.RecordActivity" />
         <activity android:name=".Homepage.Videochat.VideochatActivity" />
@@ -50,7 +49,6 @@
         <activity android:name=".Homepage.Message.MessageActivity" />
         <activity android:name=".Homepage.Module.ModuleActivity" />
         <activity android:name=".Homepage.Watch.WatchActivity" />
-        <activity android:name=".Circle.Video.VideoActivity" />
         <activity android:name=".Circle.Upload.UploadActivity" />
         <activity android:name=".MainActivity"/>
     </application>

@@ -1,9 +1,7 @@
 package com.example.learningmachineparentsapp.Circle.Video;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.media.MediaMetadataRetriever;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -14,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.learningmachineparentsapp.R;
-import com.example.learningmachineparentsapp.Widget.MyJzvdStd;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
@@ -35,8 +31,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import cn.jzvd.JzvdStd;
 
 public class GSYAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -135,6 +129,7 @@ public class GSYAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 .setNeedLockFull(true)
                 .setPlayPosition(position)
                 .setReleaseWhenLossAudio(false)
+                .setNeedShowWifiTip(false)
                 .setVideoAllCallBack(new GSYSampleCallBack() {
                     @Override
                     public void onPrepared(String url, Object... objects) {
@@ -291,6 +286,4 @@ public class GSYAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         });
         dialog.show();
     }
-
-
 }

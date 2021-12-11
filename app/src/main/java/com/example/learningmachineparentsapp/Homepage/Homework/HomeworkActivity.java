@@ -67,10 +67,10 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         homework_tit.setTitle("布置作业");
 
         homework_iv_torecord = findViewById(R.id.homework_iv_torecord);
-        Glide.with(HomeworkActivity.this)
+        /*Glide.with(HomeworkActivity.this)
                 .load("https://z3.ax1x.com/2021/11/05/IKVZDK.png")
                 .into(homework_iv_torecord);
-        homework_iv_torecord.setOnClickListener(this);
+        homework_iv_torecord.setOnClickListener(this);*/
 
         homework_btn_add = findViewById(R.id.homework_btn_add);
         homework_btn_add.setOnClickListener(this);

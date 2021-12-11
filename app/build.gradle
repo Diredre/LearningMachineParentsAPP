@@ -26,6 +26,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     buildFeatures {
         viewBinding true
     }
@@ -67,16 +68,16 @@ dependencies {
     // implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
 
     // 饺子播放器
-    implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
+    // implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
     
     // 比饺子更好用的播放器
     implementation 'com.shuyu:GSYVideoPlayer:7.0.1'
-    implementation 'com.shuyu:gsyVideoPlayer-java:7.0.1'
+    //implementation 'com.shuyu:gsyVideoPlayer-java:7.0.1'
 
     // 视频压缩
     implementation 'com.github.yellowcath:VideoProcessor:2.4.2'
     
-    // json数据
+    // 解析json数据
     implementation 'com.google.code.gson:gson:2.8.9'
 
     // 上传视频

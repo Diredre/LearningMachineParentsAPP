@@ -31,7 +31,7 @@
             <EditText
                 android:id="@+id/login_et_phone"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:background="@null"
                 android:hint="请输入手机号码"
                 android:maxLines="1"
@@ -63,7 +63,7 @@
             <EditText
                 android:id="@+id/login_et_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_marginLeft="10dip"
                 android:background="#00000000"
                 android:hint="请输入密码"

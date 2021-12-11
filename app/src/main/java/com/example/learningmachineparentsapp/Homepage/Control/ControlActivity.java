@@ -10,7 +10,9 @@ import android.text.SpannableString;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -28,6 +30,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.xuexiang.xui.widget.button.switchbutton.SwitchButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,7 +41,10 @@ import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTr
 public class ControlActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TitleLayout control_tit;
-    private ImageView control_iv_clock;
+    private ImageView control_iv_clock, control_iv_tel;
+    private SwitchButton control_sb_clock, control_sb_tel;
+    private LinearLayout control_ll_set_clock, control_ll_set_tel;
+    private TextView control_tv_set_clock, control_tv_set_tel;
     private PieChart control_pc;
     private Button control_btn_adapt;
     private Calendar calendar= Calendar.getInstance(Locale.CHINA);
@@ -62,6 +68,44 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         Glide.with(this)
                 .load("https://z3.ax1x.com/2021/11/25/oFvVLn.png")
                 .into(control_iv_clock);
+
+        control_iv_tel = findViewById(R.id.control_iv_tel);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/11/oTInnP.png")
+                .into(control_iv_tel);
+
+        control_sb_clock = findViewById(R.id.control_sb_clock);
+        control_sb_clock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    control_ll_set_clock.setVisibility(View.VISIBLE);
+                }else{
+                    control_ll_set_clock.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        control_sb_tel = findViewById(R.id.control_sb_tel);
+        control_sb_tel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    control_ll_set_clock.setVisibility(View.VISIBLE);
+                }else{
+                    control_ll_set_clock.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        control_ll_set_clock = findViewById(R.id.control_ll_set_clock);
+        control_ll_set_tel = findViewById(R.id.control_ll_set_tel);
+
+        control_tv_set_clock = findViewById(R.id.control_tv_set_clock);
+        control_tv_set_clock.setOnClickListener(this);
+
+        control_tv_set_tel = findViewById(R.id.control_tv_set_tel);
+        control_tv_set_tel.setOnClickListener(this);
 
         control_btn_adapt = findViewById(R.id.control_btn_adapt);
         control_btn_adapt.setOnClickListener(this);
@@ -172,12 +216,41 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         control_pc.invalidate();
     }
 
+
+    /**
+     * 时间选择
+     */
+    public static void showTimePickerDialog(Context context, int themeResId, final TextView tv, Calendar calendar) {
+        // Calendar c = Calendar.getInstance();
+        // 创建一个TimePickerDialog实例，并把它显示出来
+        new TimePickerDialog(context, themeResId,
+                // 绑定监听器
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        tv.setText("" + hourOfDay + "小时" + minute + "分");
+                    }
+                }
+                // 设置初始时间
+                , calendar.get(Calendar.HOUR_OF_DAY)
+                , calendar.get(Calendar.MINUTE)
+                // true表示采用24小时制
+                , true).show();
+    }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.control_btn_adapt:
                 Toast.makeText(this, "应用成功！", Toast.LENGTH_SHORT).show();
                 finish();
+                break;
+            case R.id.control_tv_set_clock:
+                showTimePickerDialog(this, 2, control_tv_set_clock, calendar);
+                break;
+            case R.id.control_tv_set_tel:
+                showTimePickerDialog(this, 2, control_tv_set_tel, calendar);
                 break;
         }
     }

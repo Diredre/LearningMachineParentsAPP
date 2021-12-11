@@ -31,7 +31,7 @@ public class HelpActivity extends AppCompatActivity {
 
         help_iv = findViewById(R.id.help_iv);
         Glide.with(this)
-                .load("https://s6.jpg.cm/2021/12/04/L556j2.png")
+                .load("https://s4.ax1x.com/2021/12/11/oTIbut.png")
                 .into(help_iv);
     }
 }

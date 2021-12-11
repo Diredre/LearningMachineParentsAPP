@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.learningmachineparentsapp.Circle.Video.GSYVideoActivity;
-import com.example.learningmachineparentsapp.Circle.Video.VideoActivity;
 import com.example.learningmachineparentsapp.R;
 
 public class DashboardFragment extends Fragment implements View.OnClickListener{
@@ -46,10 +45,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
         circle_iv_friend = view.findViewById(R.id.circle_iv_friend);
 
         Glide.with(getContext())
-                .load("https://s6.jpg.cm/2021/12/04/L55q06.png")
+                .load("https://s4.ax1x.com/2021/12/11/oTII9H.png")
                 .into(circle_iv_video);
         Glide.with(getContext())
-                .load("https://s6.jpg.cm/2021/12/04/L55nIT.png")
+                .load("https://s4.ax1x.com/2021/12/11/oTI2B6.png")
                 .into(circle_iv_friend);
 
         circle_friend.setOnClickListener(this);

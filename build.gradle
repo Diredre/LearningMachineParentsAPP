@@ -2,7 +2,9 @@
 buildscript {
     repositories {
         google()
+        jcenter()
         mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.2"
@@ -15,9 +17,14 @@ buildscript {
 allprojects {
     repositories {
         google()
+        jcenter()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
-        maven { url 'https://jitpack.io' }
+        flatDir {
+            dirs 'libs'
+        }
+        maven { url "https://jitpack.io" }
+        //HMSSDK的maven仓库
+        maven { url 'http://developer.huawei.com/repo/' }
     }
 }
 
