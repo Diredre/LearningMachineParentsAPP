@@ -6,7 +6,7 @@ import java.sql.Time;
 public class HomeworkBean {
     private String con;
     private Date use_time = new Date(System.currentTimeMillis());
-    private boolean isComplete = false;
+    private int isComplete; //0： 布置未完成 1：布置已完成 2：孩子主动上传的完成
     private Date com_time;
 
     public HomeworkBean(){
@@ -18,7 +18,7 @@ public class HomeworkBean {
         this.use_time = use_time;
     }
 
-    public HomeworkBean(String con, Date use_time, boolean isComplete, Date com_time) {
+    public HomeworkBean(String con, Date use_time, int isComplete, Date com_time) {
         this.con = con;
         this.use_time = use_time;
         this.isComplete = isComplete;
@@ -41,11 +41,11 @@ public class HomeworkBean {
         this.use_time = use_time;
     }
 
-    public boolean isComplete() {
+    public int getIsComplete() {
         return isComplete;
     }
 
-    public void setComplete(boolean complete) {
+    public void setIsComplete(int complete) {
         isComplete = complete;
     }
 

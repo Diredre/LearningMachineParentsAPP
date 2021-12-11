@@ -22,7 +22,7 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
 
     private List<HomeworkBean> hwList;
     private Context context;
-    private SimpleDateFormat commit_format = new SimpleDateFormat("yyyy-MM-dd\nhh-mm-ss");
+    private SimpleDateFormat commit_format = new SimpleDateFormat("yyyy-MM-dd\nhh:mm:ss");
     private SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
 
 
@@ -65,16 +65,21 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
     public void onBindViewHolder(@NonNull @NotNull HwcheckAdapter.ViewHolder holder, int position) {
         HomeworkBean homework = hwList.get(position);
 
-        if(homework.isComplete()){
+        if(homework.getIsComplete()== 1){
             Glide.with(context)
                     .load("https://z3.ax1x.com/2021/12/03/oUamy4.png")
                     .into(holder.item_hwcheck_iv);
             holder.item_hwcheck_tv_state.setText("已完成");
-        }else{
+        }else if(homework.getIsComplete()== 0){
             Glide.with(context)
                     .load("https://z3.ax1x.com/2021/12/03/oUa5t0.png")
                     .into(holder.item_hwcheck_iv);
             holder.item_hwcheck_tv_state.setText("未完成");
+        }else if(homework.getIsComplete()== 2){
+            Glide.with(context)
+                    .load("https://s4.ax1x.com/2021/12/11/o7E09e.png")
+                    .into(holder.item_hwcheck_iv);
+            holder.item_hwcheck_tv_state.setText("孩子提交");
         }
 
         holder.item_hwcheck_tv_name.setText(homework.getCon());

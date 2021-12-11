@@ -64,17 +64,17 @@ public class HwcheckActivity extends AppCompatActivity implements View.OnClickLi
     private List<HomeworkBean> initData(){
         List<HomeworkBean> dataList = new ArrayList<>();
         dataList.add(new HomeworkBean("背九九乘法表", new Date(2021-1900, 11,1),
-                true, new Date(System.currentTimeMillis())));
+                1, new Date(System.currentTimeMillis())));
         dataList.add(new HomeworkBean("写完一元一次方程练习", new Date(2021-1900, 10,28),
-                false, new Date(System.currentTimeMillis())));
+                2, new Date(System.currentTimeMillis())));
         dataList.add(new HomeworkBean("默写静夜思", new Date(2021-1900, 11,5),
-                false, new Date(System.currentTimeMillis())));
+                0, new Date(System.currentTimeMillis())));
         dataList.add(new HomeworkBean("背九九乘法表", new Date(2021-1900, 11,1),
-                true, new Date(System.currentTimeMillis())));
+                0, new Date(System.currentTimeMillis())));
         dataList.add(new HomeworkBean("写完一元一次方程练习", new Date(2021-1900, 10,28),
-                false, new Date(System.currentTimeMillis())));
+                1, new Date(System.currentTimeMillis())));
         dataList.add(new HomeworkBean("默写静夜思", new Date(2021-1900, 11,5),
-                false, new Date(System.currentTimeMillis())));
+                2, new Date(System.currentTimeMillis())));
 
         return dataList;
     }

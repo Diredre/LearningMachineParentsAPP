@@ -3,11 +3,15 @@ package com.example.learningmachineparentsapp.Circle.Video;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
+
+import com.bumptech.glide.Glide;
+import com.example.learningmachineparentsapp.Circle.Upload.UploadActivity;
 import com.example.learningmachineparentsapp.R;
 
 import android.content.res.Configuration;
@@ -15,6 +19,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +41,8 @@ public class GSYVideoActivity extends AppCompatActivity {
 
     private static String TAG = "GSYVIDEOACTIVITY";
     private RecyclerView recyclerView;
+    private LinearLayout gsy_ll_upload;
+    private ImageView gsy_iv_upload;
     private List<GSYVideoBean> list;
     private String[] urls = {"http://vfx.mtime.cn/Video/2019/03/13/mp4/190313094901111138.mp4",
             "https://vd2.bdstatic.com/mda-jfcccmya6ncp30mi/sc/mda-jfcccmya6ncp30mi.mp4?v_from_s=hkapp-haokan-nanjing&amp;auth_key=1633445749-0-0-5fd084fd1f354e82109ac6d501b9f650&amp;bcevod_channel=searchbox_feed&amp;pd=1&amp;pt=3&amp;abtest=3000187_1",
@@ -79,6 +88,16 @@ public class GSYVideoActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        gsy_ll_upload = findViewById(R.id.gsy_ll_upload);
+        gsy_ll_upload.setOnClickListener(v->{
+            startActivity(new Intent(this, UploadActivity.class));
+        });
+
+        gsy_iv_upload = findViewById(R.id.gsy_iv_upload);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/11/o7koGQ.png")
+                .into(gsy_iv_upload);
+
         recyclerView = findViewById(R.id.gsy_rv);
 
         GSYAdapter gsyAdapter = new GSYAdapter(this, list);

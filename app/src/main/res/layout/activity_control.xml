@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <com.example.learningmachineparentsapp.View.TitleLayout
                 android:id="@+id/control_tit"
                 android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
+                app:cardElevation="5dp"
                 android:layout_below="@id/control_pc">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -69,7 +69,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="4"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
                             android:gravity="center_vertical"
                             android:maxLines="2"
                             android:text="控制孩子使用学习机的绿色联网时间，默认设置为每日不限制时间。"/>
@@ -114,7 +114,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
+                app:cardElevation="5dp"
                 android:layout_below="@id/control_net">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -152,7 +152,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="4"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
                             android:gravity="center_vertical"
                             android:maxLines="2"
                             android:text="控制孩子使用学习机的拨打电话时间，默认设置为每日不限制时间。"/>
@@ -191,10 +191,11 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:layout_below="@id/control_tel"/>
         </RelativeLayout>
     </ScrollView>
+
     <Button
         android:id="@+id/control_btn_adapt"
         android:layout_width="match_parent"

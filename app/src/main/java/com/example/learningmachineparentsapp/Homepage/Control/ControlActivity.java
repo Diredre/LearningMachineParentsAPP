@@ -99,7 +99,9 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         });
 
         control_ll_set_clock = findViewById(R.id.control_ll_set_clock);
+        control_ll_set_clock.setVisibility(View.INVISIBLE);
         control_ll_set_tel = findViewById(R.id.control_ll_set_tel);
+        control_ll_set_tel.setVisibility(View.INVISIBLE);
 
         control_tv_set_clock = findViewById(R.id.control_tv_set_clock);
         control_tv_set_clock.setOnClickListener(this);
