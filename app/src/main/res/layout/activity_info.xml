@@ -6,11 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@drawable/gradient_bg_regist"
-    tools:context=".LoginRegist.RegisterActivity">
+    android:background="@drawable/gradient_bg_regist">
 
     <ImageView
-        android:id="@+id/reg_iv_back"
+        android:id="@+id/info_iv_back"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_margin="10dp"/>
@@ -25,11 +24,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/reg_rl_main"
+        android:layout_above="@+id/info_rl_main"
         android:layout_marginBottom="20dp"
         android:orientation="vertical" >
         <ImageView
-            android:id="@+id/reg_iv_logo"
+            android:id="@+id/info_iv_logo"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -54,12 +53,12 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/reg_rl_main"
+        android:id="@+id/info_rl_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
         <LinearLayout
-            android:id="@+id/reg_ll_input"
+            android:id="@+id/info_ll_input"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dip"
@@ -68,26 +67,24 @@
             android:orientation="vertical"
             android:padding="10dip" >
             <LinearLayout
-                android:id="@+id/reg_layout_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
                 <ImageView
-                    android:id="@+id/reg_iv_phone"
+                    android:id="@+id/info_iv_childename"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center_vertical"/>
                 <EditText
-                    android:id="@+id/reg_et_phone"
+                    android:id="@+id/info_et_childename"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:background="@null"
-                    android:hint="请输入手机号码"
+                    android:hint="请输入孩子姓名"
                     android:maxLines="1"
                     android:textColor="#CCFFFFFF"
-                    android:inputType="number"
                     android:textColorHint="#88FFFFFF"
                     android:layout_marginLeft="10dip"
                     android:padding="5dip"
@@ -102,74 +99,57 @@
                 android:background="#EFF9ED" />
 
             <LinearLayout
-                android:id="@+id/reg_layout_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
                 <ImageView
-                    android:id="@+id/reg_iv_code"
+                    android:id="@+id/info_iv_grade"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center_vertical"/>
-                <EditText
-                    android:id="@+id/reg_et_code"
+                <TextView
+                    android:id="@+id/info_tv_grade"
                     android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dip"
                     android:background="#00000000"
-                    android:hint="请输入验证码"
+                    android:hint="请选择孩子年级"
                     android:textColor="#CCFFFFFF"
                     android:textColorHint="#88FFFFFF"
                     android:padding="5dip"
                     android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="5dip"
+                android:layout_marginTop="5dip"
+                android:background="#EFF9ED" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+                <ImageView
+                    android:id="@+id/info_iv_city"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center_vertical"/>
                 <TextView
-                    android:id="@+id/reg_tv_phcode"
-                    android:layout_width="100dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:background="@drawable/border_btn_background"
-                    android:text="发送验证码"
-                    android:textColor="#ffffff"/>
-                <!--<ImageView
-                    android:id="@+id/reg_iv_phcode"
-                    android:layout_width="100dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="10dp"/>-->
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginBottom="5dip"
-                android:layout_marginTop="5dip"
-                android:background="#EFF9ED" />
-
-            <LinearLayout
-                android:id="@+id/reg_layout_psw"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-                <ImageView
-                    android:id="@+id/reg_iv_password"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="center_vertical"/>
-                <EditText
-                    android:id="@+id/reg_et_password"
+                    android:id="@+id/info_tv_city"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginLeft="10dip"
                     android:background="#00000000"
-                    android:hint="请输入密码"
+                    android:hint="请选择城市"
                     android:textColor="#CCFFFFFF"
                     android:textColorHint="#88FFFFFF"
-                    android:inputType="textPassword"
                     android:padding="5dip"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -182,26 +162,24 @@
                 android:background="#EFF9ED" />
 
             <LinearLayout
-                android:id="@+id/reg_layout_repsw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
                 <ImageView
-                    android:id="@+id/reg_iv_repassword"
+                    android:id="@+id/info_iv_address"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center_vertical"/>
 
                 <EditText
-                    android:id="@+id/reg_et_repassword"
+                    android:id="@+id/info_et_address"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_marginLeft="10dip"
                     android:background="#00000000"
-                    android:hint="请再次输入密码"
-                    android:inputType="textPassword"
+                    android:hint="请输入详细地址"
                     android:padding="5dip"
                     android:textColor="#CCFFFFFF"
                     android:textColorHint="#88FFFFFF"
@@ -210,10 +188,10 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/reg_btn_reg"
+            android:id="@+id/info_btn_com"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/reg_ll_input"
+            android:layout_below="@+id/info_ll_input"
             android:layout_centerInParent="true"
             android:layout_marginTop="15dip"
             android:background="@drawable/border_btn_background"
@@ -222,7 +200,7 @@
             android:paddingLeft="15dip"
             android:paddingRight="15dip"
             android:paddingTop="2dip"
-            android:text="注册"
+            android:text="完成"
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </RelativeLayout>
@@ -234,16 +212,4 @@
         android:alpha="0.7"
         android:layout_alignParentBottom="true"
         android:background="@mipmap/img9"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="登陆即代表阅读并同意服务条款。"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"/>
-
 </RelativeLayout>

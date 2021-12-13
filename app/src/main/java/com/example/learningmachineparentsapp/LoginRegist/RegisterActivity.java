@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -24,7 +25,8 @@ import com.example.learningmachineparentsapp.Widget.Code;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView reg_iv_back, reg_iv_phone, reg_iv_password,
-            reg_iv_code, reg_iv_logo, reg_iv_repassword, reg_iv_phcode;
+            reg_iv_code, reg_iv_logo, reg_iv_repassword;
+    private TextView reg_tv_phcode;
     private Button reg_btn_reg;
     private EditText reg_et_phone, reg_et_code, reg_et_password, reg_et_repassword;
     private String real_code;       // 生成验证码
@@ -46,9 +48,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         reg_et_password = findViewById(R.id.reg_et_password);
         reg_et_repassword = findViewById(R.id.reg_et_repassword);
 
-        reg_iv_phcode = findViewById(R.id.reg_iv_phcode);
-        reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
-        reg_iv_phcode.setOnClickListener(this);
+        reg_tv_phcode = findViewById(R.id.reg_tv_phcode);
+        //reg_tv_phcode.setImageBitmap(Code.getInstance().createBitmap());
+        reg_tv_phcode.setOnClickListener(this);
         real_code = Code.getInstance().getCode().toLowerCase();
 
         // reg按钮
@@ -100,37 +102,40 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 if(phone.equals("")){
                     Toast.makeText(RegisterActivity.this, "请输入手机号码", Toast.LENGTH_SHORT).show();
-                    reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
+                    //reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
                     real_code = Code.getInstance().getCode().toLowerCase();
                 } else if(psw.equals("")){
                     Toast.makeText(RegisterActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
-                    reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
+                    //reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
                     real_code = Code.getInstance().getCode().toLowerCase();
                 } else if(repsw.equals("")){
                     Toast.makeText(RegisterActivity.this, "请再次输入密码", Toast.LENGTH_SHORT).show();
-                    reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
+                    //reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
                     real_code = Code.getInstance().getCode().toLowerCase();
                 } else if (psw.equals(repsw)){
                     Toast.makeText(RegisterActivity.this, "两次密码请保持一致", Toast.LENGTH_SHORT).show();
-                    reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
+                    //reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
                     real_code = Code.getInstance().getCode().toLowerCase();
                 }
 
                 if(phoneCode.equals(real_code)) {
                     Toast.makeText(RegisterActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
                 }else if (phoneCode.equals(real_code)) {
-                    Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                    Toast.makeText(RegisterActivity.this, "注册成功，请填写信息", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegisterActivity.this, InfoActivity.class));
                     RegisterActivity.this.finish();
                 } else {
                     Toast.makeText(RegisterActivity.this, "验证码错误", Toast.LENGTH_SHORT).show();
-                    reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
+                    //reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
                     real_code = Code.getInstance().getCode().toLowerCase();
                 }
                 break;
-            case R.id.reg_iv_phcode:
-                reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
-                real_code = Code.getInstance().getCode().toLowerCase();
+            /**
+             * 发送验证码
+             */
+            case R.id.reg_tv_phcode:
+                //reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
+                //real_code = Code.getInstance().getCode().toLowerCase();
                 break;
             case R.id.reg_iv_back:
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));

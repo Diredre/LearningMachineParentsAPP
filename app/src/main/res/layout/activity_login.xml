@@ -112,12 +112,12 @@
     </RelativeLayout>
 
     <ImageView
+        android:id="@+id/login_iv_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:alpha="0.7"
-        android:layout_alignParentBottom="true"
-        android:src="@mipmap/img3"/>
+        android:layout_alignParentBottom="true"/>
 
     <TextView
         android:layout_width="match_parent"

@@ -141,7 +141,7 @@ public class ScrollCalculatorHelper {
     private void startPlayLogic(GSYBaseVideoPlayer gsyBaseVideoPlayer, Context context) {
         if (!com.shuyu.gsyvideoplayer.utils.CommonUtil.isWifiConnected(context)) {
             //这里判断是否wifi
-            showWifiDialog(gsyBaseVideoPlayer, context);
+            //showWifiDialog(gsyBaseVideoPlayer, context);
             return;
         }
         gsyBaseVideoPlayer.startPlayLogic();

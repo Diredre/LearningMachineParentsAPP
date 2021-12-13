@@ -35,8 +35,8 @@ import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTr
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageView login_iv_phone, login_iv_password, login_iv_logo;
-    private TextView login_tv_resgister, login_tv_forget;
+    private ImageView login_iv_phone, login_iv_password, login_iv_logo, login_iv_bg;
+    private TextView login_tv_resgister, login_tv_forget, login_tv_phcode;
     private Button login_btn_login;
     private LinearLayout input_layout_phone, input_layout_psw;
     private View login_ll_input, login_ll_progress;
@@ -73,6 +73,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         input_layout_psw = findViewById(R.id.input_layout_psw);
         input_layout_phone = findViewById(R.id.input_layout_phone);
 
+        //验证码发送
+        login_tv_phcode = findViewById(R.id.login_tv_phcode);
+        login_tv_phcode.setOnClickListener(this);
+
         // 一些图标
         login_iv_phone = findViewById(R.id.login_iv_phone);
         Glide.with(LoginActivity.this)
@@ -90,6 +94,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //.load("https://z3.ax1x.com/2021/10/24/5RObZ9.png")
                 .load("https://z3.ax1x.com/2021/10/24/5WK2jS.png")
                 .into(login_iv_logo);
+
+        login_iv_bg = findViewById(R.id.login_iv_bg);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/12/obj8hR.png")
+                .into(login_iv_bg);
 
         // CirclePgBar进度条
         login_pb = findViewById(R.id.login_pb);
@@ -132,13 +141,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             // 立即注册
             case R.id.login_tv_resgister:
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, scan.class));
                 LoginActivity.this.finish();
                 break;
 
             // 忘记密码
             case R.id.login_tv_forget:
                 startActivity(new Intent(LoginActivity.this, RemeberActivity.class));
+                break;
+
+            //发送验证码接口
+            case R.id.login_tv_phcode:
                 break;
         }
     }

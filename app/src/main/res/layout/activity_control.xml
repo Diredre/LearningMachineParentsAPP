@@ -7,22 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".Homepage.Control.ControlActivity">
 
+    <com.example.learningmachineparentsapp.View.TitleLayout
+        android:id="@+id/control_tit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/control_tit">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <com.example.learningmachineparentsapp.View.TitleLayout
-                android:id="@+id/control_tit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/control_pc"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/control_tit"/>
+                android:layout_centerHorizontal="true"/>
             <androidx.cardview.widget.CardView
                 android:id="@+id/control_net"
                 android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                     <LinearLayout
                         android:id="@+id/control_ll1"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="40dp"
                         android:orientation="horizontal"
                         android:layout_marginTop="10dp"
                         android:paddingLeft="20dp"
@@ -49,7 +49,8 @@
                         <ImageView
                             android:id="@+id/control_iv_clock"
                             android:layout_width="30dp"
-                            android:layout_height="30dp"/>
+                            android:layout_height="30dp"
+                            android:layout_marginTop="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -123,7 +124,7 @@
                     <LinearLayout
                         android:id="@+id/control_ll2"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="40dp"
                         android:orientation="horizontal"
                         android:layout_marginTop="10dp"
                         android:paddingLeft="20dp"
@@ -132,7 +133,8 @@
                         <ImageView
                             android:id="@+id/control_iv_tel"
                             android:layout_width="30dp"
-                            android:layout_height="30dp"/>
+                            android:layout_height="30dp"
+                            android:layout_marginTop="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

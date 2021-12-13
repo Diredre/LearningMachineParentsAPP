@@ -91,9 +91,9 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    control_ll_set_clock.setVisibility(View.VISIBLE);
+                    control_ll_set_tel.setVisibility(View.VISIBLE);
                 }else{
-                    control_ll_set_clock.setVisibility(View.INVISIBLE);
+                    control_ll_set_tel.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -176,7 +176,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
      */
     private SpannableString generateCenterSpannableText() {
         //原文：MPAndroidChart\ndeveloped by Philipp Jahoda
-        SpannableString s = new SpannableString("本周时间分析");
+        SpannableString s = new SpannableString("近七天时间分析");
         //s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
         //s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
         // s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
