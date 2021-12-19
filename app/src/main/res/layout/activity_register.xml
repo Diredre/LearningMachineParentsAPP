@@ -131,7 +131,6 @@
                     android:layout_height="35dp"
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
-                    android:background="@drawable/border_btn_background"
                     android:text="发送验证码"
                     android:textColor="#ffffff"/>
                 <!--<ImageView

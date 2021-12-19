@@ -43,7 +43,6 @@ import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTr
 public class HomeworkActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TitleLayout homework_tit;
-    private ImageView homework_iv_torecord;
     private EditText homework_et_clip;
     private Button homework_btn_add;
     private SwitchButton homework_sb;
@@ -65,12 +64,6 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
     private void initView(){
         homework_tit = findViewById(R.id.homework_tit);
         homework_tit.setTitle("布置作业");
-
-        homework_iv_torecord = findViewById(R.id.homework_iv_torecord);
-        /*Glide.with(HomeworkActivity.this)
-                .load("https://z3.ax1x.com/2021/11/05/IKVZDK.png")
-                .into(homework_iv_torecord);
-        homework_iv_torecord.setOnClickListener(this);*/
 
         homework_btn_add = findViewById(R.id.homework_btn_add);
         homework_btn_add.setOnClickListener(this);
@@ -119,9 +112,6 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
             case R.id.homework_fb_send:
                 //inputDialogShow();
                 Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.homework_iv_torecord:
-                startActivity(new Intent(HomeworkActivity.this, RecordActivity.class));
                 break;
             case R.id.homework_btn_add:
                 if(!homework_et_clip.getText().toString().trim().equals("")) {

@@ -22,12 +22,7 @@
         android:supportsRtl="true"
         tools:replace="android:theme"
         android:theme="@style/Theme.LearningMachineParentsAPP">
-        <activity android:name=".LoginRegist.InfoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter></activity>
+        <activity android:name=".LoginRegist.InfoActivity"></activity>
         <activity android:name=".LoginRegist.scan" />
         <activity android:name=".LoginRegist.capture" />
         <activity android:name=".Discover.MailActivity" />
@@ -43,16 +38,22 @@
         <activity android:name=".Homepage.LeftActs.PersonActivity" />
         <activity android:name=".Homepage.LeftActs.PublishActivity" />
         <activity android:name=".LoginRegist.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".LoginRegist.RegisterActivity" />
         <activity android:name=".LoginRegist.RemeberActivity" />
         <activity android:name=".Homepage.Homework.HwcheckActivity" />
         <activity android:name=".Homepage.Homework.HomeworkActivity" />
-        <activity android:name=".Homepage.Homework.RecordActivity" />
+        <activity android:name=".Homepage.Homework.RecordActivity">
+        </activity>
         <activity android:name=".Homepage.Videochat.VideochatActivity" />
-        <activity android:name=".Homepage.Control.ControlActivity" />
+        <activity android:name=".Homepage.Control.ControlActivity" ></activity>
         <activity android:name=".Homepage.Message.MessageActivity" />
-        <activity android:name=".Homepage.Module.ModuleActivity" />
+        <activity android:name=".Homepage.Module.ModuleActivity" ></activity>
         <activity android:name=".Homepage.Watch.WatchActivity" />
         <activity android:name=".Circle.Upload.UploadActivity" />
         <activity android:name=".MainActivity" />

@@ -102,7 +102,7 @@
                             android:textColor="#4D4D4D"
                             android:textStyle="bold"
                             android:textSize="14sp"
-                            android:text="2小时"/>
+                            android:text="2小时30分"/>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -186,7 +186,7 @@
                             android:textColor="#4D4D4D"
                             android:textStyle="bold"
                             android:textSize="14sp"
-                            android:text="2小时"/>
+                            android:text="2小时30分"/>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

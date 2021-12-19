@@ -48,15 +48,26 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:layout_below="@id/hwcheck_icon"
-        android:layout_above="@id/hwcheck_iv_add"
+        android:layout_above="@id/hwcheck_bot"
         android:layout_margin="20dp"/>
 
-    <ImageView
-        android:id="@+id/hwcheck_iv_add"
-        android:layout_width="60dp"
+    <LinearLayout
+        android:id="@+id/hwcheck_bot"
+        android:layout_width="wrap_content"
         android:layout_height="60dp"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:src="@mipmap/add_hw"/>
+        android:layout_marginBottom="20dp">
+        <ImageView
+            android:id="@+id/hwcheck_iv_add"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="30dp"/>
+        <ImageView
+            android:id="@+id/hwcheck_iv_history"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="30dp"/>
+    </LinearLayout>
 </RelativeLayout>

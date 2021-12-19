@@ -24,7 +24,7 @@ import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTr
 
 public class HwcheckActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ImageView hwcheck_iv_add, hwcheck_iv_back;
+    private ImageView hwcheck_iv_add, hwcheck_iv_back, hwcheck_iv_history;
     private RecyclerView hwcheck_rv;
     private HwcheckAdapter hwcheckAdapterr;
     private List<HomeworkBean> list = new ArrayList<>();
@@ -41,7 +41,16 @@ public class HwcheckActivity extends AppCompatActivity implements View.OnClickLi
 
     private void initView(){
         hwcheck_iv_add = findViewById(R.id.hwcheck_iv_add);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/19/TZMPUK.png")
+                .into(hwcheck_iv_add);
         hwcheck_iv_add.setOnClickListener(this);
+
+        hwcheck_iv_history = findViewById(R.id.hwcheck_iv_history);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/19/TZMBPU.png")
+                .into(hwcheck_iv_history);
+        hwcheck_iv_history.setOnClickListener(this);
 
         hwcheck_iv_back = findViewById(R.id.hwcheck_iv_back);
         hwcheck_iv_back.setOnClickListener(this);
@@ -65,7 +74,7 @@ public class HwcheckActivity extends AppCompatActivity implements View.OnClickLi
         List<HomeworkBean> dataList = new ArrayList<>();
         dataList.add(new HomeworkBean("背九九乘法表", new Date(2021-1900, 11,1),
                 1, new Date(System.currentTimeMillis())));
-        dataList.add(new HomeworkBean("写完一元一次方程练习", new Date(2021-1900, 10,28),
+        dataList.add(new HomeworkBean("", new Date(2021-1900, 10,28),
                 2, new Date(System.currentTimeMillis())));
         dataList.add(new HomeworkBean("默写静夜思", new Date(2021-1900, 11,5),
                 0, new Date(System.currentTimeMillis())));
@@ -74,7 +83,7 @@ public class HwcheckActivity extends AppCompatActivity implements View.OnClickLi
         dataList.add(new HomeworkBean("写完一元一次方程练习", new Date(2021-1900, 10,28),
                 1, new Date(System.currentTimeMillis())));
         dataList.add(new HomeworkBean("默写静夜思", new Date(2021-1900, 11,5),
-                2, new Date(System.currentTimeMillis())));
+                1, new Date(System.currentTimeMillis())));
 
         return dataList;
     }
@@ -87,6 +96,9 @@ public class HwcheckActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.hwcheck_iv_back:
                 this.finish();
+                break;
+            case R.id.hwcheck_iv_history:
+                startActivity(new Intent(this, RecordActivity.class));
                 break;
         }
     }
