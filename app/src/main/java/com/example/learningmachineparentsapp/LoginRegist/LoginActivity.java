@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void run() {
                 okhttpClass tools1 = new okhttpClass();
                 String result1 = tools1.UploadLogin(phone, psw);
-                Log.d("UploadLogin", result1);
+                Log.e("UploadLogin", result1);
             }
         }).start();
     }

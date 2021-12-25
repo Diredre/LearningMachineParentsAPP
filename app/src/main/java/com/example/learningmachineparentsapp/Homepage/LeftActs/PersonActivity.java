@@ -27,10 +27,7 @@ public class PersonActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initView(){
         if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.white));
-        }
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//设置状态栏黑色字
+            getWindow().setStatusBarColor(getResources().getColor(R.color.solar_background));
         }
 
         person_iv_back = findViewById(R.id.person_iv_back);

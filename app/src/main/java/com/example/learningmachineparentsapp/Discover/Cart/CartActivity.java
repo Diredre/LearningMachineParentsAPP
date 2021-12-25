@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.learningmachineparentsapp.Discover.MailActivity;
 import com.example.learningmachineparentsapp.Discover.fragment.GoodsBean;
 import com.example.learningmachineparentsapp.Discover.GoodsDetailActivity;
 import com.example.learningmachineparentsapp.R;
@@ -96,7 +97,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.cart_tv_pay:
                 /*showMsg("支付成功");
                 cartAdapter.deleteMap();*/
-                startActivity(new Intent(this, GoodsDetailActivity.class));
+                startActivity(new Intent(this, MailActivity.class));
                 this.finish();
                 break;
         }

@@ -30,19 +30,21 @@ public class okhttpClass {
      * @return
      */
     public String UploadHomework(String studentId, String parentId, String homework, String closingDate){
-        FormBody.Builder builder=new FormBody.Builder();
-        RequestBody requestBody=builder.add("studentId",studentId)
+        FormBody.Builder builder = new FormBody.Builder();
+        RequestBody requestBody = builder.add("studentId",studentId)
                 .add("parentId",parentId)
                 .add("homework",homework)
                 .add("closingDate",closingDate)
                 .build();
-        Request request=new Request.Builder().url("http://192.168.31.95:8082/addHomework").post(requestBody).build();
-        try (Response response=okHttpClient.newCall(request).execute()){
+        Request request=new Request.Builder().url("http://192.168.31.95:8082/addHomework")
+                .post(requestBody).build();
+        try (Response response = okHttpClient.newCall(request).execute()){
             if(response.isSuccessful()){
                 return response.body().string();
             }
         } catch (IOException e) {
             e.printStackTrace();
+            Log.e("homework", e.toString());
         }
         return "FW";
     }
@@ -124,9 +126,29 @@ public class okhttpClass {
         }
         return "FW";
     }
+
+    public String UploadLogin(String phone, String password){
+        FormBody.Builder builder=new FormBody.Builder();
+        RequestBody requestBody=builder.add("phone",phone)
+                .add("password",password)
+                .build();
+        Request request=new Request.Builder().url("http://192.168.31.73:8083/sso/login/parentlogin").post(requestBody).build();
+        try (Response response=okHttpClient.newCall(request).execute()){
+            if(response.isSuccessful()){
+                return response.body().string();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("log", e.toString());
+        }
+        return "FW";
+    }
+
+
+
     // ------------------------------get------------------------------------------------------------
-    public String getHomeworkListBySId(){
-        Request.Builder builder=new Request.Builder().url("http://192.168.31.95:8082/getHomeworkListBySId?studentId=1");
+    public String getHomeworkPic(){
+        Request.Builder builder=new Request.Builder().url("http://192.168.31.95:8082/getHomeworkPic");
         builder.method("GET",null);
 
         Request request=builder.build();
@@ -167,23 +189,6 @@ public class okhttpClass {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        return "FW";
-    }
-
-    public String UploadLogin(String phone, String password){
-        FormBody.Builder builder=new FormBody.Builder();
-        RequestBody requestBody=builder.add("phone",phone)
-                .add("password",password)
-                .build();
-        Request request=new Request.Builder().url("http://192.168.31.73:8083/sso/login/parentlogin").post(requestBody).build();
-        try (Response response=okHttpClient.newCall(request).execute()){
-            if(response.isSuccessful()){
-                return response.body().string();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d("log", e.toString());
         }
         return "FW";
     }

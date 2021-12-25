@@ -7,7 +7,7 @@ public class GoodsBean {
     private String goodsid;
     private String iconid;
     private String name;
-    private double money;
+    private double money = 66;
     private int people;
     private int num = 0;
     private boolean isCart = false;

@@ -65,6 +65,7 @@
                         android:layout_marginRight="15dp"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/discover_iv1"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
@@ -74,7 +75,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             android:gravity="center"
                             android:text="文具"/>
                     </LinearLayout>
@@ -86,6 +87,7 @@
                         android:layout_marginRight="15dp"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/discover_iv2"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
@@ -95,7 +97,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             android:gravity="center"
                             android:text="益智游戏"/>
                     </LinearLayout>
@@ -107,6 +109,7 @@
                         android:layout_marginRight="15dp"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/discover_iv3"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
@@ -116,7 +119,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             android:gravity="center"
                             android:text="视频课"/>
                     </LinearLayout>
@@ -128,6 +131,7 @@
                         android:layout_marginRight="15dp"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/discover_iv4"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
@@ -137,7 +141,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             android:gravity="center"
                             android:text="兴趣班"/>
                     </LinearLayout>
@@ -159,6 +163,7 @@
                         android:layout_marginRight="15dp"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/discover_iv5"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
@@ -168,9 +173,9 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             android:gravity="center"
-                            android:text="亲子游"/>
+                            android:text="主题活动"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -180,6 +185,7 @@
                         android:layout_marginRight="15dp"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/discover_iv6"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
@@ -189,7 +195,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             android:gravity="center"
                             android:text="图书"/>
                     </LinearLayout>
@@ -201,6 +207,7 @@
                         android:layout_marginRight="15dp"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/discover_iv7"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
@@ -210,7 +217,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             android:gravity="center"
                             android:text="出行"/>
                     </LinearLayout>
@@ -222,6 +229,7 @@
                         android:layout_marginRight="15dp"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/discover_iv8"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
@@ -231,7 +239,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             android:gravity="center"
                             android:text="美食"/>
                     </LinearLayout>
@@ -352,7 +360,7 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/discover_vp"
                 android:layout_width="match_parent"
-                android:layout_height="800dp"
+                android:layout_height="790dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="20dp"

@@ -1,6 +1,7 @@
 package com.example.learningmachineparentsapp.Homepage.Homework;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.learningmachineparentsapp.R;
+import com.example.learningmachineparentsapp.okhttpClass;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHolder> {
@@ -69,7 +72,8 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
         HomeworkBean homework = hwList.get(position);
 
         holder.hwcheck_ll.setOnClickListener(v->{
-            new HwDialog(context).show();
+            HwDialog hwDialog = new HwDialog(context, initData());
+            hwDialog.show();
         });
 
         if(homework.getIsComplete()== 1){
@@ -99,4 +103,24 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
         return hwList.size();
     }
 
+    private List<ImageBean> initData(){
+        List<ImageBean> datalist = new ArrayList<>();
+        datalist.add(new ImageBean("http://192.168.31.95:8082/img597188762.png"));
+        datalist.add(new ImageBean("http://192.168.31.95:8082/1639038590.jpg"));
+        datalist.add(new ImageBean("http://192.168.31.95:8082/1639040071.jpg"));
+        datalist.add(new ImageBean("http://192.168.31.95:8082/1639038590.jpg"));
+        return datalist;
+    }
+
+
+    private void startData(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                okhttpClass tools = new okhttpClass();
+                String res = tools.getHomeworkPic();
+                Log.e("getHomeworkPic()", res);
+            }
+        }).start();
+    }
 }

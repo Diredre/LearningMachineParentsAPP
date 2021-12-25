@@ -2,6 +2,7 @@ package com.example.learningmachineparentsapp.Discover;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -16,9 +17,13 @@ import com.example.learningmachineparentsapp.View.TitleLayout;
 
 public class MailActivity extends AppCompatActivity {
 
+    public static String GOODSNAME = "name";
+    public static String GOODSMONNEY = "money";
+    public static String GOODSICON = "imgurl";
+
     private TitleLayout mail_tit;
     private ImageView mail_iv_goods, mail_iv_address;
-    private TextView mail_tv_pay;
+    private TextView mail_tv_pay, mail_tv_name, mail_tv_money, mail_price;
 
 
     @Override
@@ -38,13 +43,27 @@ public class MailActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//设置状态栏黑色字
         }
 
+        Intent intent = getIntent();
+        String name = intent.getStringExtra(GOODSNAME);
+        String imgurl = intent.getStringExtra(GOODSICON);
+        String money = intent.getStringExtra(GOODSMONNEY);
+
         mail_tit = findViewById(R.id.mail_tit);
         mail_tit.setTitle("结算");
 
         mail_iv_goods = findViewById(R.id.mail_iv_goods);
         Glide.with(this)
-                .load("https://img13.360buyimg.com/n1/jfs/t12655/194/385600663/434041/a7d721d/5a0ab413N4f06e9f8.jpg")
+                .load(imgurl)
                 .into(mail_iv_goods);
+
+        mail_tv_name = findViewById(R.id.mail_tv_name);
+        mail_tv_name.setText(name);
+
+        mail_tv_money = findViewById(R.id.mail_tv_money);
+        mail_tv_money.setText(money);
+
+        mail_price = findViewById(R.id.mail_price);
+        mail_price.setText(money);
 
         mail_iv_address = findViewById(R.id.mail_iv_address);
         Glide.with(this)

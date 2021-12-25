@@ -2,6 +2,7 @@ package com.example.learningmachineparentsapp.Discover.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -71,7 +72,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
             GoodsBean goods = beanList.get(pos);
             Intent intent = new Intent(context, GoodsDetailActivity.class);
             intent.putExtra(GoodsDetailActivity.GOODSNAME, goods.getName());
-            intent.putExtra(GoodsDetailActivity.GOODSMONNEY, goods.getMoney());
+            intent.putExtra(GoodsDetailActivity.GOODSMONNEY, ""+goods.getMoney());
             intent.putExtra(GoodsDetailActivity.GOODSICON, goods.getIconid());
             context.startActivity(intent);
         });
@@ -86,8 +87,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         Glide.with(context)
                 .load(goods.getIconid())
                 .into(holder.itemgoods_iv_icon);
-        holder.itemgoods_tv_money.setText(""+goods.getMoney());
-        holder.itemgoods_tv_peo.setText(""+goods.getPeople());
+        holder.itemgoods_tv_money.setText("" + goods.getMoney());
+        holder.itemgoods_tv_peo.setText("" + goods.getPeople());
     }
 
     @Override

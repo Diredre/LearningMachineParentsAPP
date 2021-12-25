@@ -35,6 +35,7 @@ import com.xuexiang.xui.widget.button.switchbutton.SwitchButton;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -57,7 +58,7 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
     private HomeworkAdapter homeworkAdapter;
     private List<HomeworkBean> hwlist = new ArrayList<>();
     private boolean isSmart = false;
-    private DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.CHINA);;
+    private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 
     @Override
@@ -131,8 +132,6 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()){
             case R.id.homework_fb_send:
                 startData();
-                hwlist.clear();
-                homeworkAdapter.notifyDataSetChanged();
                 Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.homework_btn_add:
@@ -153,11 +152,19 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void startData(){
-        okhttpClass tools1 = new okhttpClass();
-        for(int i = 0; i < hwlist.size(); i++){
-            String result1 = tools1.UploadHomework("1", "1", hwlist.get(i).getCon(), df.format(hwlist.get(i).getCom_time()));
-            Log.d("UploadHomework", result1);
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                okhttpClass tools1 = new okhttpClass();
+                for (int i = 0; i < hwlist.size(); i++) {
+                    String result1 = tools1.UploadHomework("1", "1", hwlist.get(i).getCon(), df.format(hwlist.get(i).getUse_time()));
+                    Log.e("UploadHomework", result1);
+                }
+                hwlist.clear();
+                homeworkAdapter.notifyDataSetChanged();
+                finish();
+            }
+        }).start();
     }
 
     @Override
@@ -165,7 +172,6 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         if (item.getItemId() == android.R.id.home) {
             finish();
         }
-
         return true;
     }
 

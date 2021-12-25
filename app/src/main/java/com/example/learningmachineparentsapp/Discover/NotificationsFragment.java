@@ -33,12 +33,12 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
     private DiscoverPagerAdapter discoverPagerAdapter;
     private View discover_tv_shop_bg, discover_tv_family_bg;
     private TextView discover_tv_shop, discover_tv_family;
-    private ImageView discover_iv_recomicon, discover_iv_cart;
+    private ImageView discover_iv_recomicon, discover_iv_cart, discover_iv1, discover_iv2,
+            discover_iv3, discover_iv4, discover_iv5, discover_iv6, discover_iv7, discover_iv8;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_notifications, container,false);
         return view;
     }
@@ -50,6 +50,38 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
     }
 
     private void initView() {
+        discover_iv1 = view.findViewById(R.id.discover_iv1);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/25/TaHG7t.png")
+                .into(discover_iv1);
+        discover_iv2 = view.findViewById(R.id.discover_iv2);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/25/TaHNh8.png")
+                .into(discover_iv2);
+        discover_iv3 = view.findViewById(R.id.discover_iv3);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/25/Ta7kIf.png")
+                .into(discover_iv3);
+        discover_iv4 = view.findViewById(R.id.discover_iv4);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/25/TaThPU.png")
+                .into(discover_iv4);
+        discover_iv5 = view.findViewById(R.id.discover_iv5);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/25/Ta7NQJ.png")
+                .into(discover_iv5);
+        discover_iv6 = view.findViewById(R.id.discover_iv6);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/25/TaHPl4.png")
+                .into(discover_iv6);
+        discover_iv7 = view.findViewById(R.id.discover_iv7);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/25/TaT6rn.png")
+                .into(discover_iv7);
+        discover_iv8 = view.findViewById(R.id.discover_iv8);
+        Glide.with(this)
+                .load("https://s4.ax1x.com/2021/12/25/TaIFaT.png")
+                .into(discover_iv8);
 
         discover_tv_shop_bg = view.findViewById(R.id.discover_tv_shop_bg);
         discover_tv_family_bg = view.findViewById(R.id.discover_tv_family_bg);
