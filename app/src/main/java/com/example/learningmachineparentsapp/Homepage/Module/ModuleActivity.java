@@ -1,6 +1,7 @@
 package com.example.learningmachineparentsapp.Homepage.Module;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -64,6 +65,13 @@ public class ModuleActivity extends AppCompatActivity implements View.OnClickLis
 
 
     private void initView(){
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//设置状态栏黑色字
+        }
+
         module_tit = findViewById(R.id.module_tit);
         module_tit.setTitle("使用情况");
 

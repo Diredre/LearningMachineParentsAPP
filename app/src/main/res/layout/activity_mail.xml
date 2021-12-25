@@ -1,63 +1,306 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Discover.MailActivity">
 
-    <ScrollView
+    <com.example.learningmachineparentsapp.View.TitleLayout
+        android:id="@+id/mail_tit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:id="@+id/mail_rl1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/mail_tit"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <ImageView
+            android:id="@+id/mail_iv_address"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/mail_iv_address"
+            android:layout_toLeftOf="@id/mail_iv_next"
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#404040"
+                android:text="学林街645号浙江理工大学生活一区"
+                android:maxLines="1"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#A0A0A0"
+                android:text="李小华 13012341234"
+                android:maxLines="1"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/mail_iv_next"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/next"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/mail_rl2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/mail_rl1">
+        <ImageView
+            android:id="@+id/mail_iv_goods"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:id="@+id/mail_tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_toRightOf="@id/mail_iv_goods"
+            android:textSize="16sp"
+            android:textColor="#404040"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:text="幼儿教育：《我不想发脾气，我想好好说》"/>
+
+        <TextView
+            android:id="@+id/mail_tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12.11"
+            android:textColor="@color/red_normal"
+            android:layout_alignLeft="@id/mail_tv_name"
+            android:layout_alignBottom="@id/mail_iv_goods"
+            android:layout_margin="5dp"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/item_cart_tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="×1"
+            android:textColor="#404040"
+            android:layout_alignRight="@id/mail_tv_name"
+            android:layout_alignTop="@id/mail_tv_money"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/mail_ll1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/mail_rl2"
+        android:layout_marginTop="10dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <ImageView
-                    android:id="@+id/mail_iv_address"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_centerVertical="true"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_toRightOf="@id/mail_iv_address"
-                    android:layout_toLeftOf="@id/mail_iv_next"
-                    android:layout_margin="10dp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#404040"
-                        android:text="学林街645号浙江理工大学生活一区"
-                        android:maxLines="1"
-                        android:textSize="17sp"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColor="#A0A0A0"
-                        android:text="李小华 13012341234"
-                        android:maxLines="1"
-                        android:textSize="12sp"/>
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/mail_iv_next"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@mipmap/next"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"/>
-            </RelativeLayout>
-
-
+            android:layout_height="25dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="配送方式"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/mail_tv_way"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toLeftOf="@id/mail_iv1"
+                android:text="快递运输"
+                android:textSize="16sp"
+                android:textColor="#BFBFBF"/>
+            <ImageView
+                android:id="@+id/mail_iv1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/next"/>
         </RelativeLayout>
-    </ScrollView>
-</LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="10dp"
+            android:background="#D7D7D7"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="开具发票"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/mail_tv_fp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toLeftOf="@id/mail_iv2"
+                android:text="本次不开具发票"
+                android:textSize="16sp"
+                android:textColor="#BFBFBF"/>
+            <ImageView
+                android:id="@+id/mail_iv2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/next"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="10dp"
+            android:background="#D7D7D7"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp">
+
+            <TextView
+                android:id="@+id/mail_tv_node"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="订单备注"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="14sp"
+                android:layout_toRightOf="@id/mail_tv_node"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:hint="留言前请先和商家沟通。"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#E8E8E8"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="支付方式"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/mail_tv_payway"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toLeftOf="@id/mail_iv3"
+                android:text="在线支付"
+                android:textSize="16sp"
+                android:textColor="#BFBFBF"/>
+            <ImageView
+                android:id="@+id/mail_iv3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/next"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#E8E8E8"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="合计:￥"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/mail_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12.11"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#49DA9C"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/mail_tv_pay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#49DA9C"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="付款"
+                android:textColor="#FAFAFA" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

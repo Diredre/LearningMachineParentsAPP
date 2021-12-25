@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,12 +29,14 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
+        LinearLayout hwcheck_ll;
         ImageView item_hwcheck_iv;
         TextView item_hwcheck_tv_name, item_hwcheck_tv_time,
                 item_hwcheck_tv_state, item_hwcheck_tv_commit;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
+            hwcheck_ll = itemView.findViewById(R.id.hwcheck_ll);
             item_hwcheck_iv = itemView.findViewById(R.id.item_hwcheck_iv);
             item_hwcheck_tv_name = itemView.findViewById(R.id.item_hwcheck_tv_name);
             item_hwcheck_tv_time = itemView.findViewById(R.id.item_hwcheck_tv_time);
@@ -51,19 +54,23 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hwcheck, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_hwcheck, parent, false);
         final HwcheckAdapter.ViewHolder viewHolder = new HwcheckAdapter.ViewHolder(view);
         int parentHeight= parent.getHeight();
         parent.getWidth();
         ViewGroup.LayoutParams layoutParams = viewHolder.itemView.getLayoutParams();
-        layoutParams.height =  (parentHeight/ 3);
-
+        layoutParams.height =  (parentHeight / 3);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull HwcheckAdapter.ViewHolder holder, int position) {
         HomeworkBean homework = hwList.get(position);
+
+        holder.hwcheck_ll.setOnClickListener(v->{
+            new HwDialog(context).show();
+        });
 
         if(homework.getIsComplete()== 1){
             Glide.with(context)

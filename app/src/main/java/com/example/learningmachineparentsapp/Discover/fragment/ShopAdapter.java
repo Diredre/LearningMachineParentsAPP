@@ -1,15 +1,18 @@
 package com.example.learningmachineparentsapp.Discover.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.learningmachineparentsapp.Discover.GoodsDetailActivity;
 import com.example.learningmachineparentsapp.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -52,11 +55,25 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         final ViewHolder viewHolder = new ViewHolder(view);
 
         viewHolder.itemgoods_iv_sub.setOnClickListener(v->{
-            viewHolder.itemgoods_tv_num.setText(Integer.parseInt(viewHolder.itemgoods_tv_num.getText().toString())-1+"");
+            if(Integer.parseInt(viewHolder.itemgoods_tv_num.getText().toString()) > 0) {
+                viewHolder.itemgoods_tv_num.setText(Integer.parseInt(viewHolder.itemgoods_tv_num.getText().toString()) - 1 + "");
+            }else{
+                Toast.makeText(context, "商品数不能小于0", Toast.LENGTH_SHORT).show();
+            }
         });
 
         viewHolder.itemgoods_iv_add.setOnClickListener(v->{
             viewHolder.itemgoods_tv_num.setText(Integer.parseInt(viewHolder.itemgoods_tv_num.getText().toString())+1+"");
+        });
+
+        viewHolder.itemgoods_iv_icon.setOnClickListener(v->{
+            int pos = viewHolder.getAdapterPosition();
+            GoodsBean goods = beanList.get(pos);
+            Intent intent = new Intent(context, GoodsDetailActivity.class);
+            intent.putExtra(GoodsDetailActivity.GOODSNAME, goods.getName());
+            intent.putExtra(GoodsDetailActivity.GOODSMONNEY, goods.getMoney());
+            intent.putExtra(GoodsDetailActivity.GOODSICON, goods.getIconid());
+            context.startActivity(intent);
         });
 
         return viewHolder;

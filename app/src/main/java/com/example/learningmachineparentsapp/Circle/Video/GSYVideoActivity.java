@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,7 @@ import com.example.learningmachineparentsapp.R;
 import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -88,6 +90,13 @@ public class GSYVideoActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
+        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+        }
+
         gsy_ll_upload = findViewById(R.id.gsy_ll_upload);
         gsy_ll_upload.setOnClickListener(v->{
             startActivity(new Intent(this, UploadActivity.class));

@@ -4,12 +4,15 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,14 +27,17 @@ import com.bumptech.glide.Glide;
 import com.example.learningmachineparentsapp.R;
 import com.example.learningmachineparentsapp.View.SlideRecyclerView;
 import com.example.learningmachineparentsapp.View.TitleLayout;
+import com.example.learningmachineparentsapp.okhttpClass;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.example.learningmachineparentsapp.Homepage.Homework.HomeworkBean;
 import com.xuexiang.xui.widget.button.switchbutton.SwitchButton;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
@@ -50,6 +56,8 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
     private SlideRecyclerView homework_rv_hwlist;
     private HomeworkAdapter homeworkAdapter;
     private List<HomeworkBean> hwlist = new ArrayList<>();
+    private boolean isSmart = false;
+    private DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.CHINA);;
 
 
     @Override
@@ -62,6 +70,13 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView(){
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//设置状态栏黑色字
+        }
+
         homework_tit = findViewById(R.id.homework_tit);
         homework_tit.setTitle("布置作业");
 
@@ -72,6 +87,12 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         homework_fb_send.setOnClickListener(this);
 
         homework_sb = findViewById(R.id.homework_sb);
+        homework_sb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isSmart = isChecked;
+            }
+        });
 
         homework_et_clip = findViewById(R.id.homework_et_clip);
 
@@ -102,7 +123,6 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         dataList.add(new HomeworkBean("背诵《滕王阁序》", new Date(System.currentTimeMillis())));
         dataList.add(new HomeworkBean("做完数学课堂练习", new Date(System.currentTimeMillis())));
         dataList.add(new HomeworkBean("勾股定理", new Date(System.currentTimeMillis())));
-
         return dataList;
     }
 
@@ -110,18 +130,33 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.homework_fb_send:
-                //inputDialogShow();
+                startData();
+                hwlist.clear();
+                homeworkAdapter.notifyDataSetChanged();
                 Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.homework_btn_add:
                 if(!homework_et_clip.getText().toString().trim().equals("")) {
-                    smartInput();
+                    if(isSmart){
+                        smartInput();
+                    }else{
+                        String input = homework_et_clip.getText().toString();
+                        homeworkAdapter.addItemData(new HomeworkBean(input, new Date(System.currentTimeMillis())));
+                    }
                     Toast.makeText(HomeworkActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                     homework_et_clip.setText("");
                 }else{
                     Toast.makeText(HomeworkActivity.this, "请输入作业", Toast.LENGTH_SHORT).show();
                 }
                 break;
+        }
+    }
+
+    private void startData(){
+        okhttpClass tools1 = new okhttpClass();
+        for(int i = 0; i < hwlist.size(); i++){
+            String result1 = tools1.UploadHomework("1", "1", hwlist.get(i).getCon(), df.format(hwlist.get(i).getCom_time()));
+            Log.d("UploadHomework", result1);
         }
     }
 
@@ -140,12 +175,13 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         for(String s : inputs){
             homeworkAdapter.addItemData(new HomeworkBean(s, new Date(System.currentTimeMillis())));
         }
-/*        hwlist.add(new HomeworkBean(input, new Time(10)));
+        /*hwlist.add(new HomeworkBean(input, new Time(10)));
         // 通知适配器
         homeworkAdapter.notifyItemChanged(hwlist.size() - 1);
         // 更新定位
         homework_rv_hwlist.scrollToPosition(homeworkAdapter.getItemCount() - 1);*/
     }
+
     /**
      * 输入作业内容dialog
      */
@@ -179,7 +215,7 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         inputHWDialog.show();
     }
 
-/*    private String getCilpbord(){
+    /*private String getCilpbord(){
         //获取系统剪贴板服务
         ClipboardManager clipboardManager = (ClipboardManager)mContext.getSystemService(Context.CLIPBOARD_SERVICE);
         if (null != clipboardManager) {

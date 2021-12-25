@@ -18,7 +18,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class scan extends AppCompatActivity {
 
-    private ImageView scan_iv, scan_iv_bg;
+    private ImageView scan_iv, scan_iv_bg, scan_iv_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,8 +46,17 @@ public class scan extends AppCompatActivity {
 
         scan_iv_bg = findViewById(R.id.scan_iv_bg);
         Glide.with(this)
-                .load("https://s4.ax1x.com/2021/12/12/obj8hR.png")
+                .load("https://s4.ax1x.com/2021/12/25/TUPCQ0.png")
                 .into(scan_iv_bg);
+
+        scan_iv_back = findViewById(R.id.scan_iv_back);
+        Glide.with(this)
+                .load("https://z3.ax1x.com/2021/11/06/IMMs8U.png")
+                .into(scan_iv_back);
+        scan_iv_back.setOnClickListener(v->{
+            startActivity(new Intent(this, LoginActivity.class));
+            this.finish();
+        });
     }
 
 

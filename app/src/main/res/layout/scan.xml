@@ -8,6 +8,12 @@
     android:fitsSystemWindows="true"
     android:background="@drawable/gradient_background">
 
+    <ImageView
+        android:id="@+id/scan_iv_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"/>
+
     <LinearLayout
         android:id="@+id/scan_ll_logo"
         android:layout_width="match_parent"

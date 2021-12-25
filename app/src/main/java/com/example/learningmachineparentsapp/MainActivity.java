@@ -69,6 +69,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void initView() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//设置状态栏黑色字
+        }
+
         nav_view = findViewById(R.id.nav_view);
         main_drawer = findViewById(R.id.main_drawer);
 

@@ -2,6 +2,7 @@ package com.example.learningmachineparentsapp.Homepage.LeftActs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -38,6 +39,13 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void initView(){
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//设置状态栏黑色字
+        }
+
         psw = "";
         newpsw = "";
         renewpsw = "";

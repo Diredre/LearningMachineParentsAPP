@@ -6,6 +6,7 @@ public class UserInfo {
     private String password;    //密码
     private String iconid;      //头像图片地址url
     private String name;        //用户名
+    private int id;             //家长码
 
     public UserInfo(String phone, String password, String iconid, String name) {
         this.phone = phone;

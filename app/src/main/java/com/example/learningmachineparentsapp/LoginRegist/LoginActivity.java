@@ -12,12 +12,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +30,8 @@ import com.example.learningmachineparentsapp.MainActivity;
 import com.example.learningmachineparentsapp.R;
 import com.example.learningmachineparentsapp.Widget.CirclePgBar;
 import com.example.learningmachineparentsapp.Widget.JellyInterpolator;
+import com.example.learningmachineparentsapp.okhttpClass;
+
 import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTransparent;
 
 /**
@@ -36,7 +40,8 @@ import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTr
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView login_iv_phone, login_iv_password, login_iv_logo, login_iv_bg;
-    private TextView login_tv_resgister, login_tv_forget, login_tv_phcode;
+    private TextView login_tv_resgister, login_tv_forget;
+    private EditText login_et_phone, login_et_password;
     private Button login_btn_login;
     private LinearLayout input_layout_phone, input_layout_psw;
     private View login_ll_input, login_ll_progress;
@@ -73,9 +78,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         input_layout_psw = findViewById(R.id.input_layout_psw);
         input_layout_phone = findViewById(R.id.input_layout_phone);
 
-        //验证码发送
-        login_tv_phcode = findViewById(R.id.login_tv_phcode);
-        login_tv_phcode.setOnClickListener(this);
+        //手机号
+        login_et_phone = findViewById(R.id.login_et_phone);
+        login_et_password = findViewById(R.id.login_et_password);
 
         // 一些图标
         login_iv_phone = findViewById(R.id.login_iv_phone);
@@ -109,11 +114,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
+    /**
+     * 登录信息
+     */
+    private void startData(String phone, String psw){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                okhttpClass tools1 = new okhttpClass();
+                String result1 = tools1.UploadLogin(phone, psw);
+                Log.d("UploadLogin", result1);
+            }
+        }).start();
+    }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             // login按钮
             case R.id.login_btn_login:
+                startData("88", "88");
                 // 计算出控件的高与宽
                 mWidth = login_btn_login.getMeasuredWidth();
                 mHeight = login_btn_login.getMeasuredHeight();
@@ -147,11 +168,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             // 忘记密码
             case R.id.login_tv_forget:
-                startActivity(new Intent(LoginActivity.this, RemeberActivity.class));
-                break;
-
-            //发送验证码接口
-            case R.id.login_tv_phcode:
+                Toast.makeText(this, "待开发", Toast.LENGTH_SHORT).show();
+                //startActivity(new Intent(LoginActivity.this, RemeberActivity.class));
                 break;
         }
     }

@@ -63,11 +63,11 @@
             android:id="@+id/hwcheck_iv_add"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginRight="35dp"/>
         <ImageView
             android:id="@+id/hwcheck_iv_history"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="30dp"/>
+            android:layout_marginLeft="35dp"/>
     </LinearLayout>
 </RelativeLayout>

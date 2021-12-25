@@ -121,7 +121,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 // 此处得到选择的时间，可以进行你想要的操作
-                tv.setText("提交截止时间：" + year + "年" + (monthOfYear + 1) + "月" + dayOfMonth + "日");
+                tv.setText("提交截止时间：" + year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                 hw.setUse_time(new Date(year, monthOfYear+1, dayOfMonth));
             }
         }

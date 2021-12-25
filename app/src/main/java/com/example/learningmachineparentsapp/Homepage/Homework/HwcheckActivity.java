@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -40,6 +41,14 @@ public class HwcheckActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initView(){
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.solar_background));
+        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//设置状态栏黑色字
+        }
+
+
         hwcheck_iv_add = findViewById(R.id.hwcheck_iv_add);
         Glide.with(this)
                 .load("https://s4.ax1x.com/2021/12/19/TZMPUK.png")
@@ -72,10 +81,10 @@ public class HwcheckActivity extends AppCompatActivity implements View.OnClickLi
 
     private List<HomeworkBean> initData(){
         List<HomeworkBean> dataList = new ArrayList<>();
-        dataList.add(new HomeworkBean("背九九乘法表", new Date(2021-1900, 11,1),
-                1, new Date(System.currentTimeMillis())));
         dataList.add(new HomeworkBean("", new Date(2021-1900, 10,28),
                 2, new Date(System.currentTimeMillis())));
+        dataList.add(new HomeworkBean("背九九乘法表", new Date(2021-1900, 11,1),
+                1, new Date(System.currentTimeMillis())));
         dataList.add(new HomeworkBean("默写静夜思", new Date(2021-1900, 11,5),
                 0, new Date(System.currentTimeMillis())));
         dataList.add(new HomeworkBean("背九九乘法表", new Date(2021-1900, 11,1),

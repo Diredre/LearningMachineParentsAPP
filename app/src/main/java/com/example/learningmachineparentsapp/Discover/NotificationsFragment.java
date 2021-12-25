@@ -2,6 +2,7 @@ package com.example.learningmachineparentsapp.Discover;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,7 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
     }
 
     private void initView() {
+
         discover_tv_shop_bg = view.findViewById(R.id.discover_tv_shop_bg);
         discover_tv_family_bg = view.findViewById(R.id.discover_tv_family_bg);
         discover_tv_shop = view.findViewById(R.id.discover_tv_shop);
