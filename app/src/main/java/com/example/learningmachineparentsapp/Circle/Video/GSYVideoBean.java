@@ -17,6 +17,11 @@ public class GSYVideoBean implements Serializable {
     private int type = 0;   // 运动类=1， 文化类=2， 历史类=3
     private boolean isLike = false;
 
+    public GSYVideoBean(String auther, String con) {
+        this.auther = auther;
+        this.con = con;
+    }
+
     public GSYVideoBean(String videoUrl, String auther, String con) {
         this.videoUrl = videoUrl;
         this.auther = auther;

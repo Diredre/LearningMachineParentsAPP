@@ -1,4 +1,4 @@
-package com.example.learningmachineparentsapp.Homepage.Homework;
+package com.example.learningmachineparentsapp.Homepage;
 
 import android.app.Dialog;
 import android.content.Context;

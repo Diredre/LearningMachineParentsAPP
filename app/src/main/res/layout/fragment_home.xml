@@ -29,17 +29,26 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/hp_riv_icon"
             android:layout_centerVertical="true">
+
             <TextView
+                android:id="@+id/hp_tv_username"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="云淡风轻"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="李小华 浙江省杭州市学军中学 四年级"
+                android:text="李小华 浙江省杭州市 四年级"
                 android:textSize="10sp"/>
         </LinearLayout>
+        <ImageView
+            android:id="@+id/hp_iv_toscan"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@id/hp_iv_tomessage"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"/>
         <ImageView
             android:id="@+id/hp_iv_tomessage"
             android:layout_width="30dp"
@@ -47,6 +56,14 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"/>
+        <View
+            android:id="@+id/hp_iv_havemes"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:visibility="invisible"
+            android:background="@drawable/upload_btn_background"
+            android:layout_alignTop="@id/hp_iv_tomessage"
+            android:layout_alignRight="@id/hp_iv_tomessage"/>
     </RelativeLayout>
 
     <ScrollView
@@ -95,7 +112,8 @@
                         android:layout_height="120dp"
                         android:layout_margin="10dp"
                         android:adjustViewBounds="true"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:elevation="5dp"/>
                     <ImageView
                         android:id="@+id/hp_iv_tohomework"
                         android:layout_width="match_parent"
@@ -103,6 +121,7 @@
                         android:layout_margin="10dp"
                         android:adjustViewBounds="true"
                         android:layout_weight="1"
+                        android:elevation="5dp"
                         android:layout_centerHorizontal="true"/>
                 </LinearLayout>
                 <LinearLayout
@@ -115,6 +134,7 @@
                         android:layout_height="120dp"
                         android:layout_margin="10dp"
                         android:adjustViewBounds="true"
+                        android:elevation="5dp"
                         android:layout_weight="1"/>
                     <ImageView
                         android:id="@+id/hp_iv_towatch"
@@ -122,6 +142,7 @@
                         android:layout_height="120dp"
                         android:layout_margin="10dp"
                         android:adjustViewBounds="true"
+                        android:elevation="5dp"
                         android:layout_weight="1"/>
                 </LinearLayout>
             </LinearLayout>

@@ -1,16 +1,18 @@
 package com.example.learningmachineparentsapp.Homepage;
 
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,12 +25,13 @@ import com.example.learningmachineparentsapp.Homepage.Control.ControlActivity;
 import com.example.learningmachineparentsapp.Homepage.Homework.HwcheckActivity;
 import com.example.learningmachineparentsapp.Homepage.Message.MessageActivity;
 import com.example.learningmachineparentsapp.Homepage.Module.ModuleActivity;
-import com.example.learningmachineparentsapp.Homepage.Videochat.VideochatActivity;
-import com.example.learningmachineparentsapp.Homepage.Watch.WatchActivity;
+import com.example.learningmachineparentsapp.LoginRegist.scan;
 import com.example.learningmachineparentsapp.MainActivity;
+import com.example.learningmachineparentsapp.MyApp;
 import com.example.learningmachineparentsapp.R;
 
 import com.example.learningmachineparentsapp.View.RoundImageView;
+import com.example.learningmachineparentsapp.webrtc.rtc.MyWebSocketService;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
@@ -38,35 +41,45 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.xuexiang.xui.widget.banner.recycler.BannerLayout;
 
-import java.lang.ref.WeakReference;
+import org.json.JSONException;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
+
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private Context context;
-    private View view;
+    private View view, hp_iv_havemes;
     private ImageView hp_iv_tovideochat, hp_iv_towatch, hp_iv_tohomework, hp_iv_tocontrol;
     private LineChart hp_lc;
-    private ImageView hp_iv_tomessage;
+    private ImageView hp_iv_tomessage, hp_iv_toscan;
+    private TextView hp_tv_username;
     private DrawerLayout main_drawer;
     private RoundImageView hp_riv_icon;
 
-    LineData mLineData; // 线集合，所有折现以数组的形式存到此集合中
-    XAxis mXAxis; //X轴
-    YAxis mLeftYAxis; //左侧Y轴
-    YAxis mRightYAxis; //右侧Y轴
-    Legend mLegend; //图例
-    LimitLine mLimitline; //限制线
+    private SharedPreferences sp;
+    private String name;
+
+    LineData mLineData;     // 线集合，所有折现以数组的形式存到此集合中
+    XAxis mXAxis;           //X轴
+    YAxis mLeftYAxis;       //左侧Y轴
+    YAxis mRightYAxis;      //右侧Y轴
+    Legend mLegend;         //图例
+    LimitLine mLimitline;   //限制线
 
     private Random mRandom = new Random(); // 随机产生点
     private DecimalFormat mDecimalFormat = new DecimalFormat("#.00");   // 格式化浮点数位两位小数
 
-    //  Y值数据链表
+    // Y值数据链表
     List<Float> mList = new ArrayList<>();
     // Chart需要的点数据链表
     List<Entry> mEntries = new ArrayList<>();
@@ -76,9 +89,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+        sp = getActivity().getSharedPreferences("userInfo", 0);
+        name = sp.getString("USER_NAME", "云淡风轻");
+
         view = inflater.inflate(R.layout.fragment_home, container,false);
+        MyApp ma = (MyApp)getActivity().getApplicationContext();
+        ms = ma.getMyWebSocketService();
+
+        try {
+            getWebsocket(sp.getString("PARENTID", "1"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("", "onCreateView: "+ms );
         return view;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -90,6 +117,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
 
     private void initView() {
+        hp_tv_username = getView().findViewById(R.id.hp_tv_username);
+        hp_tv_username.setText(name);
+
+        hp_iv_havemes = getView().findViewById(R.id.hp_iv_havemes);
 
         hp_iv_tovideochat = getView().findViewById(R.id.hp_iv_tovideochat);
         Glide.with(getActivity())
@@ -120,6 +151,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 .load("https://z3.ax1x.com/2021/11/10/IUE6Ve.png")
                 .into(hp_iv_tomessage);
         hp_iv_tomessage.setOnClickListener(this);
+
+        hp_iv_toscan = getView().findViewById(R.id.hp_iv_toscan);
+        Glide.with(getActivity())
+                .load("https://s4.ax1x.com/2022/01/10/7V7zI1.png")
+                .into(hp_iv_toscan);
+        hp_iv_toscan.setOnClickListener(this);
 
         main_drawer = ((MainActivity)getActivity()).getDrawer();
 
@@ -334,6 +371,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
      *
      * @param yValues y值
      */
+    MyWebSocketService ms;
     public void addEntry(LineData lineData, LineChart lineChart, float yValues, int index) {
 
         // 通过索引得到一条折线，之后得到折线上当前点的数量
@@ -341,7 +379,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         Entry entry = new Entry(xCount, yValues); // 创建一个点
         lineData.addEntry(entry, index); // 将entry添加到指定索引处的折线中
-
         //通知数据已经改变
         lineData.notifyDataChanged();
         lineChart.notifyDataSetChanged();
@@ -359,13 +396,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 startActivity(new Intent(getActivity(), ControlActivity.class));
                 break;
             case R.id.hp_iv_towatch:
-                startActivity(new Intent(getActivity(), WatchActivity.class));
+                //todo 家长监控
+//                startActivity(new Intent(getActivity(), WatchActivity.class));
+                ms.monitor();
                 break;
             case R.id.hp_iv_tohomework:
                 startActivity(new Intent(getActivity(), HwcheckActivity.class));
                 break;
             case R.id.hp_iv_tovideochat:
-                startActivity(new Intent(getActivity(), VideochatActivity.class));
+                //todo 视频通话
+//                startActivity(new Intent(getActivity(), VideochatActivity.class));
+                ms.call();
                 break;
             case R.id.hp_iv_tomessage:
                 startActivity(new Intent(getActivity(), MessageActivity.class));
@@ -374,8 +415,57 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 main_drawer.openDrawer(Gravity.LEFT);
                 break;
             case R.id.hp_lc:
-                startActivity(new Intent(getActivity(), ModuleActivity.class));
+                //startActivity(new Intent(getActivity(), ModuleActivity.class));
+                break;
+            case R.id.hp_iv_toscan:
+                startActivity(new Intent(getActivity(), scan.class));
                 break;
         }
+    }
+
+
+    /**
+     * 接收消息
+     * @param pid
+     * @throws JSONException
+     */
+    private void getWebsocket(String pid) throws JSONException {
+        final WebSocket[] mwebsocket = new WebSocket[1];
+        Request request = new Request.Builder().url("ws://192.168.31.73:8085/parentServer/" + pid).build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newWebSocket(request, new WebSocketListener() {
+            @Override
+            public void onClosed(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
+                super.onClosed(webSocket, code, reason);
+                Log.e("websocket_onClosed", "run() returned:");
+            }
+
+            @Override
+            public void onClosing(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
+                super.onClosing(webSocket, code, reason);
+                Log.e("websocket_onClosing", "run() returned:" + reason);
+            }
+
+            @Override
+            public void onFailure(@NonNull WebSocket webSocket, @NonNull Throwable t, @Nullable Response response) {
+                super.onFailure(webSocket, t, response);
+                Log.e("websocket_onFailure", "run() returned:" + request.toString());
+            }
+
+            @Override
+            public void onMessage(@NonNull WebSocket webSocket, @NonNull String text) {
+                super.onMessage(webSocket, text);
+                Log.e("websocket_onMessage", "run() returned:" + text);
+                hp_iv_havemes.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onOpen(@NonNull WebSocket webSocket, @NonNull Response response) {
+                super.onOpen(webSocket, response);
+                mwebsocket[0] = webSocket;
+                Log.e("websocket_onopen", "run() returned:" + "连接到服务器");
+                hp_iv_havemes.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }

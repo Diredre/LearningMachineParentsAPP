@@ -12,7 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
-import com.example.learningmachineparentsapp.Circle.Upload.UploadActivity;
+import com.example.learningmachineparentsapp.Circle.Video.Upload.UploadActivity;
 import com.example.learningmachineparentsapp.R;
 
 import android.content.res.Configuration;
@@ -23,7 +23,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

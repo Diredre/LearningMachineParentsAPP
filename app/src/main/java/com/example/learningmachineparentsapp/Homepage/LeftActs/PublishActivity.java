@@ -3,6 +3,7 @@ package com.example.learningmachineparentsapp.Homepage.LeftActs;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -10,11 +11,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.learningmachineparentsapp.Homepage.InputHWDialog;
 import com.example.learningmachineparentsapp.R;
 import com.example.learningmachineparentsapp.View.RoundImageView;
 import com.example.learningmachineparentsapp.View.TitleLayout;
@@ -30,12 +34,18 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
     private RoundImageView publish_riv_icon;
     private static final int CONSTANTS_SELECT_PHOTO_CODE = 1;
 
+    private SharedPreferences sp;
+    private String name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_publish);
+
+        sp = getSharedPreferences("userInfo", 0);
+        name = sp.getString("USER_NAME", "云淡风轻");
 
         initView();
     }
@@ -72,6 +82,10 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
                 final Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);    // 选择数据
                 photoPickerIntent.setType("image/*");                               // 获取所有本地图片
                 startActivityForResult(photoPickerIntent, 1);
+                break;
+            case R.id.publish_nane:
+                inputDialogShow();
+                break;
         }
     }
 
@@ -99,5 +113,35 @@ public class PublishActivity extends AppCompatActivity implements View.OnClickLi
             default:
                 break;
         }
+    }
+
+    public void inputDialogShow(){
+        InputHWDialog dialog = new InputHWDialog(this);
+        dialog.setTile("修改用户名");
+        EditText input = dialog.getEditText();
+        dialog.setOnSureListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!input.getText().toString().trim().equals("")){
+                    String str = input.getText().toString().trim();
+                    publish_tv_nownane.setText(str);
+                    name = str;
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("USER_NAME", name);
+                    editor.commit();
+                    Toast.makeText(PublishActivity.this, "修改完成，用户名将在下次登录生效", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(PublishActivity.this, "请输入内容", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialog.setOnCanlceListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

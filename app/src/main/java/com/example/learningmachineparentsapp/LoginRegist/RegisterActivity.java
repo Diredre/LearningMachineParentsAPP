@@ -3,8 +3,13 @@ package com.example.learningmachineparentsapp.LoginRegist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -19,18 +24,24 @@ import com.example.learningmachineparentsapp.MainActivity;
 import com.example.learningmachineparentsapp.R;
 import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTransparent;
 import com.example.learningmachineparentsapp.Widget.Code;
+import com.example.learningmachineparentsapp.okhttpClass;
+import com.google.gson.Gson;
 
 /**
  * 注册界面
  */
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
+    public static int UPDATEPR = 1;
     private ImageView reg_iv_back, reg_iv_phone, reg_iv_password,
             reg_iv_code, reg_iv_logo, reg_iv_repassword;
     private TextView reg_tv_phcode;
     private Button reg_btn_reg;
     private EditText reg_et_phone, reg_et_code, reg_et_password, reg_et_repassword;
-    private String real_code;       // 生成验证码
+
+    private Handler handler;
+    private String parentid;
+    private SharedPreferences sp;
 
 
     @Override
@@ -39,6 +50,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_register);
         makeStatusBarTransparent(this);
+
+        sp = getSharedPreferences("userInfo", 0);
+        parentid = sp.getString("PARENTID", "15");
+        Log.e("PARENTID", parentid);
 
         initView();
     }
@@ -50,9 +65,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         reg_et_repassword = findViewById(R.id.reg_et_repassword);
 
         reg_tv_phcode = findViewById(R.id.reg_tv_phcode);
-        //reg_tv_phcode.setImageBitmap(Code.getInstance().createBitmap());
         reg_tv_phcode.setOnClickListener(this);
-        real_code = Code.getInstance().getCode().toLowerCase();
 
         // reg按钮
         reg_btn_reg = findViewById(R.id.reg_btn_reg);
@@ -103,45 +116,102 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 if(phone.equals("")){
                     Toast.makeText(RegisterActivity.this, "请输入手机号码", Toast.LENGTH_SHORT).show();
-                    //reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
-                    real_code = Code.getInstance().getCode().toLowerCase();
+                } else if(phone.length() != 11){
+                    Toast.makeText(RegisterActivity.this, "请输入正确的手机号码", Toast.LENGTH_SHORT).show();
                 } else if(psw.equals("")){
                     Toast.makeText(RegisterActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
-                    //reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
-                    real_code = Code.getInstance().getCode().toLowerCase();
                 } else if(repsw.equals("")){
                     Toast.makeText(RegisterActivity.this, "请再次输入密码", Toast.LENGTH_SHORT).show();
-                    //reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
-                    real_code = Code.getInstance().getCode().toLowerCase();
-                } else if (psw.equals(repsw)){
+                } else if (!psw.equals(repsw)){
                     Toast.makeText(RegisterActivity.this, "两次密码请保持一致", Toast.LENGTH_SHORT).show();
-                    //reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
-                    real_code = Code.getInstance().getCode().toLowerCase();
-                }
-
-                if(phoneCode.equals(real_code)) {
+                }else if(phoneCode.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
-                }else if (phoneCode.equals(real_code)) {
-                    Toast.makeText(RegisterActivity.this, "注册成功，请填写信息", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterActivity.this, InfoActivity.class));
-                    RegisterActivity.this.finish();
-                } else {
-                    Toast.makeText(RegisterActivity.this, "验证码错误", Toast.LENGTH_SHORT).show();
-                    //reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
-                    real_code = Code.getInstance().getCode().toLowerCase();
+                }else{
+                    uploadParentRegister(phone, psw, phoneCode);
+                    handler = new Handler(){
+                        public void handleMessage(Message msg) {
+                            Log.e("RegisterAct", "验证码线程");
+                            Gson gson = new Gson();
+                            if(msg.what == UPDATEPR){
+                                String str = (String)msg.obj;
+                                ParentRegGson parent = gson.fromJson(str, ParentRegGson.class);
+                                if(parent.getMsg().equals("注册成功")){
+                                    Toast.makeText(RegisterActivity.this, "注册成功，请填写信息", Toast.LENGTH_SHORT).show();
+                                    parentid = String.valueOf(parent.getData());
+
+                                    SharedPreferences.Editor editor = sp.edit();
+                                    editor.putString("PARENTID", String.valueOf(parent.getData()));
+                                    editor.commit();
+
+                                    Intent intent = new Intent(RegisterActivity.this, InfoActivity.class);
+                                    intent.putExtra("PHONE", phone);
+                                    intent.putExtra("PSW", psw);
+                                    startActivity(intent);
+                                    RegisterActivity.this.finish();
+                                }else{
+                                    Toast.makeText(RegisterActivity.this, "验证码输入错误", Toast.LENGTH_SHORT).show();
+                                    reg_et_code.setText("");
+                                }
+                            }
+                        }
+                    };
                 }
                 break;
             /**
              * 发送验证码
              */
             case R.id.reg_tv_phcode:
-                //reg_iv_phcode.setImageBitmap(Code.getInstance().createBitmap());
-                //real_code = Code.getInstance().getCode().toLowerCase();
+                String phone1 = reg_et_phone.getText().toString().trim();
+                Toast.makeText(this, "发送成功"+phone1, Toast.LENGTH_SHORT).show();
+                getSMS(phone1);
                 break;
             case R.id.reg_iv_back:
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 finish();
                 break;
         }
+    }
+
+
+    private void getSMS(String phone){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                okhttpClass tool = new okhttpClass();
+                Log.e("getSMS:", phone);
+                tool.getSms2(phone);
+            }
+        }).start();
+    }
+
+
+    private void uploadParentRegister(String phone, String password, String code){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                okhttpClass tool = new okhttpClass();
+                String res = tool.uploadParentRegister(phone, password, code);
+                Log.e("uploadParentRegister:", res);
+
+                Message message = new Message();
+                message.what = UPDATEPR;
+                message.obj = res;
+                handler.sendMessage(message);
+            }
+        }).start();
+    }
+
+    /**
+     * 判断手机号码
+     * @param mobiles
+     * @return
+     */
+    public static boolean isMobileNO(String mobiles) {
+        String telRegex = "[1][3578]\\d{9}";
+        // "[1]"代表第1位为数字1，"[3578]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
+        if (TextUtils.isEmpty(mobiles)) {
+            return false;
+        } else
+            return mobiles.matches(telRegex);
     }
 }

@@ -1,7 +1,11 @@
 package com.example.learningmachineparentsapp.Homepage.Homework;
 
 import android.content.Context;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -54,6 +58,9 @@ public class ArticleAdapter extends GroupRecyclerAdapter<String, Article> {
         Glide.with(context)
                 .load(item.getImgUrl())
                 .into(h.mImageView);
+        h.mImageView.setOnClickListener(v->{
+            bigImageLoader(item.getImgUrl());
+        });
     }
 
     private static class ArticleViewHolder extends RecyclerView.ViewHolder {
@@ -95,44 +102,31 @@ public class ArticleAdapter extends GroupRecyclerAdapter<String, Article> {
             list.add(create("数学试卷订正并家长签字",
                     "已完成",
                     "https://tse1-mm.cn.bing.net/th/id/R-C.358aea61cc77301c31bdb85aa0d9510b?rik=pcKt6CzKQN%2bMXQ&riu=http%3a%2f%2ffiles.eduuu.com%2fimg%2f2016%2f11%2f17%2f104416_582d1980c9b43.png&ehk=2Wr0CBatrcFuDYKeQ%2f4eypbKk1cfMD9Jmjav2rIj97E%3d&risl=&pid=ImgRaw&r=0"));
-        }/* else if (p == 1) {
-            list.add(create(
-                    "2019年投产 电咖整车生产基地落户浙江绍兴",
-                    "网易汽车11月30日报道 两周前的广州车展上，电咖发布了其首款电动汽车EV10，官方指导价为13.38万-14.18万，扣除补贴后的零售价为5.98万元-6.78万元，性价比很高。抛开车辆本身，引起业界关注的是这家新势力造车企业的几位核心成员，当年上汽大众团队的三位老兵--张海亮、向东平、牛胜福携手用了957天造了一辆可以上市的车。",
-                    "http://cms-bucket.nosdn.127.net/674c392123254bb69bdd9227442965eb20171129203658.jpeg?imageView&thumbnail=550x0"));
-            list.add(create(
-                    "2017年进入尾声，苹果大笔押注的ARkit还好么？",
-                    "谷歌推出了AR眼镜、ARCore平台和应用在手机上的Project Tango，Facebook也上线了AR开发平台和工具。至于苹果，更是把AR当做发展的重中之重。在新品iPhone8和iPhoneX中，后置摄像头专为AR进行校准，前置摄像头还添加了可以带来更好AR效果的深度传感器。",
-                    "http://cms-bucket.nosdn.127.net/catchpic/7/76/76135ac5d3107a1d5ba11a8ee2fc7e27.jpg?imageView&thumbnail=550x0"));
-            list.add(create(
-                    "亚马逊CTO：我们要让人类成为机器人的中心！",
-                    "那些相信应用下载会让世界变得更美好的智能手机布道者和应用爱好者们，会在AWS re:Invent大会上感到不自在。亚马逊网络服务首席技术官Werner Vogels表示，所有这些都未能实现信息的民主化。",
-                    "http://cms-bucket.nosdn.127.net/ddb758f16a7d4aa3aa422ec385fc3e5020171204081818.jpeg?imageView&thumbnail=550x0"));
-            list.add(create(
-                    "有特斯拉车主想用免费的充电桩挖矿，但这可能行不通",
-                    "在社交网络 Facebook 上的一个特斯拉车主群组中，有人开脑洞说可以尝试自己组装矿机放在特斯拉后备箱中，接入车载电池的电源，然后将车停到超级充电桩附近，就能用免费获得的电力挖矿了。",
-                    "http://crawl.nosdn.127.net/nbotreplaceimg/4ce9c743e6c02f6777d22278e2ef8bc3/2b33e32532db204fe207693c82719660.jpg"));
-        } else if (p == 2) {
-            list.add(create(
-                    "2017年进入尾声，苹果大笔押注的ARkit还好么？",
-                    "谷歌推出了AR眼镜、ARCore平台和应用在手机上的Project Tango，Facebook也上线了AR开发平台和工具。至于苹果，更是把AR当做发展的重中之重。在新品iPhone8和iPhoneX中，后置摄像头专为AR进行校准，前置摄像头还添加了可以带来更好AR效果的深度传感器。",
-                    "http://cms-bucket.nosdn.127.net/catchpic/7/76/76135ac5d3107a1d5ba11a8ee2fc7e27.jpg?imageView&thumbnail=550x0"));
-            list.add(create(
-                    "亚马逊CTO：我们要让人类成为机器人的中心！",
-                    "那些相信应用下载会让世界变得更美好的智能手机布道者和应用爱好者们，会在AWS re:Invent大会上感到不自在。亚马逊网络服务首席技术官Werner Vogels表示，所有这些都未能实现信息的民主化。",
-                    "http://cms-bucket.nosdn.127.net/ddb758f16a7d4aa3aa422ec385fc3e5020171204081818.jpeg?imageView&thumbnail=550x0"));
-            list.add(create("中企投资巴西获支持 英媒:巴西人感激\"保住饭碗\"",
-                    "参考消息网12月4日报道 英媒称，里约热内卢附近的阿苏港曾被埃克·巴蒂斯塔称为“通往中国的公路”，10多年前，这位现已名誉扫地的巴西前首富创建了这个超级港，大宗商品热潮结束后，他在巴西的商业帝国几乎无一幸存并于2014年破产，但此后至今有一个项目仍蓬勃发展，那就是阿苏港。",
-                    "http://cms-bucket.nosdn.127.net/catchpic/8/8b/8ba2d19b7f63efc5cf714960d5edd2c3.jpg?imageView&thumbnail=550x0"));
-            list.add(create("美电视台记者因误报有关弗林新闻被停职四周",
-                    "【环球网报道】据俄罗斯卫星网12月3日报道，美国ABC电视台记者布莱恩·罗素因在有关美国总统前国家安全顾问迈克尔·弗林的新闻报道中的失误，临时被停职。",
-                    "http://cms-bucket.nosdn.127.net/5d18566fde70407b9cc3a728822115c320171203133214.jpeg?imageView&thumbnail=550x0"));
-            list.add(create(
-                    "2019年投产 电咖整车生产基地落户浙江绍兴",
-                    "网易汽车11月30日报道 两周前的广州车展上，电咖发布了其首款电动汽车EV10，官方指导价为13.38万-14.18万，扣除补贴后的零售价为5.98万元-6.78万元，性价比很高。抛开车辆本身，引起业界关注的是这家新势力造车企业的几位核心成员，当年上汽大众团队的三位老兵--张海亮、向东平、牛胜福携手用了957天造了一辆可以上市的车。",
-                    "http://cms-bucket.nosdn.127.net/674c392123254bb69bdd9227442965eb20171129203658.jpeg?imageView&thumbnail=550x0"));
-        }*/
+        }
 
         return list;
+    }
+
+    /**
+     * 方法里直接实例化一个imageView不用xml文件，传入bitmap设置图片
+     */
+    private void bigImageLoader(String url){
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View imgEntryView = inflater.inflate(R.layout.dialog_photo, null);
+        // 加载自定义的布局文件
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        ImageView img = imgEntryView.findViewById(R.id.large_image);
+        Glide.with(context)
+                .load(url)
+                .into(img);
+        dialog.setView(imgEntryView); // 自定义dialog
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.show();
+        // 点击大图关闭dialog
+        imgEntryView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View paramView) {
+                dialog.cancel();
+            }
+        });
     }
 }

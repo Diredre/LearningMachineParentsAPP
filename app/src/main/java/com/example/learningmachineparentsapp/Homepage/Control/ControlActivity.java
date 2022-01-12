@@ -1,13 +1,19 @@
 package com.example.learningmachineparentsapp.Homepage.Control;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -19,9 +25,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.learningmachineparentsapp.Homepage.Homework.HomeworkActivity;
 import com.example.learningmachineparentsapp.R;
 import com.example.learningmachineparentsapp.View.TitleLayout;
+import com.example.learningmachineparentsapp.okhttpClass;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -31,16 +37,31 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.xuexiang.xui.widget.button.switchbutton.SwitchButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTransparent;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 
 public class ControlActivity extends AppCompatActivity implements View.OnClickListener{
 
+    public static int Control = 1;
     private TitleLayout control_tit;
     private ImageView control_iv_clock, control_iv_tel;
     private SwitchButton control_sb_clock, control_sb_tel;
@@ -49,6 +70,47 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     private PieChart control_pc;
     private Button control_btn_adapt;
     private Calendar calendar= Calendar.getInstance(Locale.CHINA);
+    private static int hour = 0, min = 0;
+
+    /*1:：绿色上网，2：互帮互学*/
+    private String MId = "1";
+    private String SId;
+
+    private SharedPreferences sp;
+    private Handler handler = new Handler(){
+        public void handleMessage(Message msg){
+            Gson gson = new Gson();
+            try{
+                String s = (String)msg.obj;
+                ControlDisplayGson controlDisplayGson = gson.fromJson(s, ControlDisplayGson.class);
+                if(controlDisplayGson.getCode() == 200){
+                    for(int i = 0; i < controlDisplayGson.getExtend().getSurfingInfo().size(); i++) {
+                        int mid = controlDisplayGson.getExtend().getSurfingInfo().get(i).getModuleId();
+                        boolean state = controlDisplayGson.getExtend().getSurfingInfo().get(i).getIfOpen() == 1;
+                        int time = controlDisplayGson.getExtend().getSurfingInfo().get(i).getControlTime();
+                        Log.e("state", ""+controlDisplayGson.getExtend().getSurfingInfo().get(i).getIfOpen());
+                        Log.e("state", ""+controlDisplayGson.getExtend().getSurfingInfo().get(i).getControlTime());
+                        Log.e("state", ""+time);
+                        if(mid == 1){
+                            control_sb_clock.setChecked(state);
+                            if(state) {
+                                control_tv_set_clock.setVisibility(View.VISIBLE);
+                                control_tv_set_clock.setText(time/3600+"小时"+time%3600/60+"分钟");
+                            }
+                        }else{
+                            control_sb_tel.setChecked(state);
+                            if(state) {
+                                control_tv_set_tel.setVisibility(View.VISIBLE);
+                                control_tv_set_tel.setText(time/3600+"小时"+time%3600/60+"分钟");
+                            }
+                        }
+                    }
+                }
+            } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+            }
+        }
+    };
 
 
     @Override
@@ -56,6 +118,12 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_control);
+
+        sp = getSharedPreferences("userInfo", 0);
+        SId = sp.getString("CHILDID", "1050");
+        Log.e("CHILDID", SId);
+
+        getSearchTime();
 
         initView();
         initChart();
@@ -88,9 +156,11 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     control_ll_set_clock.setVisibility(View.VISIBLE);
+                    MId = "1";
                 }else{
                     control_ll_set_clock.setVisibility(View.INVISIBLE);
                 }
+                updateOpenState(SId, MId);
             }
         });
 
@@ -100,9 +170,11 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     control_ll_set_tel.setVisibility(View.VISIBLE);
+                    MId = "2";
                 }else{
                     control_ll_set_tel.setVisibility(View.INVISIBLE);
                 }
+                updateOpenState(SId, MId);
             }
         });
 
@@ -195,7 +267,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     /**
-     * 设置数据
+     * 设置图表数据
      */
     private void setData(ArrayList<PieEntry> entries) {
         PieDataSet dataSet = new PieDataSet(entries, "");
@@ -239,6 +311,8 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         tv.setText("" + hourOfDay + "小时" + minute + "分");
+                        hour = hourOfDay;
+                        min = minute;
                     }
                 }
                 // 设置初始时间
@@ -253,8 +327,8 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.control_btn_adapt:
-                Toast.makeText(this, "应用成功！", Toast.LENGTH_SHORT).show();
-                finish();
+                int time = hour * 3600 + min * 60;
+                sendControlData(SId, MId, ""+time);
                 break;
             case R.id.control_tv_set_clock:
                 showTimePickerDialog(this, 2, control_tv_set_clock, calendar);
@@ -264,4 +338,109 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
+
+
+    private void updateOpenState(String SId,String MId){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+                MultipartBody body = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("SId",SId)
+                        .addFormDataPart("MId",MId)
+                        .build();
+                final Request request = new Request.Builder()
+                        .url("http://221.12.170.98:91/lamp/parent"+"/updateOpenState")
+                        .post(body)
+                        .build();
+                Call call = okHttpClient.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) { }
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        String response_answer = response.body().string();
+                        Log.e("updateOpenState", response_answer);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    private void sendControlData(String SId, String MId, String time){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+                MultipartBody body = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("SId",SId)
+                        .addFormDataPart("MId",MId)
+                        .addFormDataPart("time",time)
+                        .build();
+                final Request request = new Request.Builder()
+                        .url("http://221.12.170.98:91/lamp/parent"+"/updateControlTime")
+                        .post(body)
+                        .build();
+                Call call = okHttpClient.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) { }
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        String response_answer = response.body().string();
+                        Log.e("sendControlData", response_answer);
+                        Gson gson = new Gson();
+                        ControlGson controlGson = gson.fromJson(response_answer, ControlGson.class);
+                        if(controlGson.getCode() == 200){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ControlActivity.this,"应用成功",Toast.LENGTH_SHORT).show();
+                                    ControlActivity.this.finish();
+                                }
+                            });
+                        }else{
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ControlActivity.this,"应用失败",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void getSearchTime(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+                final Request request = new Request.Builder()
+                        .url("http://221.12.170.98:91/lamp/parent"+"/getSurfingInfo?SId="+SId)
+                        .get()
+                        .build();
+                Call call = okHttpClient.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) { }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String s = response.body().string();
+                        Log.e("getSearchTime", s);
+                        Message msg = new Message();
+                        msg.what = Control;
+                        msg.obj = s;
+                        handler.sendMessage(msg);
+                    }
+                });
+            }
+        }).start();
+    }
+
 }

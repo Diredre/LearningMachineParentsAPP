@@ -11,7 +11,6 @@
     tools:openDrawer="start">
 
     <!--主页-->
-    <!--<androidx.constraintlayout.widget.ConstraintLayout-->
     <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"

@@ -17,8 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.learningmachineparentsapp.Homepage.InputHWDialog;
 import com.example.learningmachineparentsapp.R;
-import com.example.learningmachineparentsapp.Homepage.Homework.HomeworkBean;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,7 +35,6 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
     private List<HomeworkBean> hwList;
     private Context context;
 
-    DateFormat format= DateFormat.getDateTimeInstance();
     Calendar calendar= Calendar.getInstance(Locale.CHINA);
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -122,7 +121,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.ViewHo
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 // 此处得到选择的时间，可以进行你想要的操作
                 tv.setText("提交截止时间：" + year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-                hw.setUse_time(new Date(year, monthOfYear+1, dayOfMonth));
+                hw.setUse_time(new Date(year, monthOfYear+1, dayOfMonth).toString());
             }
         }
                 // 设置初始日期

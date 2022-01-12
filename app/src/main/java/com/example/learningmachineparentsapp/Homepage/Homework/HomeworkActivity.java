@@ -1,9 +1,5 @@
 package com.example.learningmachineparentsapp.Homepage.Homework;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,11 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,26 +16,19 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 
-import com.bumptech.glide.Glide;
+import com.example.learningmachineparentsapp.Homepage.InputHWDialog;
 import com.example.learningmachineparentsapp.R;
 import com.example.learningmachineparentsapp.View.SlideRecyclerView;
 import com.example.learningmachineparentsapp.View.TitleLayout;
 import com.example.learningmachineparentsapp.okhttpClass;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.example.learningmachineparentsapp.Homepage.Homework.HomeworkBean;
 import com.xuexiang.xui.widget.button.switchbutton.SwitchButton;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
-
-import static com.example.learningmachineparentsapp.MainActivity.makeStatusBarTransparent;
 
 /**
  * 家长布置作业
@@ -58,7 +44,7 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
     private HomeworkAdapter homeworkAdapter;
     private List<HomeworkBean> hwlist = new ArrayList<>();
     private boolean isSmart = false;
-    private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    String time = new Date(System.currentTimeMillis()).toString();
 
 
     @Override
@@ -120,10 +106,10 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
 
     private List<HomeworkBean> initData(){
         List<HomeworkBean> dataList = new ArrayList<>();
-        dataList.add(new HomeworkBean("预习《滕王阁序》", new Date(System.currentTimeMillis())));
-        dataList.add(new HomeworkBean("背诵《滕王阁序》", new Date(System.currentTimeMillis())));
-        dataList.add(new HomeworkBean("做完数学课堂练习", new Date(System.currentTimeMillis())));
-        dataList.add(new HomeworkBean("勾股定理", new Date(System.currentTimeMillis())));
+        dataList.add(new HomeworkBean("预习《滕王阁序》", time));
+        dataList.add(new HomeworkBean("背诵《滕王阁序》", time));
+        dataList.add(new HomeworkBean("做完数学课堂练习", time));
+        dataList.add(new HomeworkBean("勾股定理", time));
         return dataList;
     }
 
@@ -140,7 +126,7 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
                         smartInput();
                     }else{
                         String input = homework_et_clip.getText().toString();
-                        homeworkAdapter.addItemData(new HomeworkBean(input, new Date(System.currentTimeMillis())));
+                        homeworkAdapter.addItemData(new HomeworkBean(input, time));
                     }
                     Toast.makeText(HomeworkActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                     homework_et_clip.setText("");
@@ -157,7 +143,7 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
             public void run() {
                 okhttpClass tools1 = new okhttpClass();
                 for (int i = 0; i < hwlist.size(); i++) {
-                    String result1 = tools1.UploadHomework("1", "1", hwlist.get(i).getCon(), df.format(hwlist.get(i).getUse_time()));
+                    String result1 = tools1.UploadHomework("1", "1", hwlist.get(i).getCon(), hwlist.get(i).getUse_time());
                     Log.e("UploadHomework", result1);
                 }
                 hwlist.clear();
@@ -179,7 +165,7 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
         String input = homework_et_clip.getText().toString();
         String[] inputs = input.split("\n");
         for(String s : inputs){
-            homeworkAdapter.addItemData(new HomeworkBean(s, new Date(System.currentTimeMillis())));
+            homeworkAdapter.addItemData(new HomeworkBean(s, time));
         }
         /*hwlist.add(new HomeworkBean(input, new Time(10)));
         // 通知适配器
@@ -198,7 +184,7 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 if(!input.getText().toString().trim().equals("")) {
-                    hwlist.add(new HomeworkBean(input.getText().toString().trim(), new Date(System.currentTimeMillis())));
+                    hwlist.add(new HomeworkBean(input.getText().toString().trim(), time));
                     // 通知适配器
                     homeworkAdapter.notifyItemChanged(hwlist.size() - 1);
                     // 更新定位

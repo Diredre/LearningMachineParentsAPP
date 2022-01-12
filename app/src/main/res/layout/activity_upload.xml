@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context=".Circle.Upload.UploadActivity">
+    tools:context=".Circle.Video.Upload.UploadActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -47,6 +47,7 @@
         android:background="#D7D7D7"/>
 
     <EditText
+        android:id="@+id/upload_et_con"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minLines="1"

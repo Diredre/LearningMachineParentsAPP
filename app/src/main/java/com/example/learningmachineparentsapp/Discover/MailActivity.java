@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.learningmachineparentsapp.R;
 import com.example.learningmachineparentsapp.View.TitleLayout;
+import com.example.learningmachineparentsapp.okhttpClass;
 
 public class MailActivity extends AppCompatActivity {
 
@@ -74,6 +76,19 @@ public class MailActivity extends AppCompatActivity {
         mail_tv_pay.setOnClickListener(v->{
             finish();
             Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
+            alipay("234324234234", "测试", money, "结算");
         });
+    }
+    
+    
+    private void alipay(String outTradeNo, String subject, String totalAmount, String body){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                okhttpClass tool = new okhttpClass();
+                String res = tool.alipay(outTradeNo, subject, totalAmount, body);
+                Log.e("alipay:", res);
+            }
+        }).start();
     }
 }

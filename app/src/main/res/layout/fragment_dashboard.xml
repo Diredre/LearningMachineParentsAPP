@@ -31,7 +31,7 @@
                 android:textSize="18sp"/>
     </RelativeLayout>
 
-    <RelativeLayout
+<!--    <RelativeLayout
         android:id="@+id/circle_friend"
         android:layout_width="match_parent"
         android:layout_height="30dp">
@@ -64,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="10dp"
-        android:background="#D7D7D7"/>
+        android:background="#D7D7D7"/>-->
 
     <RelativeLayout
         android:id="@+id/circle_video"

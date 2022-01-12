@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,8 +27,6 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
 
     private List<HomeworkBean> hwList;
     private Context context;
-    private SimpleDateFormat commit_format = new SimpleDateFormat("yyyy-MM-dd\nhh:mm:ss");
-    private SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -72,21 +71,26 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
         HomeworkBean homework = hwList.get(position);
 
         holder.hwcheck_ll.setOnClickListener(v->{
-            HwDialog hwDialog = new HwDialog(context, initData());
-            hwDialog.show();
+            Log.e("size", String.valueOf(homework.getPiclist().size())+" " +homework.getCon());
+            if(homework.getPiclist().size() == 0){
+                Toast.makeText(context, "照片未提交", Toast.LENGTH_SHORT).show();
+            }else {
+                HwDialog hwDialog = new HwDialog(context, homework.getPiclist(), homework.getUse_time());
+                hwDialog.show();
+            }
         });
 
-        if(homework.getIsComplete()== 1){
+        if(homework.getIsComplete() == 1){
             Glide.with(context)
                     .load("https://z3.ax1x.com/2021/12/03/oUamy4.png")
                     .into(holder.item_hwcheck_iv);
             holder.item_hwcheck_tv_state.setText("已完成");
-        }else if(homework.getIsComplete()== 0){
+        }else if(homework.getIsComplete() == 0){
             Glide.with(context)
                     .load("https://z3.ax1x.com/2021/12/03/oUa5t0.png")
                     .into(holder.item_hwcheck_iv);
             holder.item_hwcheck_tv_state.setText("未完成");
-        }else if(homework.getIsComplete()== 2){
+        }else if(homework.getIsComplete() == 2){
             Glide.with(context)
                     .load("https://s4.ax1x.com/2021/12/11/o7E09e.png")
                     .into(holder.item_hwcheck_iv);
@@ -94,33 +98,12 @@ public class HwcheckAdapter extends RecyclerView.Adapter<HwcheckAdapter.ViewHold
         }
 
         holder.item_hwcheck_tv_name.setText(homework.getCon());
-        holder.item_hwcheck_tv_time.setText(format.format(homework.getUse_time()));
-        holder.item_hwcheck_tv_commit.setText(commit_format.format(homework.getCom_time()));
+        holder.item_hwcheck_tv_time.setText(homework.getUse_time());
+        holder.item_hwcheck_tv_commit.setText(homework.getCom_time());
     }
 
     @Override
     public int getItemCount() {
         return hwList.size();
-    }
-
-    private List<ImageBean> initData(){
-        List<ImageBean> datalist = new ArrayList<>();
-        datalist.add(new ImageBean("http://192.168.31.95:8082/img597188762.png"));
-        datalist.add(new ImageBean("http://192.168.31.95:8082/1639038590.jpg"));
-        datalist.add(new ImageBean("http://192.168.31.95:8082/1639040071.jpg"));
-        datalist.add(new ImageBean("http://192.168.31.95:8082/1639038590.jpg"));
-        return datalist;
-    }
-
-
-    private void startData(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                okhttpClass tools = new okhttpClass();
-                String res = tools.getHomeworkPic();
-                Log.e("getHomeworkPic()", res);
-            }
-        }).start();
     }
 }

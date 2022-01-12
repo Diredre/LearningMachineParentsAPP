@@ -33,24 +33,23 @@ public class HwDialog extends Dialog {
     private RecyclerView dialog_hw_rv;
     private List<ImageBean> list = new ArrayList<>();
     private ImageAdapter adapter;
-    private String date = "";
 
-    public HwDialog(@NonNull Context context, List<ImageBean> list) {
+    public HwDialog(@NonNull Context context, List<ImageBean> list, String tit) {
         super(context);
         this.context = context;
         this.list = list;
-        initView();
-        //startData();
+        initView(tit);
     }
 
-    private void initView(){
+    private void initView(String tit){
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_hw, null);
         dialog_hw_cansel = view.findViewById(R.id.dialog_hw_cansel);
         dialog_hw_cansel.setOnClickListener(v->{
             this.dismiss();
         });
 
-        dialog_hw_time = findViewById(R.id.dialog_hw_time);
+        dialog_hw_time = view.findViewById(R.id.dialog_hw_time);
+        dialog_hw_time.setText(tit);
         dialog_hw_rv = view.findViewById(R.id.dialog_hw_rv);
 
         // 垂直滑动
@@ -72,11 +71,5 @@ public class HwDialog extends Dialog {
         adapter = new ImageAdapter(context, list);
         dialog_hw_rv.setAdapter(adapter);
         super.setContentView(view);
-    }
-
-
-    public void setDate(String d){
-        date = d;
-        dialog_hw_time.setText(date);
     }
 }
