@@ -31,6 +31,8 @@ import com.example.learningmachineparentsapp.MyApp;
 import com.example.learningmachineparentsapp.R;
 
 import com.example.learningmachineparentsapp.View.RoundImageView;
+import com.example.learningmachineparentsapp.webrtc.pojo.User;
+import com.example.learningmachineparentsapp.webrtc.rtc.MyWebSocket;
 import com.example.learningmachineparentsapp.webrtc.rtc.MyWebSocketService;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -67,7 +69,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private RoundImageView hp_riv_icon;
 
     private SharedPreferences sp;
-    private String name;
+    private String name, childId, parentid;
 
     LineData mLineData;     // 线集合，所有折现以数组的形式存到此集合中
     XAxis mXAxis;           //X轴
@@ -92,15 +94,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         sp = getActivity().getSharedPreferences("userInfo", 0);
         name = sp.getString("USER_NAME", "云淡风轻");
 
+        parentid = sp.getString("PARENTID", "15");
+        childId = sp.getString("CHILDID", "1");
+
+        Log.e("newParentid", sp.getString("PARENTID", "15"));
+        Log.e("newChildid", sp.getString("CHILDID", "1"));
+
+        User user = new User();
+        user.id=Integer.valueOf(parentid);
+        user.childId=Integer.valueOf(childId);
+
         view = inflater.inflate(R.layout.fragment_home, container,false);
         MyApp ma = (MyApp)getActivity().getApplicationContext();
-        ms = ma.getMyWebSocketService();
+        ms = ma.myWebSocketService;
 
-        try {
-            getWebsocket(sp.getString("PARENTID", "1"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
+        MyWebSocket.getInstance().setOnNotifyListener(new MyWebSocket.OnNotifyListener() {
+            @Override
+            public void onNotify() {
+                hp_iv_havemes.setVisibility(View.VISIBLE);
+            }
+        });
+//        try {
+//            getWebsocket(sp.getString("PARENTID", "1"));
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
         Log.e("", "onCreateView: "+ms );
         return view;
@@ -391,35 +410,47 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.hp_iv_tocontrol:
-                startActivity(new Intent(getActivity(), ControlActivity.class));
-                break;
-            case R.id.hp_iv_towatch:
-                //todo 家长监控
+        if(ms==null){
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(),"请稍后再试",Toast.LENGTH_SHORT).show();
+                }
+            });
+            MyApp m = (MyApp)getActivity().getApplicationContext();
+            ms = m.myWebSocketService;
+
+        }else {
+            switch (v.getId()) {
+                case R.id.hp_iv_tocontrol:
+                    startActivity(new Intent(getActivity(), ControlActivity.class));
+                    break;
+                case R.id.hp_iv_towatch:
+                    //todo 家长监控
 //                startActivity(new Intent(getActivity(), WatchActivity.class));
-                ms.monitor();
-                break;
-            case R.id.hp_iv_tohomework:
-                startActivity(new Intent(getActivity(), HwcheckActivity.class));
-                break;
-            case R.id.hp_iv_tovideochat:
-                //todo 视频通话
+                    ms.monitor();
+                    break;
+                case R.id.hp_iv_tohomework:
+                    startActivity(new Intent(getActivity(), HwcheckActivity.class));
+                    break;
+                case R.id.hp_iv_tovideochat:
+                    //todo 视频通话
 //                startActivity(new Intent(getActivity(), VideochatActivity.class));
-                ms.call();
-                break;
-            case R.id.hp_iv_tomessage:
-                startActivity(new Intent(getActivity(), MessageActivity.class));
-                break;
-            case R.id.hp_riv_icon:
-                main_drawer.openDrawer(Gravity.LEFT);
-                break;
-            case R.id.hp_lc:
-                //startActivity(new Intent(getActivity(), ModuleActivity.class));
-                break;
-            case R.id.hp_iv_toscan:
-                startActivity(new Intent(getActivity(), scan.class));
-                break;
+                    ms.call();
+                    break;
+                case R.id.hp_iv_tomessage:
+                    startActivity(new Intent(getActivity(), MessageActivity.class));
+                    break;
+                case R.id.hp_riv_icon:
+                    main_drawer.openDrawer(Gravity.LEFT);
+                    break;
+                case R.id.hp_lc:
+                    //startActivity(new Intent(getActivity(), ModuleActivity.class));
+                    break;
+                case R.id.hp_iv_toscan:
+                    startActivity(new Intent(getActivity(), scan.class));
+                    break;
+            }
         }
     }
 

@@ -43,6 +43,7 @@ public class MyWebSocket {
     private OnMonitorListener monMonitorListener;
     private OnRTCEventListener mOnRTCEventListener;
     private OnMonitorRTCEventListener mOnMonitorRTCEventListener;
+    private OnNotifyListener mOnNotifyListener;
     public interface OnCallListener{
         void onCall();
 
@@ -76,6 +77,10 @@ public class MyWebSocket {
 
     }
 
+    public interface OnNotifyListener{
+        void onNotify();
+    }
+
     public void setOnCallListener(OnCallListener onCallListener){
         this.monCallListener = onCallListener;
     }
@@ -90,6 +95,10 @@ public class MyWebSocket {
 
     public void setOnMonitorRTCEventListener(OnMonitorRTCEventListener onMonitorRTCEventListener){
         this.mOnMonitorRTCEventListener = onMonitorRTCEventListener;
+    }
+
+    public void setOnNotifyListener(OnNotifyListener onNotifyListener){
+        this.mOnNotifyListener = onNotifyListener;
     }
 
     /**
@@ -158,6 +167,11 @@ public class MyWebSocket {
                             break;
                         case Constant.MONITOR_CANDIDATE:
                             mOnMonitorRTCEventListener.onMonitorCandidate(jsonMessage);
+                            break;
+                        case "Message":
+                            mOnNotifyListener.onNotify();
+                            break;
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -166,12 +180,12 @@ public class MyWebSocket {
 
             @Override
             public void onClose(int code, String reason, boolean remote) {
-                Log.e(TAG, "onClose: " + reason);
+                Log.e(TAG, "onClose: code is "+code+" and reason is " + reason);
             }
 
             @Override
             public void onError(Exception ex) {
-                Log.e(TAG, "onError: " + ex.getMessage());
+                Log.e(TAG, "onError: "+ ex.getMessage());
             }
         };
         socket.connectBlocking();
@@ -179,7 +193,7 @@ public class MyWebSocket {
 
 
     public boolean isConnect() {
-        return socket == null;
+        return socket != null;
     }
 
     public boolean isClosed() {

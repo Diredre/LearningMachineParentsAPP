@@ -91,7 +91,6 @@ public class VideoCallActivity extends AppCompatActivity {
         MyWebSocket.getInstance().setOnRTCListener(mOnRTCEventListener);
         initView();
         initPeerConnection();
-
     }
 
     private void initView() {

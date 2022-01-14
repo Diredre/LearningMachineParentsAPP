@@ -53,6 +53,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         sp = getSharedPreferences("userInfo", 0);
         parentid = sp.getString("PARENTID", "15");
+
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("ISREG", true);
+        editor.commit();
+
         Log.e("PARENTID", parentid);
 
         initView();

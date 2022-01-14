@@ -123,7 +123,7 @@ public class HwcheckActivity extends AppCompatActivity implements View.OnClickLi
         Log.e("CHILDID", SId);
 
         initView();
-        startData("1", "1", "3");
+        startData(SId, "1", "3");
     }
 
     private void initView(){

@@ -275,8 +275,8 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
                 Call call = okHttpClient.newCall(request);
                 call.enqueue(new Callback() {
                     @Override
-                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    }
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) { }
+
                     @Override
                     public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                         String response_answer = response.body().string();
@@ -286,13 +286,17 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
                         if(infoChildRegGson.getCode() == 200){
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putString("CHILDACCOUNT", infoChildRegGson.getData().getAccount());
+                            childAccount = infoChildRegGson.getData().getAccount();
                             editor.putString("CHILDID", infoChildRegGson.getData().getId());
+                            childId = infoChildRegGson.getData().getId();
+                            Log.e("CHILDID", childId);
                             editor.commit();
+
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     Toast.makeText(InfoActivity.this,"孩子注册成功",Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(InfoActivity.this, scan.class));
+                                    startActivity(new Intent(InfoActivity.this, LoginActivity.class));
                                     InfoActivity.this.finish();
                                 }
                             });

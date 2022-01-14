@@ -107,7 +107,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-
     public TextView getTotal(){
         return cart_tv_total_price;
     }

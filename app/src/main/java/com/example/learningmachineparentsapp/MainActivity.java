@@ -26,8 +26,10 @@ import com.example.learningmachineparentsapp.Homepage.LeftActs.PrivateActivity;
 import com.example.learningmachineparentsapp.Homepage.LeftActs.PublishActivity;
 import com.example.learningmachineparentsapp.Homepage.LeftActs.PurseActivity;
 import com.example.learningmachineparentsapp.LoginRegist.LoginActivity;
+import com.example.learningmachineparentsapp.LoginRegist.scan;
 import com.example.learningmachineparentsapp.Utils.FloatTool;
 import com.example.learningmachineparentsapp.View.RoundImageView;
+import com.example.learningmachineparentsapp.webrtc.rtc.MyWebSocket;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
@@ -88,6 +90,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         sp = getSharedPreferences("userInfo", 0);
         name = sp.getString("USER_NAME", "云淡风轻");
+        if(sp.getBoolean("ISREG", false)){
+            Toast.makeText(this, "新注册账号需要绑定学习机", Toast.LENGTH_SHORT).show();
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putBoolean("ISREG", false);
+            editor.commit();
+            startActivity(new Intent(this, scan.class));
+            this.finish();
+        }
 
         initView();
 
@@ -97,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(nav_view, navController);
+        MyApp ma = (MyApp)getApplicationContext();
+//        if(!MyWebSocket.getInstance().isConnect())
+            ma.connect();
 
     }
 

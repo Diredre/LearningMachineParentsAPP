@@ -1,5 +1,6 @@
 package com.example.learningmachineparentsapp.Homepage.Homework;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,12 +47,20 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
     private boolean isSmart = false;
     String time = new Date(System.currentTimeMillis()).toString();
 
+    private String SId, parentid;
+    private SharedPreferences sp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_homework);
+
+        sp = getSharedPreferences("userInfo", 0);
+        SId = sp.getString("CHILDID", "1050");
+        parentid = sp.getString("PARENTID", "15");
+        Log.e("CHILDID", SId);
 
         initView();
     }
@@ -143,11 +152,11 @@ public class HomeworkActivity extends AppCompatActivity implements View.OnClickL
             public void run() {
                 okhttpClass tools1 = new okhttpClass();
                 for (int i = 0; i < hwlist.size(); i++) {
-                    String result1 = tools1.UploadHomework("1", "1", hwlist.get(i).getCon(), hwlist.get(i).getUse_time());
+                    String result1 = tools1.UploadHomework(SId, parentid,
+                            hwlist.get(i).getCon(), hwlist.get(i).getUse_time());
                     Log.e("UploadHomework", result1);
                 }
                 hwlist.clear();
-                homeworkAdapter.notifyDataSetChanged();
                 finish();
             }
         }).start();

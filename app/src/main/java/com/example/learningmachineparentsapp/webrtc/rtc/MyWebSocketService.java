@@ -122,7 +122,7 @@ public class MyWebSocketService extends Service {
         @Override
         public void run() {
             if (System.currentTimeMillis() - sendTime >= HEART_BEAT_RATE) {
-                if(!MyWebSocket.getInstance().isConnect()){
+                if(MyWebSocket.getInstance().isConnect()){
                     if(MyWebSocket.getInstance().isClosed()){
                         reConnect();
                     }
@@ -231,6 +231,7 @@ public class MyWebSocketService extends Service {
      * 弹出接到电话对话框
      */
     private void onCall() {
+        Log.d(TAG, "onCall: 收到孩子电话");
         state="onCall";
         AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
         builder.setTitle("来电");
@@ -294,6 +295,7 @@ public class MyWebSocketService extends Service {
     private void onRefuse() {
         if(state.equals("call")){
             callDialog.dismiss();
+            state="null";
             Toast.makeText(this,"对方拒绝接听",Toast.LENGTH_SHORT).show();
         }
     }
@@ -331,6 +333,12 @@ public class MyWebSocketService extends Service {
      * -----------------------发出去的打电话消息-------------------------------
      */
     public void call() {
+        if(!MyWebSocket.getInstance().isConnect()||MyWebSocket.getInstance().isClosed()){
+            Log.e(TAG, "call:isconnect "+ MyWebSocket.getInstance().isConnect());
+            Log.e(TAG, "call: isClosed"+MyWebSocket.getInstance().isClosed() );
+            Toast.makeText(getApplicationContext(),"未成功连接到服务器，请稍后再试",Toast.LENGTH_SHORT).show();
+            return;
+        }
         MyWebSocket.getInstance().sendMessage(mUser.id,mUser.childId,Constant.CALL);
         state = "call";
         mHandler.sendEmptyMessage(CALLING);
@@ -398,6 +406,12 @@ public class MyWebSocketService extends Service {
      */
 
     public void monitor() {
+        if(!MyWebSocket.getInstance().isConnect()||MyWebSocket.getInstance().isClosed()){
+            Log.e(TAG, "call:isconnect "+ MyWebSocket.getInstance().isConnect());
+            Log.e(TAG, "call: isClosed"+MyWebSocket.getInstance().isClosed() );
+            Toast.makeText(getApplicationContext(),"未成功连接到服务器，请稍后再试",Toast.LENGTH_SHORT).show();
+            return;
+        }
         MyWebSocket.getInstance().sendMessage(mUser.id,mUser.childId,Constant.MONITOR);
         state = "monitor";
     }

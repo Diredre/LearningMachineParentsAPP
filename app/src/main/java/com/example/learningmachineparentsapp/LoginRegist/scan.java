@@ -128,6 +128,7 @@ public class scan extends AppCompatActivity {
                         Log.e("UUID", uuid);
                         Log.e("childAccount", childAccount);
                         String s = response.body().string();
+                        Log.e("tag", "onResponse: "+s);
                         try {
                             JSONObject js = new JSONObject(s);
                             int code = js.getInt("code");

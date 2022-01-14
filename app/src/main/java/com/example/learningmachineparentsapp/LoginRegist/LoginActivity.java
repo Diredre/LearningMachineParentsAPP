@@ -103,6 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         editor.putBoolean("REMPSW", rem_psw_flag);
                         editor.commit();
                     }
+                    getChilds(id);
 
                     // 计算出控件的高与宽
                     mWidth = login_btn_login.getMeasuredWidth();
@@ -295,6 +296,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }).start();
     }
 
+
+    public void getChilds(String parentId){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                okhttpClass tool = new okhttpClass();
+                String res = tool.getChilds(sp.getString("PARENTID", "15"));
+                Log.e("getChild", res);
+                Gson gson = new Gson();
+                GetChildGson getChildGson = gson.fromJson(res, GetChildGson.class);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("CHILDID", getChildGson.getData().get(0).getSid());
+                editor.putString("CHILDACCOUNT", getChildGson.getData().get(0).getAccount());
+                editor.commit();
+            }
+        }).start();
+    }
 
     @Override
     public void onClick(View v) {
