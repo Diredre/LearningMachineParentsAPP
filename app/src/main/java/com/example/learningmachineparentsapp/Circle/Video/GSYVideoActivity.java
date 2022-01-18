@@ -43,7 +43,7 @@ public class GSYVideoActivity extends AppCompatActivity {
     private static String TAG = "GSYVIDEOACTIVITY";
     private RecyclerView recyclerView;
     private LinearLayout gsy_ll_upload;
-    private ImageView gsy_iv_upload;
+    private ImageView gsy_iv_upload, gsy_iv_back;
     private List<GSYVideoBean> list;
     private String[] urls = {"http://vfx.mtime.cn/Video/2019/03/13/mp4/190313094901111138.mp4",
             "https://vd2.bdstatic.com/mda-jfcccmya6ncp30mi/sc/mda-jfcccmya6ncp30mi.mp4?v_from_s=hkapp-haokan-nanjing&amp;auth_key=1633445749-0-0-5fd084fd1f354e82109ac6d501b9f650&amp;bcevod_channel=searchbox_feed&amp;pd=1&amp;pt=3&amp;abtest=3000187_1",
@@ -105,6 +105,14 @@ public class GSYVideoActivity extends AppCompatActivity {
         Glide.with(this)
                 .load("https://s4.ax1x.com/2021/12/11/o7koGQ.png")
                 .into(gsy_iv_upload);
+
+        gsy_iv_back = findViewById(R.id.gsy_iv_back);
+        Glide.with(this)
+                .load("https://z3.ax1x.com/2021/10/24/5WWs54.png")
+                .into(gsy_iv_back);
+        gsy_iv_back.setOnClickListener(v->{
+            this.finish();
+        });
 
         recyclerView = findViewById(R.id.gsy_rv);
 

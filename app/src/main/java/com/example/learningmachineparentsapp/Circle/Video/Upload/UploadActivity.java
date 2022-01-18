@@ -123,11 +123,11 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.upload_btn_upload:
                 con = upload_et_con.getText().toString().trim();
-                upload_tv_path.setText("视频文件路径：" + VIDEOPATH);
-                upload_iv_add.setImageBitmap(getVideoThumb(VIDEOPATH));
                 Log.e("con", con);
 
-                if(VIDEOPATH.equals(""))
+                if(con.isEmpty()){
+                    Toast.makeText(this, "请输入描述视频", Toast.LENGTH_SHORT).show();
+                } else if(VIDEOPATH.equals(""))
                     Toast.makeText(UploadActivity.this, "请选择视频后，再点击上传！", Toast.LENGTH_LONG).show();
                 else {
                     post_file(parentId, "1", con, new File(VIDEOPATH));
@@ -169,8 +169,8 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                     if (data != null) {
                         String realPathFromUri = PathUtils.getRealPathFromUri(this, data.getData());
                         VIDEOPATH = realPathFromUri;
-                        Log.e("data.getData():", ""+data.getData());
-                        Log.e("视频路径：",""+realPathFromUri);
+                        upload_tv_path.setText("视频文件路径：" + VIDEOPATH);
+                        upload_iv_add.setImageBitmap(getVideoThumb(VIDEOPATH));
                     } else {
                         Toast.makeText(this, "视频损坏，请重新选择", Toast.LENGTH_SHORT).show();
                     }
@@ -191,7 +191,6 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         OkHttpClient client = new OkHttpClient();
         MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
         if(file != null){
-            Toast.makeText(this, "视频文件不存在，请重新选择", Toast.LENGTH_SHORT).show();
             RequestBody body = RequestBody.create(MediaType.parse("mp4/*"),file);
             String filename = file.getName();
             requestBody.addFormDataPart("file",file.getName(),body).addFormDataPart("type","event");
