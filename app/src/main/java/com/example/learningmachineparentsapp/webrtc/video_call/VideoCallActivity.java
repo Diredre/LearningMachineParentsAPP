@@ -374,6 +374,7 @@ public class VideoCallActivity extends AppCompatActivity {
                     AudioTrack audioTrack = audioTracks.get(0);
                     if (audioTrack != null) {
 //                       todo audioTrack.setVolume(AudioManager.STREAM_VOICE_CALL);
+                        audioTrack.setVolume(4);
                     }
                 }
             }

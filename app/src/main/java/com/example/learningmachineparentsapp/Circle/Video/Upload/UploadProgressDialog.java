@@ -44,7 +44,7 @@ public class UploadProgressDialog extends Dialog {
 
         pb_dialog_bar = findViewById(R.id.dialog_uppb_bar);
         //设置进度条满100%动画共用时5s
-        pb_dialog_bar.setProgress(100,3000);
+        pb_dialog_bar.setProgress(100,5000);
         //在自定义View写了一个接口回调,来监听进度
         pb_dialog_bar.setOnCircleProgressListener(new CirclePgBar.OnCircleProgressListener() {
             @Override

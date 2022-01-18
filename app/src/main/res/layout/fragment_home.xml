@@ -15,14 +15,14 @@
         android:layout_marginBottom="10dp"
         android:background="#ffffff"
         android:elevation="5dp">
-        <com.example.learningmachineparentsapp.View.RoundImageView
-            android:id="@+id/hp_riv_icon"
+        <ImageView
+            android:id="@+id/hp_iv_icon"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@mipmap/added"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"/>
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="李小华 浙江省杭州市 四年级"
                 android:textSize="10sp"/>
-        </LinearLayout>
+        </LinearLayout>-->
         <ImageView
             android:id="@+id/hp_iv_toscan"
             android:layout_width="30dp"

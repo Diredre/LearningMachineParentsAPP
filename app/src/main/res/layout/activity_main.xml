@@ -49,12 +49,11 @@
 
     <!--侧边栏内容-->
     <RelativeLayout
-        android:layout_width="320dp"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="#E4E4E4">
+        android:layout_gravity="start">
         <LinearLayout
-            android:layout_width="320dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <RelativeLayout
@@ -62,14 +61,14 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:background="#FFFFFF">
-                <com.example.learningmachineparentsapp.View.RoundImageView
-                    android:id="@+id/main_riv_usericon"
+                <ImageView
+                    android:id="@+id/main_iv_usericon"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="70dp"
+                    android:layout_centerHorizontal="true"
                     android:src="@mipmap/added"/>
-                <TextView
+               <!-- <TextView
                     android:id="@+id/main_tv_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -90,16 +89,16 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignTop="@id/main_tv_username"
                     android:layout_marginRight="30dp"/>
-
+-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_below="@id/main_tv_username">
-                    <LinearLayout
+                    android:layout_below="@id/main_iv_usericon">
+                    <!--<LinearLayout
                         android:id="@+id/main_ll_publish"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -117,7 +116,7 @@
                             android:textSize="16sp"
                             android:textColor="#404040"
                             android:text="个人资料"/>
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                     <LinearLayout
                         android:id="@+id/main_ll_purse"
@@ -226,7 +225,7 @@
                     android:layout_width="120dp"
                     android:layout_height="35dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="70dp"
                     android:gravity="center"
                     android:background="@drawable/border_et_hw"
                     android:layout_centerHorizontal="true"
@@ -239,15 +238,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:background="#BFE4E4E4"
                 android:layout_gravity="start">
                 <!--<androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/main_rv_child"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>-->
                 <RelativeLayout
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginBottom="10dp">
                     <View
                         android:layout_width="3dp"
@@ -255,8 +255,8 @@
                         android:background="#49DA9C"/>
                     <ImageView
                         android:id="@+id/main_iv_child"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_centerHorizontal="true"
                         android:foreground="@mipmap/award"
                         android:background="@drawable/border_goods_bg"
@@ -274,14 +274,14 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="15dp">
                     <ImageView
                         android:id="@+id/main_iv_adddevice"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_centerHorizontal="true"
                         android:foreground="@mipmap/add"
                         android:background="@drawable/border_goods_bg"
@@ -293,7 +293,7 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center_horizontal"
                         android:layout_below="@id/main_iv_adddevice"
-                        android:text="添加学习机"
+                        android:text="添加"
                         android:textColor="#404040"/>
                 </RelativeLayout>
 

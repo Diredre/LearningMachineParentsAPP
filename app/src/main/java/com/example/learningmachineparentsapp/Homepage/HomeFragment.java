@@ -21,6 +21,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.learningmachineparentsapp.Homepage.Control.ControlActivity;
 import com.example.learningmachineparentsapp.Homepage.Homework.HwcheckActivity;
 import com.example.learningmachineparentsapp.Homepage.Message.MessageActivity;
@@ -61,12 +63,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private Context context;
     private View view, hp_iv_havemes;
-    private ImageView hp_iv_tovideochat, hp_iv_towatch, hp_iv_tohomework, hp_iv_tocontrol;
+    private ImageView hp_iv_tovideochat, hp_iv_towatch, hp_iv_tohomework, hp_iv_tocontrol, hp_iv_icon;
     private LineChart hp_lc;
     private ImageView hp_iv_tomessage, hp_iv_toscan;
-    private TextView hp_tv_username;
     private DrawerLayout main_drawer;
-    private RoundImageView hp_riv_icon;
 
     private SharedPreferences sp;
     private String name, childId, parentid;
@@ -136,9 +136,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
 
     private void initView() {
-        hp_tv_username = getView().findViewById(R.id.hp_tv_username);
-        hp_tv_username.setText(name);
-
         hp_iv_havemes = getView().findViewById(R.id.hp_iv_havemes);
 
         hp_iv_tovideochat = getView().findViewById(R.id.hp_iv_tovideochat);
@@ -179,8 +176,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         main_drawer = ((MainActivity)getActivity()).getDrawer();
 
-        hp_riv_icon = getView().findViewById(R.id.hp_riv_icon);
-        hp_riv_icon.setOnClickListener(this);
+        hp_iv_icon = getView().findViewById(R.id.hp_iv_icon);
+        Glide.with(getActivity())
+                .load("https://s4.ax1x.com/2022/01/17/7d0TUO.png")
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .into(hp_iv_icon);
+        hp_iv_icon.setOnClickListener(this);
     }
 
 
@@ -441,7 +442,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 case R.id.hp_iv_tomessage:
                     startActivity(new Intent(getActivity(), MessageActivity.class));
                     break;
-                case R.id.hp_riv_icon:
+                case R.id.hp_iv_icon:
                     main_drawer.openDrawer(Gravity.LEFT);
                     break;
                 case R.id.hp_lc:

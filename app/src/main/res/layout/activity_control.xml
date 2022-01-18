@@ -55,7 +55,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="10dp"
                             android:textSize="16sp"
                             android:textColor="#404040"
                             android:text="绿色上网时间"/>
@@ -100,7 +100,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:textColor="#4D4D4D"
+                            android:textColor="#49DA9C"
                             android:textStyle="bold"
                             android:textSize="14sp"
                             android:text="2小时30分"/>
@@ -140,7 +140,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="10dp"
                             android:textSize="16sp"
                             android:textColor="#404040"
                             android:text="互帮互学时间"/>
@@ -185,7 +185,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:textColor="#4D4D4D"
+                            android:textColor="#49DA9C"
                             android:textStyle="bold"
                             android:textSize="14sp"
                             android:text="2小时30分"/>
@@ -206,6 +206,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
+        android:textSize="16sp"
         android:textColor="@color/white"
         android:background="@drawable/upload_btn_background"
         android:text="应用"/>

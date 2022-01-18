@@ -16,6 +16,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.learningmachineparentsapp.Circle.Video.GSYVideoActivity;
 import com.example.learningmachineparentsapp.MainActivity;
 import com.example.learningmachineparentsapp.R;
@@ -27,8 +29,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
     private Context context;
     private View view;
     private RelativeLayout circle_friend, circle_video;
-    private ImageView circle_iv_friend, circle_iv_video;
-    private RoundImageView hp_riv_icon;
+    private ImageView circle_iv_friend, circle_iv_video, circle_iv_icon;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,8 +51,12 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
         circle_video = view.findViewById(R.id.circle_video);
         circle_iv_video = view.findViewById(R.id.circle_iv_video);
 
-        hp_riv_icon = view.findViewById(R.id.hp_riv_icon);
-        hp_riv_icon.setOnClickListener(this);
+        circle_iv_icon = view.findViewById(R.id.circle_iv_icon);
+        Glide.with(getContext())
+                .load("https://s4.ax1x.com/2022/01/17/7d0TUO.png")
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .into(circle_iv_icon);
+        circle_iv_icon.setOnClickListener(this);
 
         Glide.with(getContext())
                 .load("https://s4.ax1x.com/2021/12/11/oTII9H.png")
@@ -75,7 +80,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
             case R.id.circle_video:
                 startActivity(new Intent(getActivity(), GSYVideoActivity.class));
                 break;
-            case R.id.hp_riv_icon:
+            case R.id.circle_iv_icon:
                 main_drawer.openDrawer(Gravity.LEFT);
                 break;
         }

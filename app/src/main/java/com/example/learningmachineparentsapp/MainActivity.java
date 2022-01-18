@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.learningmachineparentsapp.Homepage.LeftActs.AccountActivity;
 import com.example.learningmachineparentsapp.Homepage.LeftActs.HelpActivity;
 import com.example.learningmachineparentsapp.Homepage.LeftActs.PersonActivity;
@@ -59,12 +61,11 @@ import okhttp3.WebSocketListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ImageView main_iv_publish, main_iv_purse, main_iv_help, main_iv_account,
-            main_iv_cache, main_iv_private, main_iv_qrcode;
+    private ImageView main_iv_purse, main_iv_help, main_iv_account,
+            main_iv_cache, main_iv_private, main_iv_usericon;
     private LinearLayout main_ll_publish, main_ll_purse, main_ll_help, main_ll_account,
             main_ll_cache, main_ll_private;
-    private RoundImageView main_riv_usericon;
-    private TextView main_tv_off, main_tv_username;
+    private TextView main_tv_off;
     private BottomNavigationView nav_view;
     private DrawerLayout main_drawer;
 
@@ -232,18 +233,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         main_tv_off = findViewById(R.id.main_tv_off);
         main_tv_off.setOnClickListener(this);
 
-        main_iv_qrcode = findViewById(R.id.main_iv_qrcode);
-        /*main_iv_qrcode.setOnClickListener(this);
+        main_iv_usericon = findViewById(R.id.main_iv_usericon);
         Glide.with(this)
-                .load("https://z3.ax1x.com/2021/11/20/IqqLef.png")
-                .into(main_iv_qrcode);*/
+                .load("https://s4.ax1x.com/2022/01/17/7d0TUO.png")
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .into(main_iv_usericon);
+        //main_iv_usericon.setOnClickListener(this);
 
-        main_iv_publish = findViewById(R.id.main_iv_publish);
+        /*main_iv_publish = findViewById(R.id.main_iv_publish);
         main_ll_publish = findViewById(R.id.main_ll_publish);
         main_ll_publish.setOnClickListener(this);
         Glide.with(this)
                 .load("https://z3.ax1x.com/2021/11/20/IqXxYD.png")
-                .into(main_iv_publish);
+                .into(main_iv_publish);*/
 
         main_iv_purse = findViewById(R.id.main_iv_purse);
         main_ll_purse = findViewById(R.id.main_ll_purse);
@@ -280,11 +282,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .load("https://z3.ax1x.com/2021/11/20/IqjJtU.png")
                 .into(main_iv_private);
 
-        main_riv_usericon = findViewById(R.id.main_riv_usericon);
-        main_riv_usericon.setOnClickListener(this);
-
-        main_tv_username = findViewById(R.id.main_tv_username);
-        main_tv_username.setText(name);
+        //main_tv_username = findViewById(R.id.main_tv_username);
+        //main_tv_username.setText(name);
     }
 
 
@@ -294,9 +293,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.main_tv_off:
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 MainActivity.this.finish();
-                break;
-            case R.id.main_ll_publish:
-                startActivity(new Intent(MainActivity.this, PublishActivity.class));
                 break;
             case R.id.main_ll_purse:
                 startActivity(new Intent(MainActivity.this, PurseActivity.class));
@@ -313,12 +309,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.main_ll_private:
                 startActivity(new Intent(MainActivity.this, PrivateActivity.class));
                 break;
-            case R.id.main_iv_qrcode:
-                //Toast.makeText(MainActivity.this, "二维码界面还没写", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.main_riv_usericon:
+            /*case R.id.main_iv_usericon:
                 startActivity(new Intent(MainActivity.this, PersonActivity.class));
-                break;
+                break;*/
         }
     }
 

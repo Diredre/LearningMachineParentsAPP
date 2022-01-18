@@ -61,7 +61,7 @@ public class MessageActivity extends AppCompatActivity {
 
                     String content;
                     if(paystate){
-                        content = messageGson.getData().get(i).getTypeName() + "已经支付";
+                        content = messageGson.getData().get(i).getTypeName() + "已支付";
                     }else{
                         content = messageGson.getData().get(i).getTypeName() + "待支付解锁";
                     }
@@ -135,15 +135,6 @@ public class MessageActivity extends AppCompatActivity {
         snapHelper.attachToRecyclerView(message_rv);
 
         //messageBeanList = initData();
-    }
-
-
-    private List<MessageBean> initData() {
-        List<MessageBean> list = new ArrayList<>();
-        list.add(new MessageBean(1, "系统测试通知1", "学习机官方", "https://s4.ax1x.com/2022/01/08/7CxQW8.png", false));
-        list.add(new MessageBean(2, "系统测试通知2", "学习机官方", "https://s4.ax1x.com/2022/01/08/7CxQW8.png", true));
-        list.add(new MessageBean(3, "系统测试通知3", "学习机官方", "https://s4.ax1x.com/2022/01/08/7CxQW8.png", false));
-        return list;
     }
 
 

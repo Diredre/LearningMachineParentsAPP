@@ -61,6 +61,8 @@
         android:id="@+id/upload_iv_add"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
         android:layout_marginLeft="10dp"/>
 
     <TextView

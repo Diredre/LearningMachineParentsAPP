@@ -3,6 +3,7 @@ package com.example.learningmachineparentsapp.Circle.Video.Upload;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
@@ -40,9 +41,16 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * 上传视频界面
@@ -61,12 +69,18 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     private TextView upload_tv_path;
     private EditText upload_et_con;
 
+    private SharedPreferences sp;
+    private String parentId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_upload);
+
+        sp = getSharedPreferences("userInfo", 0);
+        parentId = sp.getString("PARENTID", "15");
 
         initView();
     }
@@ -109,16 +123,14 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.upload_btn_upload:
                 con = upload_et_con.getText().toString().trim();
+                upload_tv_path.setText("视频文件路径：" + VIDEOPATH);
+                upload_iv_add.setImageBitmap(getVideoThumb(VIDEOPATH));
                 Log.e("con", con);
 
                 if(VIDEOPATH.equals(""))
                     Toast.makeText(UploadActivity.this, "请选择视频后，再点击上传！", Toast.LENGTH_LONG).show();
                 else {
-                    GSYVideoBean video = new GSYVideoBean("@云淡风轻", con);
-                    Gson gson = new Gson();
-                    String video_json = gson.toJson(video);
-                    System.out.println("video_json:::"+video_json);
-                    uploadVideo(video_json);
+                    post_file(parentId, "1", con, new File(VIDEOPATH));
                     uploadProgressDialog = new UploadProgressDialog(this);
                     uploadProgressDialog.show();
                 }
@@ -130,6 +142,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+
     /**
      * 从相册中选择视频
      */
@@ -140,6 +153,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(intent, UploadActivity.VIDEO);
     }
+
 
     /**
      * 回调，视频上传处理
@@ -166,49 +180,59 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    private void uploadVideo(String video_json) {
-        String TOUPLOADVIDEO = "http://192.168.31.95:8081/parent/file/fileuploadwithvideo";
-        System.out.println("TOUPLOADVIDEO>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+TOUPLOADVIDEO);
+    /**
+     * 上传视频
+     * @param parentId
+     * @param cityId
+     * @param content
+     * @param file
+     */
+    protected void post_file(String parentId, String cityId, String content, File file) {
+        OkHttpClient client = new OkHttpClient();
+        MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        if(file != null){
+            Toast.makeText(this, "视频文件不存在，请重新选择", Toast.LENGTH_SHORT).show();
+            RequestBody body = RequestBody.create(MediaType.parse("mp4/*"),file);
+            String filename = file.getName();
+            requestBody.addFormDataPart("file",file.getName(),body).addFormDataPart("type","event");
+        }
 
-        OkHttpUtil.post_file(TOUPLOADVIDEO, video_json, VIDEOPATH, new OkHttpUtil.IOkhttp_file() {
+        Request request = new Request.Builder()
+                .url("http://192.168.31.73:8081/social/moments/postvideodynamic")
+                .post(requestBody.build())
+                .tag(UploadActivity.this)
+                .build();
+        // readTimeout("请求超时时间",时间单位);
+            client.newBuilder()
+                    .readTimeout(5000, TimeUnit.MILLISECONDS)
+                    .build()
+                    .newCall(request).
+                    enqueue(new Callback() {
             @Override
-            public void success(final String str) {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                getStr = str;
-                                Log.i("Search","getStr>>>>>>>>>>>"+getStr);
-                                if(getStr.equals("true")){
-                                    uploadProgressDialog.hide();
-                                    Toast.makeText(UploadActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
-                                }else{
-                                    uploadProgressDialog.hide();
-                                    Toast.makeText(UploadActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    }
-                });
+            public void onFailure(Call call, IOException e) {
+                Log.i("lfq","onFailure");
             }
-
             @Override
-            public void failure() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(UploadActivity.this, "不要紧张，网络好像出了点问题", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String str = response.body().string();
+                    Log.i("post_file：：",response.message() + ",body " + str);
+                } else {
+                    Log.i("post_file：：",response.message() + " error : body " + response.body().string());
+                }
             }
         });
+    }
+
+    /**
+     * 获取视频文件第一帧图
+     * @param path 视频文件的路径
+     * @return Bitmap 返回获取的Bitmap
+     */
+    public static Bitmap getVideoThumb(String path) {
+        MediaMetadataRetriever media = new MediaMetadataRetriever();
+        media.setDataSource(path);
+        return media.getFrameAtTime();
     }
 
 }
