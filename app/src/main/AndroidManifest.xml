@@ -32,10 +32,6 @@
         </activity>
         <activity android:name=".LoginRegist.scan"/>
         <activity android:name=".LoginRegist.capture"/>
-        <activity android:name=".Discover.MailActivity"/>
-        <activity android:name=".Circle.Video.GSYVideoActivity"/>
-        <activity android:name=".Circle.Friend.FriendActivity"/>
-        <activity android:name=".Discover.Cart.CartActivity"/>
         <activity android:name=".Homepage.LeftActs.PasswordActivity"/>
         <activity android:name=".Homepage.LeftActs.DeviceActivity"/>
         <activity android:name=".Homepage.LeftActs.AccountActivity"/>
@@ -62,10 +58,15 @@
         <activity android:name=".Homepage.Message.MessageActivity"/>
         <activity android:name=".Homepage.Module.ModuleActivity"/>
         <activity android:name=".Homepage.Watch.WatchActivity"/>
+        <activity android:name=".Discover.MailActivity"/>
+        <activity android:name=".Circle.Video.GSYVideoActivity"/>
+        <activity android:name=".Circle.Friend.FriendActivity"/>
+        <activity android:name=".Discover.Cart.CartActivity"/>
         <activity android:name=".Circle.Video.Upload.UploadActivity"/>
         <activity android:name=".MainActivity"></activity>
-        <service android:name=".webrtc.rtc.MyWebSocketService"/>
         <activity android:name=".webrtc.monitor.MonitorActivity"/>
         <activity android:name=".webrtc.video_call.VideoCallActivity"/>
+
+        <service android:name=".webrtc.rtc.MyWebSocketService"/>
     </application>
 </manifest>

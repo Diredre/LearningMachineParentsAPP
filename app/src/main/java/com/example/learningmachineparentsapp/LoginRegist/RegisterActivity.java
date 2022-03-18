@@ -133,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(RegisterActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
                 }else{
                     uploadParentRegister(phone, psw, phoneCode);
-                    handler = new Handler(){
+;                    handler = new Handler(){
                         public void handleMessage(Message msg) {
                             Log.e("RegisterAct", "验证码线程");
                             Gson gson = new Gson();
@@ -176,7 +176,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
     }
-
 
     private void getSMS(String phone){
         new Thread(new Runnable() {

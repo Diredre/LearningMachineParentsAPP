@@ -223,7 +223,10 @@ public class okhttpClass {
                 .add("password",password)
                 .add("code", code)
                 .build();
-        Request request=new Request.Builder().url(PATH3 + "/sso/register/parentregister").post(requestBody).build();
+        Request request=new Request.Builder()
+                .url(PATH3 + "/sso/register/parentregister")
+                .post(requestBody)
+                .build();
         try (Response response=okHttpClient.newCall(request).execute()){
             if(response.isSuccessful()){
                 return response.body().string();

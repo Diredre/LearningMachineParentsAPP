@@ -3,6 +3,7 @@ package com.example.learningmachineparentsapp.Homepage.Control;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -69,45 +70,55 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     private TextView control_tv_set_clock, control_tv_set_tel;
     private PieChart control_pc;
     private Button control_btn_adapt;
-    private Calendar calendar= Calendar.getInstance(Locale.CHINA);
-    private static int hour = 0, min = 0;
 
-    /*1:：绿色上网，2：互帮互学*/
-    private String MId = "1";
-    private String SId;
+    private Calendar calendar= Calendar.getInstance(Locale.CHINA);
+    /*MID: 1:：绿色上网，3：互帮互学*/
+    private static int hour1 = 2, min1 = 30,
+                        hour2 = 2, min2 = 30;
+    private boolean isClock = false, isTel = false, flag1 = false, flag2 = false;
 
     private SharedPreferences sp;
+    private String SId;
     private Handler handler = new Handler(){
         public void handleMessage(Message msg){
             Gson gson = new Gson();
-            try{
-                String s = (String)msg.obj;
-                ControlDisplayGson controlDisplayGson = gson.fromJson(s, ControlDisplayGson.class);
-                if(controlDisplayGson.getCode() == 200){
-                    for(int i = 0; i < controlDisplayGson.getExtend().getSurfingInfo().size(); i++) {
-                        int mid = controlDisplayGson.getExtend().getSurfingInfo().get(i).getModuleId();
-                        boolean state = controlDisplayGson.getExtend().getSurfingInfo().get(i).getIfOpen() == 1;
-                        int time = controlDisplayGson.getExtend().getSurfingInfo().get(i).getControlTime();
-                        Log.e("state", ""+controlDisplayGson.getExtend().getSurfingInfo().get(i).getIfOpen());
-                        Log.e("state", ""+controlDisplayGson.getExtend().getSurfingInfo().get(i).getControlTime());
-                        Log.e("state", ""+time);
-                        if(mid == 1){
-                            control_sb_clock.setChecked(state);
-                            if(state) {
-                                control_tv_set_clock.setVisibility(View.VISIBLE);
-                                control_tv_set_clock.setText(time/3600+"小时"+time%3600/60+"分钟");
+            if(msg.what == Control) {
+                try {
+                    String s = (String) msg.obj;
+                    ControlDisplayGson controlDisplayGson = gson.fromJson(s, ControlDisplayGson.class);
+                    if (controlDisplayGson.getCode() == 200) {
+                        for (int i = 0; i < controlDisplayGson.getExtend().getSurfingInfo().size(); i++) {
+                            int mid = controlDisplayGson.getExtend().getSurfingInfo().get(i).getModuleId();                             //模块id
+                            boolean state = controlDisplayGson.getExtend().getSurfingInfo().get(i).getIfOpen() == 1 ? true: false;      //是否限制时间
+                            int time = controlDisplayGson.getExtend().getSurfingInfo().get(i).getControlTime();                         //限制时长
+
+                            if (mid == 1) {
+                                isClock = state;
+                                hour1 = time / 3600;
+                                min1 = time % 3600 / 60;
+
+                                control_sb_clock.setChecked(isClock);
+                                if (isClock) {
+                                    control_tv_set_clock.setVisibility(View.VISIBLE);
+                                    control_tv_set_clock.setText(hour1 + "小时" + min1 + "分钟");
+                                }
                             }
-                        }else{
-                            control_sb_tel.setChecked(state);
-                            if(state) {
-                                control_tv_set_tel.setVisibility(View.VISIBLE);
-                                control_tv_set_tel.setText(time/3600+"小时"+time%3600/60+"分钟");
+                            if(mid == 3){
+                                isTel = state;
+                                hour2 = time / 3600;
+                                min2 = time % 3600 / 60;
+
+                                control_sb_tel.setChecked(isTel);
+                                if (isTel) {
+                                    control_tv_set_tel.setVisibility(View.VISIBLE);
+                                    control_tv_set_tel.setText(hour2 + "小时" + min2 + "分钟");
+                                }
                             }
                         }
                     }
-                }
-            } catch (JsonSyntaxException e) {
+                } catch (JsonSyntaxException e) {
                     e.printStackTrace();
+                }
             }
         }
     };
@@ -123,8 +134,7 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         SId = sp.getString("CHILDID", "1050");
         Log.e("CHILDID", SId);
 
-        getSearchTime();
-
+        getSearchTime();    // 获取数据
         initView();
         initChart();
     }
@@ -154,13 +164,17 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         control_sb_clock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isClock != isChecked && !flag1) {
+                    updateOpenState(SId, "1");
+                }
+                flag1 = true;
+
+                isClock = isChecked;
                 if(isChecked) {
                     control_ll_set_clock.setVisibility(View.VISIBLE);
-                    MId = "1";
                 }else{
                     control_ll_set_clock.setVisibility(View.INVISIBLE);
                 }
-                updateOpenState(SId, MId);
             }
         });
 
@@ -168,13 +182,17 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
         control_sb_tel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isTel != isChecked && !flag2) {
+                    updateOpenState(SId, "3");
+                }
+                flag2 = true;
+
+                isTel = isChecked;
                 if(isChecked) {
                     control_ll_set_tel.setVisibility(View.VISIBLE);
-                    MId = "2";
                 }else{
                     control_ll_set_tel.setVisibility(View.INVISIBLE);
                 }
-                updateOpenState(SId, MId);
             }
         });
 
@@ -302,22 +320,30 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     /**
      * 时间选择
      */
-    public static void showTimePickerDialog(Context context, int themeResId, final TextView tv, Calendar calendar) {
+    public static void showTimePickerDialog(Context context, int themeResId,
+                                            final TextView tv, Calendar calendar, String Mid) {
         // Calendar c = Calendar.getInstance();
         // 创建一个TimePickerDialog实例，并把它显示出来
-        new TimePickerDialog(context, themeResId,
-                // 绑定监听器
-                new TimePickerDialog.OnTimeSetListener() {
+        new TimePickerDialog(context, themeResId, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        tv.setText("" + hourOfDay + "小时" + minute + "分");
-                        hour = hourOfDay;
-                        min = minute;
+                        if (Mid == "1") {
+                            hour1 = hourOfDay;
+                            min1 = minute;
+                            tv.setText("" + hour1 + "小时" + min1 + "分");
+                        }
+                        if(Mid == "3"){
+                            hour2 = hourOfDay;
+                            min2 = minute;
+                            tv.setText("" + hour2 + "小时" + min2 + "分");
+                        }
                     }
                 }
                 // 设置初始时间
-                , calendar.get(Calendar.HOUR_OF_DAY)
-                , calendar.get(Calendar.MINUTE)
+                /*, calendar.get(Calendar.HOUR_OF_DAY)
+                , calendar.get(Calendar.MINUTE)*/
+                ,2
+                ,30
                 // true表示采用24小时制
                 , true).show();
     }
@@ -327,28 +353,34 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.control_btn_adapt:
-                int time = hour * 3600 + min * 60;
-                sendControlData(SId, MId, ""+time);
+                if(isClock) {
+                    int time = hour1 * 3600 + min1 * 60;
+                    sendControlData(SId, "1", "" + time);
+                }
+                if(isTel){
+                    int time = hour2 * 3600 + min2 * 60;
+                    sendControlData(SId, "3", "" + time);
+                }
                 break;
             case R.id.control_tv_set_clock:
-                showTimePickerDialog(this, 2, control_tv_set_clock, calendar);
+                showTimePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, control_tv_set_clock, calendar, "1");
                 break;
             case R.id.control_tv_set_tel:
-                showTimePickerDialog(this, 2, control_tv_set_tel, calendar);
+                showTimePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, control_tv_set_tel, calendar, "3");
                 break;
         }
     }
 
 
-    private void updateOpenState(String SId,String MId){
+    private void updateOpenState(String SId, String MId){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
                 MultipartBody body = new MultipartBody.Builder()
                         .setType(MultipartBody.FORM)
-                        .addFormDataPart("SId",SId)
-                        .addFormDataPart("MId",MId)
+                        .addFormDataPart("SId", SId)
+                        .addFormDataPart("MId", MId)
                         .build();
                 final Request request = new Request.Builder()
                         .url("http://221.12.170.98:91/lamp/parent"+"/updateOpenState")
@@ -442,5 +474,4 @@ public class ControlActivity extends AppCompatActivity implements View.OnClickLi
             }
         }).start();
     }
-
 }
